@@ -1,6 +1,6 @@
-# ProjetAWS : Rapport du 30/03/2023
+# ProjetAWS [Groupe 3] : Rapport du 30/03/2023
 
-**Title**: Recipe Rendezvous
+**Titre du projet**: Recipe Rendez-vous
 
 **Description**: 
 
