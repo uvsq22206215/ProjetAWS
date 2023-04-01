@@ -11,6 +11,10 @@
   flex:1;
 }
 
+#child1 a {
+  padding-left: 15px;
+}
+
 #child2 {
   display: flex;
 }
@@ -43,4 +47,24 @@
   border-radius: 9px;
   border: 0px;
   margin:5px;
+}
+
+.search-bar {
+  display: flex;
+  margin-right: 20px;
+}
+
+.account-icon {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px)  {
+  .search-bar {
+    visibility: hidden;
+    display: none;
+  }
+
+  #child2 {
+    margin: auto;
+  }
 }

@@ -32,6 +32,21 @@ body {
   color: #61dafb;
 }
 
+.block-title {
+  font-family: 'Marcellus', serif;
+  color: #a68671;
+}
+
+.block-link {
+  color: #a68671;
+  font-size: 24px;
+}
+
+#slider-hp .slider {
+  height: 500px;
+  width: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

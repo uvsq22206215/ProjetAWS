@@ -62,3 +62,13 @@ h1.card-title {
  .card-btn:hover {
   color: white;
  }
+
+ @media (max-width: 600px) { 
+  .recipe-card {
+    width: 90%;
+  }
+  
+  .recipe-cards {
+    display: block;
+  }
+ }
