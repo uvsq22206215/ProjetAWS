@@ -89,7 +89,7 @@ export default function login() {
               padding: 10,
             }}
           >
-            <Stack align="center">
+            <Grid align="center">
               <Avatar style={avatarStyle}>
                 <LockIcon></LockIcon>
               </Avatar>
@@ -99,7 +99,7 @@ export default function login() {
                 <br />
                 The Recipe Rendez-vous
               </Typography>
-            </Stack>
+            </Grid>
             <Formik
               initialValues={{
                 username: "",
