@@ -3,9 +3,11 @@ import './RecipeCard.css';
 import RecipeCard from './RecipeCard';
 import Header from './Header';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import Login from "./components/Login";
+import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
 
 function App() {
-  return (
+  const Main = () => (
     <div className="App">
       <Header />
 
@@ -46,18 +48,28 @@ function App() {
         </MDBCarousel>
       </div>
 
-      <div id='trending-recipes'>
-        <h1 className='block-title'>Trending Recipes</h1>
-        <div className='recipe-cards'>
+      <div id="trending-recipes">
+        <h1 className="block-title">Trending Recipes</h1>
+        <div className="recipe-cards">
           <RecipeCard />
           <RecipeCard />
           <RecipeCard />
         </div>
-        <a className='block-link' href="#">View More Recipes</a>
+        <a className="block-link" href="#">
+          View More Recipes
+        </a>
       </div>
-      
     </div>
-
+  );
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
