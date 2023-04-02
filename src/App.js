@@ -6,15 +6,8 @@ import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 
 function App() {
-  const Main = () => <h1>Hello world</h1>;
-  return (
+  const Main = () => (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
       <Header />
 
       <div id="slider-hp"></div>
@@ -30,6 +23,16 @@ function App() {
           View More Recipes
         </a>
       </div>
+    </div>
+  );
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

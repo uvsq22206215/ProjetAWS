@@ -15,6 +15,7 @@ import {
   Avatar,
   Card,
   CssTextField,
+  Stack,
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -88,7 +89,7 @@ export default function login() {
               padding: 10,
             }}
           >
-            <Grid align="center">
+            <Stack align="center">
               <Avatar style={avatarStyle}>
                 <LockIcon></LockIcon>
               </Avatar>
@@ -98,7 +99,7 @@ export default function login() {
                 <br />
                 The Recipe Rendez-vous
               </Typography>
-            </Grid>
+            </Stack>
             <Formik
               initialValues={{
                 username: "",
