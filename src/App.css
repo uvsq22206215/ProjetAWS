@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  font-family: 'Baloo 2', cursive;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -26,6 +30,21 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.block-title {
+  font-family: 'Marcellus', serif;
+  color: #a68671;
+}
+
+.block-link {
+  color: #a68671;
+  font-size: 24px;
+}
+
+#slider-hp .slider {
+  height: 500px;
+  width: 100%;
 }
 
 @keyframes App-logo-spin {

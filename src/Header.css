@@ -1,0 +1,70 @@
+#container {
+  display: flex;
+  width: 100%;
+  background-color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#child1 {
+  display: flex;
+  flex:1;
+}
+
+#child1 a {
+  padding-left: 15px;
+}
+
+#child2 {
+  display: flex;
+}
+
+#child2 img {
+  object-fit: contain;
+  height: 50px;
+  max-width: 100%;
+}
+
+#child3 {
+  display: flex;
+  flex:1;
+  justify-content: flex-end;
+}
+
+#child3 * {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#child3 input {
+  height: 20px;
+  border-radius: 7px;
+  border: 0px;
+}
+
+#child3 img {
+  height: 40px;
+  border-radius: 9px;
+  border: 0px;
+  margin:5px;
+}
+
+.search-bar {
+  display: flex;
+  margin-right: 20px;
+}
+
+.account-icon {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px)  {
+  .search-bar {
+    visibility: hidden;
+    display: none;
+  }
+
+  #child2 {
+    margin: auto;
+  }
+}
