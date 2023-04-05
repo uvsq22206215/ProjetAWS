@@ -1,18 +1,21 @@
 .recipe-card {
   /* border: 1px solid brown; */
-  width: 27%;
+  width: 30%;
   padding: 2vh
 }
 
 .recipe-cards {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .recipe-card .card-image img {
-  width: 100%;
+  max-width: 100%;
   object-fit: cover;
   margin: 0!important;
+  max-height: 200px;
+
 }
 
 h1.card-title {

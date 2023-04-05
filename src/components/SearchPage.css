@@ -3,55 +3,11 @@
   }
   
   #filter-column {
-    width: 30%;
+    width: 25%;
     padding: 20px;
   }
   
   #result-column {
-    width: 70%;
-  }
-  
-  .refinements-sidebar {
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    margin-bottom: 20px;
-    padding: 20px;
-  }
-  
-  .refinements-sidebar h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .refinements-sidebar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .refinements-sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .refinements-sidebar input[type="checkbox"] {
-    margin-right: 5px;
-  }
-  
-  .refinements-sidebar label {
-    cursor: pointer;
-  }
-  
-  .refinements-sidebar a {
-    color: #009688;
-    text-decoration: none;
-  }
-  
-  .refinements-sidebar a:hover {
-    text-decoration: underline;
+    width: 75%;
   }
   

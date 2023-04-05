@@ -1,7 +1,7 @@
 import './SearchPage.css';
-import '../ResultSearchCard.css';
+import '../RecipeCard.css';
 import Header from '../Header';
-import ResultSearchCard from '../ResultSearchCard';
+import ReceipCard from '../RecipeCard';
 import { useState } from 'react';
 
 function SearchPage() {
@@ -15,33 +15,30 @@ function SearchPage() {
     <div id='SearchPage'>
       <Header />
       <div id="search-container">
-        <div id="filter-column">
-    
-        </div>
+      <div id="filter-column">
+// partie filter 
+</div>
         <div id="result-column">
           <div id="trending-recipes">
             <h1 className="block-title">Résultat recherche</h1>
-            <div className="result-cards">
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
-              <ResultSearchCard />
+            <div className="recipe-cards">
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            <ReceipCard />
+            
               {showMore && (
                 <>
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
-                  <ResultSearchCard />
+                 <ReceipCard />
+                 <ReceipCard />
+                 <ReceipCard />
+                 <ReceipCard />
+  
                 </>
               )}
             </div>
