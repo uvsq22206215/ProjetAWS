@@ -45,15 +45,18 @@ const recipe =
   "tags":[
     {
       nameTag: "🇮🇹 Italien",
-      background: "white"
+      background: "white",
+      textColor : "black"
     },
     {
-      nameTag: "🕒Moins de 30 min",
-      background: "grey"
+      nameTag: "🕒 Moins de 30 min",
+      background: "grey",
+      textColor : "white"
     },
     {
       nameTag: "🌿 Vegan",
-      background: "green"
+      background: "green",
+      textColor : "white"
     },
   ]
 }
@@ -67,9 +70,11 @@ function RecipePage() {
       <Header />
       <div id='container'>
         <div id='infoRecipe'>
-          <div class='containerTime'>Temps de préparation </div>
-          <div class='containerTime'>Temps de cuisson </div>
-          <div id='personsContainer'>Ingrédients pour
+          <div class='containerTime'>Temps de préparation : {recipe["prepTime"]}</div>
+          <div class='containerTime'>Temps de cuisson : {recipe["cookTime"]}</div>
+          <div id='personsContainer'>Ingrédients pour {recipe.recipeYield}
+            <div id='morePersonButton'>+</div>
+            <div id='lessPersonButton'>-</div>
           </div>
           <div id='ingredientsList'>
             <ul>
@@ -81,12 +86,16 @@ function RecipePage() {
         </div>
         <div id='descriptionRecipe'>
           <div id='recipeResume'>
-            <div id='recipeName'></div>
+            <div id='recipeName'>{recipe.name}</div>
             <div id='recipeRating'></div>
           </div>
           <div id='recipeTags'>
             {recipe["tags"].map((tag, index) => (
-              <div class='tag' style={{backgroundColor : tag.background}}>{tag.nameTag}</div>
+              <div class='tag' style={{
+                backgroundColor : tag.background,
+                borderColor : tag.background === "white" ? "solid" : tag.background,
+                color : tag.textColor
+              }}>{tag.nameTag}</div>
             ))}
           </div>
           <div id='recipePhoto'></div>
