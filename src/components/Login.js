@@ -44,6 +44,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { blue, pink } from "@mui/material/colors";
+import "./Login.css";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -130,7 +131,7 @@ export default function Uselogin() {
       <Container sx={{ height: "100vh" }}>
         <Grid container justifyContent="flex-end">
           <TabPanel value={value} index={0}>
-            <Grid item xs={12}>
+            <Grid>
               <Card
                 sx={{
                   backgroundColor: "background.default",
@@ -201,7 +202,6 @@ export default function Uselogin() {
                           <Grid container>
                             <Grid item xs={12}>
                               <CssTextField
-                                // className={styles.textfield}
                                 fullWidth
                                 error={Boolean(
                                   touched.username && errors.username
@@ -269,10 +269,9 @@ export default function Uselogin() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Grid item xs={12}>
+            <Grid>
               <Card
                 sx={{
-                  mt: 5,
                   backgroundColor: "background.default",
                   flexDirection: "column",
                   height: "100%",
@@ -339,7 +338,6 @@ export default function Uselogin() {
                       <Container>
                         <Box
                           sx={{
-                            mb: 10,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "left",

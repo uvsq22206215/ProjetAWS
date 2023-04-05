@@ -17,7 +17,7 @@ function Header() {
             <input type='text' size='30'/>
           </div>
           <div className='account-icon'>
-            <a href='#'><img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/></a>
+            <a href={`${process.env.REACT_APP_BASE_URL}/login`}><img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/></a>
           </div>
         </div>
 

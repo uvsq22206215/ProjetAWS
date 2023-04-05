@@ -1,31 +1,22 @@
 import "./App.css";
-import Login from "./components/Login";
-import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
 import "./RecipeCard.css";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
+import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import Login from "./components/Login";
+import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
+import "./RecipeCard.css";
 import React, { useState } from "react";
+import HomePage from "./HomePage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const Main = () => (
     <div className="App">
-      <Header />
-
-      <div id="slider-hp"></div>
-
-      <div id="trending-recipes">
-        <h1 className="block-title">Trending Recipes</h1>
-        <div className="recipe-cards">
-          <RecipeCard />
-          <RecipeCard />
-          <RecipeCard />
-        </div>
-        <a className="block-link" href="#">
-          View More Recipes
-        </a>
-      </div>
+      <HomePage />
     </div>
   );
+
   return (
     <div>
       <BrowserRouter>
