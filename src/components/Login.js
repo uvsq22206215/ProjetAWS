@@ -128,7 +128,7 @@ export default function Uselogin() {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Container sx={{ height: "100vh" }}>
+      <Container>
         <Grid container justifyContent="flex-end">
           <TabPanel value={value} index={0}>
             <Grid>
@@ -202,6 +202,7 @@ export default function Uselogin() {
                           <Grid container>
                             <Grid item xs={12}>
                               <CssTextField
+                                // className={styles.textfield}
                                 fullWidth
                                 error={Boolean(
                                   touched.username && errors.username
@@ -269,9 +270,10 @@ export default function Uselogin() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Grid>
+            <Grid item xs={12}>
               <Card
                 sx={{
+                  mt: 5,
                   backgroundColor: "background.default",
                   flexDirection: "column",
                   height: "100%",
@@ -338,6 +340,7 @@ export default function Uselogin() {
                       <Container>
                         <Box
                           sx={{
+                            mb: 10,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "left",

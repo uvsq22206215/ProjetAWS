@@ -9,6 +9,7 @@ import "./RecipeCard.css";
 import React, { useState } from "react";
 import HomePage from "./HomePage";
 import SearchPage from "./components/SearchPage";
+import RecipePage from "./RecipePage";
 
 function App() {
   const Main = () => (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
+          <Route path="/recipe" element={<RecipePage />} />
         </Routes>
       </BrowserRouter>
     </div>
