@@ -1,12 +1,14 @@
-import './App.css';
-import './RecipeCard.css';
-import RecipeCard from './RecipeCard';
-import Header from './Header';
+import "./App.css";
+import "./RecipeCard.css";
+import RecipeCard from "./RecipeCard";
+import Header from "./Header";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Login from "./components/Login";
 import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
-import HomePage from './HomePage';
-import SearchPage from './components/SearchPage';
+import "./RecipeCard.css";
+import React, { useState } from "react";
+import HomePage from "./HomePage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const Main = () => (
