@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   TextField,
@@ -16,17 +16,54 @@ import {
   Card,
   CssTextField,
   Stack,
+  Link,
+  Hidden,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import LockIcon from "@mui/icons-material/Lock";
-import image from "./brooke-lark-08bOYnH_r_E-unsplash.jpg";
+import image from "./l.jpg";
 import logo from "./AWS Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme } from "@mui/material/styles";
 import { positions } from "@mui/system";
 import { alpha, styled } from "@mui/material/styles";
-export default function login() {
+import { render } from "@testing-library/react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import MailIcon from "@mui/icons-material/Mail";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { blue, pink } from "@mui/material/colors";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+export default function Uselogin() {
   const avatarStyle = { backgroundColor: "#ff5b00ba" };
   const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -38,23 +75,32 @@ export default function login() {
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderRadius: "50vh",
+        borderRadius: "10vh",
       },
       "&.Mui-focused fieldset": {
         borderColor: "#ff5b00ba",
       },
     },
   });
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  });
+  const handleChange1 = (event, newValue) => {
+    if (login) setValue(0);
+    else setValue(1);
+  };
+  const [value, setValue] = React.useState(0);
+  const [login, setLogin] = React.useState(true);
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [showPassword1, setShowPassword1] = React.useState(false);
+  const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+  const handleMouseDownPassword1 = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Paper
       style={{
@@ -63,6 +109,7 @@ export default function login() {
         backgroundPosition: "center center",
         backgroundSize: "cover",
         height: "100vh",
+        borderRadius: "none",
       }}
     >
       <AppBar position="static" color="transparent" elevation={0}>
@@ -74,89 +121,83 @@ export default function login() {
             style={{ marginTop: "2vh" }}
           />
           <Grid container justifyContent="flex-end">
-            <IconButton sx={{ color: "white", right: "right" }}>
+            <IconButton sx={{ color: "#ff5b00ba", right: "right" }}>
               <MenuIcon></MenuIcon>
             </IconButton>
           </Grid>
         </Toolbar>
       </AppBar>
-      <Container>
+      <Container sx={{ height: "100vh" }}>
         <Grid container justifyContent="flex-end">
-          <Grid item style={theme.breakpoints}>
-            <Card
-              sx={{
-                mt: 8,
-                backgroundColor: "background.default",
-                flexDirection: "column",
-                height: "100%",
-                justifyContent: "center",
-                boxShadow: 10,
-                borderRadius: "3vh",
-              }}
-              elevation={20}
-              style={{
-                width: "50vh",
-                height: "70vh",
-                padding: 10,
-              }}
-            >
-              <Grid align="center">
-                <Avatar style={avatarStyle}>
-                  <LockIcon></LockIcon>
-                </Avatar>
-                <h3>CONNEXION</h3>
-                <Typography
-                  variant="subtitle1"
-                  style={{ paddingBottom: "3vh" }}
-                >
-                  Utiliser votre compte
-                  <br />
-                  The Recipe Rendez-vous
-                </Typography>
-              </Grid>
-              <Formik
-                initialValues={{
-                  username: "",
-                  password: "",
+          <TabPanel value={value} index={0}>
+            <Grid item xs={12}>
+              <Card
+                sx={{
+                  backgroundColor: "background.default",
+                  flexDirection: "column",
+                  height: "100%",
+                  justifyContent: "center",
+                  boxShadow: 10,
+                  borderRadius: "3vh",
                 }}
-                validationSchema={Yup.object().shape({
-                  username: Yup.string()
-                    .max(255)
-                    .required("username est obligatoire"),
-                  password: Yup.string()
-                    .max(255)
-                    .required("password est obligatoire"),
-                })}
-                onSubmit={(values) => {}}
+                elevation={20}
+                style={{
+                  width: "50vh",
+                  height: "78vh",
+                }}
               >
-                {({
-                  errors,
-                  handleBlur,
-                  handleChange,
-                  touched,
-                  values,
-                  setFieldValue,
-                }) => (
-                  <Form>
-                    <Container>
-                      <CssBaseline />
-                      <Box
-                        sx={{
-                          marginTop: 2,
-
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "left",
-                        }}
-                      >
-                        <Divider />
+                <Grid align="center" sx={{ mt: 3 }}>
+                  <Avatar style={avatarStyle}>
+                    <LockIcon></LockIcon>
+                  </Avatar>
+                  <h2>CONNEXION</h2>
+                  <Typography
+                    variant="subtitle1"
+                    style={{ paddingBottom: "3vh" }}
+                  >
+                    Utiliser votre compte
+                    <br />
+                    The Recipe Rendez-vous
+                  </Typography>
+                </Grid>
+                <Formik
+                  initialValues={{
+                    username: "",
+                    password: "",
+                  }}
+                  validationSchema={Yup.object().shape({
+                    username: Yup.string()
+                      .max(255)
+                      .required("username est obligatoire"),
+                    password: Yup.string()
+                      .max(255)
+                      .required("password est obligatoire"),
+                  })}
+                  onSubmit={(values) => {
+                    console.log();
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    touched,
+                    values,
+                    setFieldValue,
+                  }) => (
+                    <Form>
+                      <Container>
+                        <CssBaseline />
                         <Box
                           sx={{
+                            mt: 2,
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "center",
+                            alignItems: "left",
                           }}
                         >
+                          <Divider />
+
                           <Grid container>
                             <Grid item xs={12}>
                               <CssTextField
@@ -206,14 +247,296 @@ export default function login() {
                           >
                             Login
                           </Button>
+                          <Grid item xs={12}>
+                            <Typography>
+                              {" "}
+                              Vous avez déja un compte ?
+                              <Link
+                                href="#"
+                                onClick={(setLogin(false), handleChange1)}
+                              >
+                                {" "}
+                                S'inscrire
+                              </Link>
+                            </Typography>
+                          </Grid>
                         </Box>
-                      </Box>
-                    </Container>
-                  </Form>
-                )}
-              </Formik>
-            </Card>
-          </Grid>
+                      </Container>
+                    </Form>
+                  )}
+                </Formik>
+              </Card>
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Grid item xs={12}>
+              <Card
+                sx={{
+                  mt: 5,
+                  backgroundColor: "background.default",
+                  flexDirection: "column",
+                  height: "100%",
+                  justifyContent: "center",
+                  boxShadow: 10,
+                  borderRadius: "3vh",
+                }}
+                elevation={20}
+                style={{
+                  width: "60vh",
+                  height: "78vh",
+                }}
+              >
+                <Grid align="center" sx={{ mt: 1 }}>
+                  <Avatar style={avatarStyle}>
+                    <AddCircleIcon></AddCircleIcon>
+                  </Avatar>
+                  <h2>Inscription</h2>
+                  <Typography variant="caption">
+                    Veuillez remplir ce formulaire pour créer un compte
+                  </Typography>
+                </Grid>
+                <Formik
+                  initialValues={{
+                    username: "",
+                    email: "",
+                    password: "",
+                    password2: "",
+                    picked: "male",
+                  }}
+                  validationSchema={Yup.object().shape({
+                    username: Yup.string()
+                      .max(255)
+                      .required(" Le nom d'utilisateur est obligatoire"),
+                    email: Yup.string()
+                      .email("Introduisez un e-mail valide")
+                      .max(255)
+                      .required("Email est obligatoire"),
+                    password: Yup.string()
+                      .required("Le mot de passe est obligatoire")
+                      .min(
+                        8,
+                        "Veullez introduire un mot de passe supériére à 8 caractéres"
+                      ),
+
+                    password2: Yup.string().oneOf(
+                      [Yup.ref("password"), null],
+                      "Les mots de passes se ne correspondent pas"
+                    ),
+                  })}
+                  onSubmit={(values) => {
+                    console.log(values);
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    touched,
+                    values,
+                    setFieldValue,
+                  }) => (
+                    <Form>
+                      <Container>
+                        <Box
+                          sx={{
+                            mb: 10,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "left",
+                          }}
+                        >
+                          <Grid container>
+                            <Grid item xs={12}>
+                              <CssTextField
+                                fullWidth
+                                size="small"
+                                error={Boolean(
+                                  touched.username && errors.username
+                                )}
+                                helperText={touched.username && errors.username}
+                                onBlur={handleBlur}
+                                margin="normal"
+                                label="Nom d'utilisateur"
+                                id="username"
+                                name="username"
+                                value={values.username}
+                                onChange={handleChange}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <AccountCircle />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <CssTextField
+                                fullWidth
+                                size="small"
+                                error={Boolean(touched.email && errors.email)}
+                                helperText={touched.email && errors.email}
+                                onBlur={handleBlur}
+                                margin="normal"
+                                name="email"
+                                type="email"
+                                label="E-mail"
+                                value={values.email}
+                                onChange={handleChange}
+                                id="email"
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <MailIcon />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <CssTextField
+                                fullWidth
+                                size="small"
+                                error={Boolean(
+                                  touched.password && errors.password
+                                )}
+                                helperText={touched.password && errors.password}
+                                onBlur={handleBlur}
+                                margin="normal"
+                                name="password"
+                                label="Mot de passe"
+                                type={showPassword ? "text" : "password"}
+                                value={values.password}
+                                onChange={handleChange}
+                                id="password"
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                      >
+                                        {showPassword ? (
+                                          <VisibilityOff />
+                                        ) : (
+                                          <Visibility />
+                                        )}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <CssTextField
+                                fullWidth
+                                size="small"
+                                error={Boolean(
+                                  touched.password2 && errors.password2
+                                )}
+                                helperText={
+                                  touched.password2 && errors.password2
+                                }
+                                onBlur={handleBlur}
+                                margin="normal"
+                                name="password2"
+                                type={showPassword1 ? "text" : "password"}
+                                label="Confirmation de mot de passe"
+                                value={values.password2}
+                                onChange={handleChange}
+                                id="password2"
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword1}
+                                        onMouseDown={handleMouseDownPassword1}
+                                        edge="end"
+                                      >
+                                        {showPassword1 ? (
+                                          <VisibilityOff />
+                                        ) : (
+                                          <Visibility />
+                                        )}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <FormControl sx={{ marginLeft: 1 }}>
+                                <FormLabel id="demo-row-radio-buttons-group-label">
+                                  Gender
+                                </FormLabel>
+                                <RadioGroup
+                                  row
+                                  aria-labelledby="demo-row-radio-buttons-group-label"
+                                  name="picked"
+                                  value={values.picked}
+                                  onChange={(event) => {
+                                    setFieldValue(
+                                      "picked",
+                                      event.currentTarget.value
+                                    );
+                                  }}
+                                >
+                                  <FormControlLabel
+                                    value="female"
+                                    control={
+                                      <Radio
+                                        sx={{
+                                          color: pink[800],
+                                          "&.Mui-checked": {
+                                            color: pink[600],
+                                          },
+                                        }}
+                                      />
+                                    }
+                                    label="Female"
+                                  />
+                                  <FormControlLabel
+                                    value="male"
+                                    control={
+                                      <Radio
+                                        sx={{
+                                          color: blue[800],
+                                          "&.Mui-checked": {
+                                            color: blue[600],
+                                          },
+                                        }}
+                                      />
+                                    }
+                                    label="Male"
+                                  />
+                                </RadioGroup>
+                              </FormControl>
+                            </Grid>
+                          </Grid>
+                          <Button
+                            type="sumbit"
+                            fullWidth
+                            variant="contained"
+                            sx={{
+                              mt: 3,
+                              mb: 2,
+                              borderRadius: "20vh",
+                              background: "#f58220",
+                            }}
+                          >
+                            Creer
+                          </Button>
+                        </Box>
+                      </Container>
+                    </Form>
+                  )}
+                </Formik>
+              </Card>
+            </Grid>
+          </TabPanel>
         </Grid>
       </Container>
     </Paper>
