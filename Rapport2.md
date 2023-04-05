@@ -4,17 +4,18 @@
 
 ##### L'avancement du projet:
 
-Cette semaine, nous avons travaillé sur le projet de création d'un site de recettes. Nous nous sommes concentrés sur le design de certaines pages importantes, comme la page de connexion et la page d'accueil. Nous avons utilisé React pour concevoir ces pages et nous avons réalisé plusieurs composants clés, comme le header, la Card-Recipe et le Slider,en utilisant des bibliothèques populaires comme Material-UI et React-Bootstrap.
+Cette semaine, nous avons travaillé sur notre projet qui a comme objectif de créer d'un site de recettes. En se basant sur les modèles graphique des pages créé sur Canvas lors de la première semaine, nous avons pu commencé à réaliser les pages principales. Plus spécifiquement:
 
-Les pages principales ont été réalisées en se basant sur les modèles graphique des pages créé sur Canvas lors de la première semaine.
+* Nous nous sommes concentrés sur le **design et la conception de certaines pages importantes**, comme la page de connexion et la page d'accueil. Nous avons utilisé React pour concevoir ces pages et nous avons réalisé plusieurs composants clés, comme le Header, la RecipeCard et le Slider,en utilisant des bibliothèques populaires comme Material-UI et React-Bootstrap,
 
-En outre, nous avons également commencé à travailler sur la page de création de recette, où l'utilisateur pourra créer sa propre recette en fournissant toutes les informations nécessaires, telles que les ingrédients, les étapes, les temps de cuisson, etc. 
+* Nous avons également commencé à travailler sur **la page de création de recette**, où l'utilisateur pourra créer sa propre recette en fournissant toutes les informations nécessaires, telles que les ingrédients, les étapes, les temps de cuisson, etc. 
 
-Nous avons également commencé à travailler sur la page de recherche de recettes, qui permettra aux utilisateurs de filtrer les recettes disponibles sur la base de données en fonction de leurs préférences.
+* Nous avons commencé à travailler sur **la page de recherche**, qui permettra aux utilisateurs de filtrer les recettes disponibles sur la base de données en fonction de leurs préférences.
 
-Nous avons également créé plusieurs composants qui peuvent être réutilisés dans d'autres parties du site. Par exemple, le header apparaîtra sur toutes les pages du site, ce qui facilitera la navigation pour les utilisateurs.
+* Comme mentionné plus haut, nous avons **créé plusieurs composants** qui pourraient être réutilisés dans d'autres parties du site. Par exemple, le header apparaîtra sur toutes les pages du site, ce qui facilitera la navigation pour les utilisateurs. Le RecipeCard, sera utilisé pour afficher les différentes recettes disponibles sur le site. Enfin le slider, qui permet aux utilisateurs de voir un aperçu sur les différentes catégories de recette.
 
-Enfin, nous avons réalisé plusieurs composants clés, comme la cardrecipe, qui affiche les différentes recettes disponibles sur le site. Nous avons également créé un slider, qui permet aux utilisateurs de voir un aperçu sur les différentes catégories de recette.
+* De plus, comme React est une bibliothèque qui, intentionnellement, ne fournit pas de conseils sur la façon de **structurer votre projet** (Il n'y a pas qu'une seule façon de faire !), cela peut être vraiment déroutant pour les développeurs. Donc, nous nous sommes tous mis d'accord pour appliquer une structure logique qui nous conviendrait à tous et qui ne serait pas trop compliquée à maintenir puisque notre projet est de taille moyenne pour le moment. La structure devrait permettre de séparer les différents composants (blocs de code réutilisable), les ressources (multimédia et feuilles de style), les pages, les données ou même les fonctions.
+
 
 **Technologies utilisées** :
 
@@ -51,4 +52,6 @@ Enfin, nous avons réalisé plusieurs composants clés, comme la cardrecipe, qui
 * *Outil Jira* : permet de suivre les tâches et les activités associées au projet. L'outil aide à maintenir une vue d'ensemble des tâches à effectuer sous forme de backlog, des délais et des responsabilités des membres de l'équipe. On peut aussi partager des resources nécessaire. Nous aurons également la possibilité d'inscrire nos heures passées sur les différentes parties du projet a des fin d'amélioration constante pour tenir le délai imposé.
 
 ##### Reference:
+* Slider avec Mdb de React:
+https://mdbootstrap.com/docs/react/extended/slider/
 
