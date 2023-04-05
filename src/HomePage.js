@@ -47,9 +47,24 @@ function HomePage() {
       <div id="trending-recipes">
         <h1 className="block-title">Trending Recipes</h1>
         <div className="recipe-cards">
-          <RecipeCard />
-          <RecipeCard />
-          <RecipeCard />
+          <RecipeCard 
+            title="title"
+            image="/assets/card-image.jpg"
+            description="Lorem ipsum demet dolor..."
+            link="#"
+          />
+           <RecipeCard 
+            title="title"
+            image="/assets/card-image.jpg"
+            description="Lorem ipsum demet dolor..."
+            link="#"
+          />
+           <RecipeCard 
+            title="title"
+            image="/assets/card-image.jpg"
+            description="Lorem ipsum demet dolor..."
+            link="#"
+          />
         </div>
         <a className="block-link" href="#">
           View More Recipes
