@@ -103,8 +103,8 @@ function RecipePage() {
             <ul>
               {recipe["recipeInstructions"].map((instruction, index) => (
                   <li class='step' key={`step-${index}`}>
-                    <div>Etape {index + 1}</div>
-                    <div>{instruction["text"]}</div>
+                    <div class='stepNumber'>Etape {index + 1}</div>
+                    <div class='stepInstruction'>{instruction["text"]}</div>
                   </li>
                 ))}
             </ul>

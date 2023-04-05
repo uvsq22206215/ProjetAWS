@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:wght@500&display=swap');
 #container {
   text-align: start;
   display : flex;
@@ -8,17 +9,17 @@
 #infoRecipe {
   flex-grow: 1;
   border : solid;
+  padding: 5px;
+  border-radius: 10px;
+  margin : 5px;
+  border-color : #f89837;
 }
 
 #descriptionRecipe {
-  flex-grow: 4;
-  border: solid;
-}
-
-#recipeResume {
-}
-
-#recipeName {
+  flex-grow: 6;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 #recipeTags {
@@ -35,9 +36,6 @@
   border:solid;
 }
 
-#recipeSteps {
-  height : auto;
-}
 
 .containerTime {
   display: flex;
@@ -47,6 +45,43 @@
   padding-left : 5px;
 }
 
+#recipeSteps {
+  height : auto;
+  border : solid;
+  margin-top : 10px;
+  border-radius: 10px;
+  height: auto;
+  border-color : #f89837;
+}
+
+#ingredientsList, .containerTime, #personsContainer {
+  font-size : large;
+  font-family: 'Playfair Display';
+  color : #A68671;
+}
+
+.stepInstruction {
+  font-size : large;
+  font-family: 'Playfair Display';
+  color : #A68671;
+}
+
+.stepNumber {
+  font-size : x-large;
+  font-family: 'Abril Fatface';
+  color: #f89837;
+}
+
 #personsContainer {
   display: flex;
+}
+
+#recipeName {
+  font-size : xxx-large;
+  font-family: 'Abril Fatface';
+  color : #f89837;
+}
+
+ul {
+  list-style-type: none;
 }
