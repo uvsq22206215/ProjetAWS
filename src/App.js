@@ -6,6 +6,7 @@ import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Login from "./components/Login";
 import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
 import HomePage from './HomePage';
+import SearchPage from './components/SearchPage';
 
 function App() {
   const Main = () => (

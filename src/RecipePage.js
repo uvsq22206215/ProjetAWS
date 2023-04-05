@@ -67,11 +67,9 @@ function RecipePage() {
       <Header />
       <div id='container'>
         <div id='infoRecipe'>
-          <div class='containerTime'>Temps de préparation : {recipe["prepTime"]}</div>
-          <div class='containerTime'>Temps de cuisson : {recipe["cookTime"]}</div>
-          <div id='personsContainer'>Ingrédients pour {recipe.recipeYield}
-            <div id='morePersonButton'>+</div>
-            <div id='lessPersonButton'>-</div>
+          <div class='containerTime'>Temps de préparation </div>
+          <div class='containerTime'>Temps de cuisson </div>
+          <div id='personsContainer'>Ingrédients pour
           </div>
           <div id='ingredientsList'>
             <ul>
@@ -83,7 +81,7 @@ function RecipePage() {
         </div>
         <div id='descriptionRecipe'>
           <div id='recipeResume'>
-            <div id='recipeName'>{recipe.name}</div>
+            <div id='recipeName'></div>
             <div id='recipeRating'></div>
           </div>
           <div id='recipeTags'>
