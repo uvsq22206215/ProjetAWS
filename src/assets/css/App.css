@@ -53,11 +53,11 @@ body {
 }
 
 .carousel-control-next-icon::after {
-  content: url(../public/assets/arrow-right.png)!important;
+  content: url(../../../public/assets/arrow-right.png)!important;
 }
 
 .carousel-control-prev-icon::after {
-  content: url(../public/assets/arrow-left.png)!important;
+  content: url(../../../public/assets/arrow-left.png)!important;
 }
 
 .carousel-caption {

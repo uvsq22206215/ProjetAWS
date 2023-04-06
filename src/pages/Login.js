@@ -24,8 +24,8 @@ import {
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import LockIcon from "@mui/icons-material/Lock";
-import image from "./l.jpg";
-import logo from "./AWS Logo.png";
+import image from "../assets/img/l.jpg";
+import logo from "../assets/img/AWS Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme } from "@mui/material/styles";
 import { positions } from "@mui/system";
@@ -44,7 +44,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { blue, pink } from "@mui/material/colors";
-import "./Login.css";
+import "../assets/css/Login.css";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (

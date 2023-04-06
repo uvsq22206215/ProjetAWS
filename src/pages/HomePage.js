@@ -1,6 +1,6 @@
-import './RecipeCard.css';
-import RecipeCard from './RecipeCard';
-import Header from './Header';
+import '../assets/css/RecipeCard.css';
+import RecipeCard from '../components/RecipeCard';
+import Header from '../components/Header';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 function HomePage() {
