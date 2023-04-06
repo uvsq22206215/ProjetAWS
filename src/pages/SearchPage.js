@@ -1,7 +1,7 @@
-import './SearchPage.css';
-import '../RecipeCard.css';
-import Header from '../Header';
-import RecipeCard from '../RecipeCard';
+import '../assets/css/SearchPage.css';
+import '../assets/css/RecipeCard.css';
+import Header from '../components/Header';
+import RecipeCard from '../components/RecipeCard';
 import { useState } from 'react';
 
 function SearchPage() {
