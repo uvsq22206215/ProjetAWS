@@ -10,7 +10,11 @@ function Header() {
             <img alt='Logo menu' src='/assets/logoMenu.png' height='50'/>
           </a>
         </div>
-        <div id='child2'><img alt='main logo' src='/assets/logo.webp'/></div>
+        <div id='child2'>
+          <a href='/'>
+            <img alt='main logo' src='/assets/logo.webp'/>
+          </a>
+        </div>
         <div id='child3'>
           <div className='search-bar'>
             <img alt='Logo barre de recherche ' src='/assets/loupe.png' height='35'/>

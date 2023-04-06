@@ -1,5 +1,6 @@
 import './RecipePage.css'
 import Header from './Header'
+import { useState } from 'react';
 
 /*
 champs JSON scrapés utiles
@@ -26,15 +27,15 @@ const recipe =
   "25 g de Parmesan (copeaux)",
   "4 tranches de pain écroûtées"],
 "recipeInstructions":[{"@type":"HowToStep",
-  "text":"Faites dorer le pain,coupé en cubes,3 min dans un peu d'huile. "},
+  "text":"Faites dorer le pain, coupé en cubes,3 min dans un peu d'huile. "},
   {"@type":"HowToStep",
-  "text":"Déchirez les feuilles de romaine dans un saladier,et ajoutez les croûtons préalablement épongés dans du papier absorbant. "},
+  "text":"Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. "},
   {"@type":"HowToStep",
-  "text":"Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante,et rafraîchissez-le."},
+  "text":"Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le."},
   {"@type":"HowToStep",
-  "text":"Cassez-le dans le bol d'un mixeur et mixez,avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. "},
+  "text":"Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. "},
   {"@type":"HowToStep",
-  "text":"Décorez de copeaux de parmesan,et servez."}],
+  "text":"Décorez de copeaux de parmesan, et servez."}],
 "author":"patricia_204",
 "description":"moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain",
 "keywords":"Salade César,moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain,salade Cesar,très facile,bon marché,rapide",
@@ -62,19 +63,21 @@ const recipe =
 }
 
 
-
-
 function RecipePage() {
+  const [nbPersons, setNbPersons] = useState(parseInt(recipe.recipeYield))
   return(
     <div id='recipePage'>
       <Header />
       <div id='container'>
         <div id='infoRecipe'>
-          <div class='containerTime'>Temps de préparation : {recipe["prepTime"]}</div>
-          <div class='containerTime'>Temps de cuisson : {recipe["cookTime"]}</div>
-          <div id='personsContainer'>Ingrédients pour {recipe.recipeYield}
-            <div id='morePersonButton'>+</div>
-            <div id='lessPersonButton'>-</div>
+          <div class='containerTime'>Temps de préparation : {recipe["prepTime"].replace('PT','')}</div>
+          <div class='containerTime'>Temps de cuisson : {recipe["cookTime"].replace('PT','')}</div>
+          <div id='personsContainer'>Ingrédients pour
+            <div id='numberPersons'>{nbPersons}</div>
+            personnes 
+            <span id='morePersonButton' onClick={() => {setNbPersons(nbPersons + 1);}}>+</span>
+            <span id='lessPersonButton' onClick={() => {setNbPersons(Math.max(nbPersons - 1, 1));}}>-</span>
+            :
           </div>
           <div id='ingredientsList'>
             <ul>

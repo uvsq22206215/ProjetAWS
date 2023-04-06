@@ -24,6 +24,7 @@
 
 #recipeTags {
   display: flex;
+  flex-wrap : wrap;
 }
 
 .tag {
@@ -54,16 +55,10 @@
   border-color : #f89837;
 }
 
-#ingredientsList, .containerTime, #personsContainer {
+#ingredientsList, .containerTime, #personsContainer, .stepInstruction {
   font-size : large;
   font-family: 'Playfair Display';
-  color : #A68671;
-}
-
-.stepInstruction {
-  font-size : large;
-  font-family: 'Playfair Display';
-  color : #A68671;
+  /* color : #A68671; */
 }
 
 .stepNumber {
@@ -82,6 +77,28 @@
   color : #f89837;
 }
 
-ul {
+ol, ul {
   list-style-type: none;
+  padding-left: 1rem !important;
+}
+
+#morePersonButton, #lessPersonButton {
+  font-weight: bold;
+  background:#f2f2f2;
+  border-radius:4px;
+  padding : 0px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  border:1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor:pointer;
+  user-select: none;
+}
+
+#numberPersons {
+  width: 25px;
+  margin: 10px;
+  margin: initial;
+  margin-left: 10px;
 }
