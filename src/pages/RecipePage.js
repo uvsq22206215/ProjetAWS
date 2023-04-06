@@ -1,5 +1,5 @@
-import './RecipePage.css'
-import Header from './Header'
+import '../assets/css/RecipePage.css'
+import Header from '../components/Header'
 import { useState } from 'react';
 
 /*
