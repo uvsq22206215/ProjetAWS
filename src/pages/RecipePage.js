@@ -31,16 +31,12 @@ function RecipePage() {
     {"name" : "g de Parmesan (copeaux)", "quantity" : 25/4},
     {"name" : "tranches de pain écroûtées", "quantity" : 4/4}
   ],
-  "recipeInstructions":[{"@type":"HowToStep",
-    "text":"Faites dorer le pain, coupé en cubes,3 min dans un peu d'huile. "},
-    {"@type":"HowToStep",
-    "text":"Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. "},
-    {"@type":"HowToStep",
-    "text":"Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le."},
-    {"@type":"HowToStep",
-    "text":"Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. "},
-    {"@type":"HowToStep",
-    "text":"Décorez de copeaux de parmesan, et servez."}],
+  "recipeInstructions":[
+    "Faites dorer le pain, coupé en cubes,3 min dans un peu d'huile. ",
+    "Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. ",
+    "Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le.",
+    "Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. ",
+    "Décorez de copeaux de parmesan, et servez."],
   "author":"patricia_204",
   "description":"moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain",
   "keywords":"Salade César,moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain,salade Cesar,très facile,bon marché,rapide",
@@ -122,7 +118,7 @@ function RecipePage() {
               {recipe["recipeInstructions"].map((instruction, index) => (
                   <li class='step' key={`step-${index}`}>
                     <div class='stepNumber'>Etape {index + 1}</div>
-                    <div class='stepInstruction'>{instruction["text"]}</div>
+                    <div class='stepInstruction'>{instruction}</div>
                   </li>
                 ))}
             </ul>
