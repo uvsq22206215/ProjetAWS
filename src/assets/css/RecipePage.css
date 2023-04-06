@@ -69,6 +69,7 @@
 
 #personsContainer {
   display: flex;
+  flex-wrap : wrap;
 }
 
 #recipeName {
@@ -82,10 +83,13 @@ ol, ul {
   padding-left: 1rem !important;
 }
 
-#morePersonButton, #lessPersonButton {
+#moreLessButtons {
+  height : min-content;
+  display : flex;
+  gap : 15px;
   font-weight: bold;
-  background:#f2f2f2;
-  border-radius:4px;
+  background:#f89837;
+  border-radius:30px;
   padding : 0px 5px 0px 5px;
   margin: 0px 5px 0px 5px;
   border:1px solid #ddd;
@@ -94,6 +98,15 @@ ol, ul {
   text-align: center;
   cursor:pointer;
   user-select: none;
+}
+
+#morePersonButton, #lessPersonButton {
+  padding : 0 10px 0 10px;
+  height: min-content;
+}
+
+#lessPersonButton {
+  border-left: 2px solid white;
 }
 
 #numberPersons {

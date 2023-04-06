@@ -2,69 +2,74 @@ import '../assets/css/RecipePage.css'
 import Header from '../components/Header'
 import { useState } from 'react';
 
-/*
-champs JSON scrapés utiles
-*/
-const recipe = 
-{
-"name":"Salade César",
-"prepTime":"PT15M",
-"cookTime":"PT5M",
-"totalTime":"PT20M",
-"recipeYield":"4 personnes",
-"recipeIngredient":["1/2 c.à.c de moutarde",
-  "1 trait de tabasco",
-  "15 cl d'huile",
-  "poivre",
-  "sel",
-  "1 oeuf",
-  "25 g de parmesan râpé",
-  "2 c.à.c de câpres",
-  "citron",
-  "1 gousse d'ail pelée",
-  "2 c.à.s d'huile",
-  "2 coeurs de laitue effeuillé",
-  "25 g de Parmesan (copeaux)",
-  "4 tranches de pain écroûtées"],
-"recipeInstructions":[{"@type":"HowToStep",
-  "text":"Faites dorer le pain, coupé en cubes,3 min dans un peu d'huile. "},
-  {"@type":"HowToStep",
-  "text":"Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. "},
-  {"@type":"HowToStep",
-  "text":"Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le."},
-  {"@type":"HowToStep",
-  "text":"Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. "},
-  {"@type":"HowToStep",
-  "text":"Décorez de copeaux de parmesan, et servez."}],
-"author":"patricia_204",
-"description":"moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain",
-"keywords":"Salade César,moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain,salade Cesar,très facile,bon marché,rapide",
-"recipeCuisine":"Entrée",
-"aggregateRating":{"@type":"AggregateRating",
-  "reviewCount":109,
-  "ratingValue":4.7},
-  "tags":[
-    {
-      nameTag: "🇮🇹 Italien",
-      background: "white",
-      textColor : "black"
-    },
-    {
-      nameTag: "🕒 Moins de 30 min",
-      background: "grey",
-      textColor : "white"
-    },
-    {
-      nameTag: "🌿 Vegan",
-      background: "green",
-      textColor : "white"
-    },
-  ]
-}
-
 
 function RecipePage() {
+  
+  /*
+  champs JSON scrapés utiles
+  */
+  const recipe = 
+  {
+  "name":"Salade César",
+  "prepTime":"PT15M",
+  "cookTime":"PT5M",
+  "totalTime":"PT20M",
+  "recipeYield":"4 personnes",
+  "recipeIngredient":[
+    {"name" : "c.à.c de moutarde", "quantity" : 1/8},
+    {"name" : "trait de tabasco", "quantity" : 1/4},
+    {"name" : "cl d'huile", "quantity" : 15/4},
+    {"name" : "poivre", "quantity" : NaN},
+    {"name" : "sel", "quantity" : NaN},
+    {"name" : "oeuf", "quantity" : 1/4},
+    {"name" : "g de parmesan râpé", "quantity" : 25/4}, 
+    {"name" : "c.à.c de câpres", "quantity" : 2/4},
+    {"name" : "citron", "quantity" : NaN},
+    {"name" : "gousse d'ail pelée", "quantity" : 1/4}, 
+    {"name" : "c.à.s d'huile", "quantity" : 2/4},
+    {"name" : "coeurs de laitue effeuillé", "quantity" : 2/4}, 
+    {"name" : "g de Parmesan (copeaux)", "quantity" : 25/4},
+    {"name" : "tranches de pain écroûtées", "quantity" : 4/4}
+  ],
+  "recipeInstructions":[{"@type":"HowToStep",
+    "text":"Faites dorer le pain, coupé en cubes,3 min dans un peu d'huile. "},
+    {"@type":"HowToStep",
+    "text":"Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. "},
+    {"@type":"HowToStep",
+    "text":"Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le."},
+    {"@type":"HowToStep",
+    "text":"Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. "},
+    {"@type":"HowToStep",
+    "text":"Décorez de copeaux de parmesan, et servez."}],
+  "author":"patricia_204",
+  "description":"moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain",
+  "keywords":"Salade César,moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain,salade Cesar,très facile,bon marché,rapide",
+  "recipeCuisine":"Entrée",
+  "aggregateRating":{"@type":"AggregateRating",
+    "reviewCount":109,
+    "ratingValue":4.7},
+    "tags":[
+      {
+        nameTag: "🇮🇹 Italien",
+        background: "white",
+        textColor : "black"
+      },
+      {
+        nameTag: "🕒 Moins de 30 min",
+        background: "grey",
+        textColor : "white"
+      },
+      {
+        nameTag: "🌿 Vegan",
+        background: "green",
+        textColor : "white"
+      },
+    ]
+  }
+  
+  
   const [nbPersons, setNbPersons] = useState(parseInt(recipe.recipeYield))
+
   return(
     <div id='recipePage'>
       <Header />
@@ -75,14 +80,19 @@ function RecipePage() {
           <div id='personsContainer'>Ingrédients pour
             <div id='numberPersons'>{nbPersons}</div>
             personnes 
-            <span id='morePersonButton' onClick={() => {setNbPersons(nbPersons + 1);}}>+</span>
-            <span id='lessPersonButton' onClick={() => {setNbPersons(Math.max(nbPersons - 1, 1));}}>-</span>
+            <div id='moreLessButtons'>
+              <span id='morePersonButton' onClick={() => {setNbPersons(nbPersons + 1);}}>+</span>
+              <span id='lessPersonButton' onClick={() => {setNbPersons(Math.max(nbPersons - 1, 1));}}>-</span>
+            </div>
             :
           </div>
           <div id='ingredientsList'>
             <ul>
               {recipe["recipeIngredient"].map((ingredient) => (
-                <li>{ingredient}</li>
+                <li>
+                  {isNaN(ingredient.quantity) ? '' : ingredient.quantity * nbPersons + ' '}
+                  {ingredient.name}
+                </li>
               ))}
             </ul>
           </div>
