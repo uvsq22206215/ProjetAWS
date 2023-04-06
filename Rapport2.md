@@ -53,5 +53,21 @@ Cette semaine, nous avons travaillé sur notre projet qui a comme objectif de cr
 
 ##### Reference:
 * Slider avec Mdb de React:
-https://mdbootstrap.com/docs/react/extended/slider/
+  https://mdbootstrap.com/docs/react/extended/slider/
+
+* les composants de la page login:
+   https://mui.com/material-ui/
+
+* Pour le Css de site:
+  css-tricks.com/snippets/css/a-guide-to-flexbox 
+
+* React-Dom:
+  https://legacy.reactjs.org/docs/react-dom.html
+
+* Firebsae9 (auth):
+  https://www.youtube.com/watch?v=9bXhf_TELP4
+
+  
+
+  
 
