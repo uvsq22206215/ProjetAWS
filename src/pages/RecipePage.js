@@ -55,15 +55,20 @@ function RecipePage() {
         textColor : "black"
       },
       {
+        nameTag: "🌿 Vegan",
+        background: "green",
+        textColor : "white"
+      },
+      {
         nameTag: "🕒 Moins de 30 min",
         background: "grey",
         textColor : "white"
       },
       {
-        nameTag: "🌿 Vegan",
-        background: "green",
-        textColor : "white"
-      },
+        nameTag: "🟢 Facile",
+        background: "#f89837",
+        textColor: "white"
+      }
     ]
   }
   
@@ -81,8 +86,8 @@ function RecipePage() {
             <div id='numberPersons'>{nbPersons}</div>
             personnes 
             <div id='moreLessButtons'>
-              <span id='morePersonButton' onClick={() => {setNbPersons(nbPersons + 1);}}>+</span>
               <span id='lessPersonButton' onClick={() => {setNbPersons(Math.max(nbPersons - 1, 1));}}>-</span>
+              <span id='morePersonButton' onClick={() => {setNbPersons(nbPersons + 1);}}>+</span>
             </div>
             :
           </div>

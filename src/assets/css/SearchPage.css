@@ -1,12 +1,12 @@
 #search-container {
     display: flex;
-  }
+    align-items: flex-start;
+}
   
   #filter-column {
     width: 25%;
-    padding: 20px;
     border: 2px solid orange;
-
+    border-radius: 10px;
   }
   
   #result-column {
@@ -17,7 +17,6 @@
     background-color: #f8f8f8;
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 20px;
   }
   
   .filter h2 {

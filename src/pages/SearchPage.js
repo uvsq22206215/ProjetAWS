@@ -11,6 +11,11 @@ function SearchPage() {
     setShowMore(true);
   };
 
+  const generateOptions = (option) => {
+    return(
+    <option value={option.value}>{option.text}</option>);
+  }
+
   return (
     <div id='SearchPage'>
       <Header />
@@ -35,12 +40,20 @@ function SearchPage() {
     <div class="form-group">
       <label for="time">Temps de préparation :</label>
       <select id="time" name="time">
-        <option value="">--Choisir un temps--</option>
+        {[
+          {"value" : "", "text" : "--Choisir un temps--"},
+          {"value" : "10", "text" : "Moins de 10 minutes"},
+          {"value" : "20", "text" : "Moins de 20 minutes"},
+          {"value" : "30", "text" : "Moins de 30 minutes"},
+          {"value" : "60", "text" : "Moins de 1 heure"},
+          {"value" : "120", "text" : "Moins de 2 heures"},
+        ].map(generateOptions)}
+        {/* <option value="">--Choisir un temps--</option>
         <option value="10">Moins de 10 minutes</option>
         <option value="20">Moins de 20 minutes</option>
         <option value="30">Moins de 30 minutes</option>
         <option value="60">Moins de 1 heure</option>
-        <option value="120">Moins de 2 heures</option>
+        <option value="120">Moins de 2 heures</option> */}
       </select>
     </div>
     <div class="form-group">
