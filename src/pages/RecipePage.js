@@ -1,7 +1,7 @@
 import '../assets/css/RecipePage.css'
 import Header from '../components/Header'
 import { useState } from 'react';
-
+import RecipeCard from '../components/RecipeCard';
 
 function RecipePage() {
   
@@ -126,7 +126,26 @@ function RecipePage() {
 
         </div>
       </div>
-
+      <div id='relatedRecipes'>
+        <RecipeCard 
+          title="Pesto Pasta"
+          image="/assets/pesto-pasta.jpg"
+          description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+          link="#"
+        />
+        <RecipeCard 
+          title="Pesto Pasta"
+          image="/assets/pesto-pasta.jpg"
+          description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+          link="#"
+        />
+        <RecipeCard 
+          title="Pesto Pasta"
+          image="/assets/pesto-pasta.jpg"
+          //description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+          link="#"
+        />
+      </div>
     </div>
   );
 }

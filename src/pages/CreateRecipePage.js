@@ -2,7 +2,9 @@ import database from '../utils/firebase'
 import { useState } from 'react';
 import { getDocs, addDoc, collection, getFirestore } from 'firebase/firestore';
 import { IconButton } from '@mui/material';
-
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import RecipeCard from '../components/RecipeCard';
 /* 
 "name":"Salade César",
   "prepTime":"PT15M",
@@ -107,11 +109,12 @@ function CreateRecipePage() {
   return (
     
     <div id='createPage'>
+      <Header />
       {
         //console.log(name, prepTime, cookTime, instructions, listIngredients)
       }
       <div>Création de recette</div>
-      <input placeholder='Nom de la recette' onChange={(e) =>  setName(e.target.value)}/>
+      <input placeholder='Nom de la recette' onChange={(e) => setName(e.target.value)}/>
       <input placeholder='Temps de préparation' onChange={(e) => setPrepTime(e.target.value)}/>
       <input placeholder='Temps de cuisson' onChange={(e) => setCookTime(e.target.value)}/>
       <div id='listInstructions'>

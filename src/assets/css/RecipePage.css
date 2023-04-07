@@ -115,3 +115,8 @@ ol, ul {
   margin: initial;
   margin-left: 10px;
 }
+
+#relatedRecipes {
+  display : flex;
+  flex-wrap : wrap;
+}
