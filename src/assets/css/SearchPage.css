@@ -14,18 +14,9 @@
     border-radius: 10px;
   }
   
+ 
   #result-column {
     width: 75%;
-  }
-  
-  .filter {
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    padding: 20px;
-  }
-  
-  .filter h2 {
-    margin-top: 0;
   }
   
   .form-group {
@@ -55,3 +46,98 @@
     border: none;
 
   }
+
+  .filter-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .filter-container h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .filter-container label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .filter-container input[type="checkbox"] {
+    display: none;
+  }
+  
+  .filter-container input[type="checkbox"] + label::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+  }
+  
+  .filter-container input[type="checkbox"] + label:hover::before {
+    border-color: #ff9900;
+  }
+  
+  .filter-container input[type="checkbox"]:checked + label::before {
+    background-color: #ff9900;
+  }
+  
+  .filter-options {
+    display: none;
+  }
+  
+  .filter-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .filter-container ul li {
+    margin-bottom: 10px;
+  }
+  
+  .filter-container .apply-button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff9900;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .filter-container .apply-button:hover {
+    background-color: #ff6600;
+  }
+  
+  button[type="submit"] {
+    background-color: #ff9900;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #ff6600;
+  }
+  
