@@ -6,16 +6,23 @@
   padding: 10px;
 }
 
+#infoRecipe, #recipeSteps {
+  background-color: cornsilk;
+}
+
 #infoRecipe {
+  max-width: fit-content;
   flex-grow: 1;
   border : solid;
-  padding: 5px;
+  padding: 10px;
   border-radius: 10px;
   margin : 5px;
   border-color : #f89837;
 }
 
 #descriptionRecipe {
+  width: min-content;
+  min-width: 300px;
   flex-grow: 6;
   border: none;
   padding: 5px;
@@ -47,7 +54,6 @@
 }
 
 #recipeSteps {
-  height : auto;
   border : solid;
   margin-top : 10px;
   border-radius: 10px;
@@ -114,4 +120,20 @@ ol, ul {
   margin: 10px;
   margin: initial;
   margin-left: 10px;
+}
+
+#relatedRecipesTitle {
+  font-family: 'Playfair Display';
+  text-align : center;
+  color : #a68671;
+}
+
+#relatedRecipes {
+  justify-content: space-around;
+  display : flex;
+  flex-wrap : wrap;
+}
+
+.recipe-card {
+  text-align: center;
 }

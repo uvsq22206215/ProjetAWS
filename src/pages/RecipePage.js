@@ -1,7 +1,7 @@
 import '../assets/css/RecipePage.css'
 import Header from '../components/Header'
 import { useState } from 'react';
-
+import RecipeCard from '../components/RecipeCard';
 
 function RecipePage() {
   
@@ -36,7 +36,8 @@ function RecipePage() {
     "Déchirez les feuilles de romaine dans un saladier, et ajoutez les croûtons préalablement épongés dans du papier absorbant. ",
     "Préparez la sauce :\nFaites cuire l'oeuf 1 min 30 dans l'eau bouillante, et rafraîchissez-le.",
     "Cassez-le dans le bol d'un mixeur et mixez, avec tous les autres ingrédients; rectifiez l'assaissonnement et incorporez à la salade. ",
-    "Décorez de copeaux de parmesan, et servez."],
+    "Décorez de copeaux de parmesan, et servez."
+  ],
   "author":"patricia_204",
   "description":"moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain",
   "keywords":"Salade César,moutarde,tabasco,huile,poivre,sel,oeuf,parmesan râpé,câpres,citron,ail,huile,laitue,Parmesan,pain,salade Cesar,très facile,bon marché,rapide",
@@ -126,7 +127,29 @@ function RecipePage() {
 
         </div>
       </div>
-
+      <div>
+        <h1 id='relatedRecipesTitle'>Recettes associées</h1>
+        <div id='relatedRecipes'>
+          <RecipeCard 
+            title="Pesto Pasta"
+            image="/assets/pesto-pasta.jpg"
+            description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+            link="#"
+          />
+          <RecipeCard 
+            title="Pesto Pasta"
+            image="/assets/pesto-pasta.jpg"
+            description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+            link="#"
+          />
+          <RecipeCard 
+            title="Pesto Pasta"
+            image="/assets/pesto-pasta.jpg"
+            description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
+            link="#"
+          />
+        </div>
+      </div>
     </div>
   );
 }
