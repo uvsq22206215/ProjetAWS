@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import RecipePage from "./pages/RecipePage";
+import CreateRecipePage from "./pages/CreateRecipePage";
 
 function App() {
   const Main = () => (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/create" element={<CreateRecipePage />} />
         </Routes>
       </BrowserRouter>
     </div>

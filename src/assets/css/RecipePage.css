@@ -6,16 +6,23 @@
   padding: 10px;
 }
 
+#infoRecipe, #recipeSteps {
+  background-color: cornsilk;
+}
+
 #infoRecipe {
+  max-width: fit-content;
   flex-grow: 1;
   border : solid;
-  padding: 5px;
+  padding: 10px;
   border-radius: 10px;
   margin : 5px;
   border-color : #f89837;
 }
 
 #descriptionRecipe {
+  width: min-content;
+  min-width: 300px;
   flex-grow: 6;
   border: none;
   padding: 5px;
@@ -24,6 +31,7 @@
 
 #recipeTags {
   display: flex;
+  flex-wrap : wrap;
 }
 
 .tag {
@@ -46,7 +54,6 @@
 }
 
 #recipeSteps {
-  height : auto;
   border : solid;
   margin-top : 10px;
   border-radius: 10px;
@@ -54,16 +61,10 @@
   border-color : #f89837;
 }
 
-#ingredientsList, .containerTime, #personsContainer {
+#ingredientsList, .containerTime, #personsContainer, .stepInstruction {
   font-size : large;
   font-family: 'Playfair Display';
-  color : #A68671;
-}
-
-.stepInstruction {
-  font-size : large;
-  font-family: 'Playfair Display';
-  color : #A68671;
+  /* color : #A68671; */
 }
 
 .stepNumber {
@@ -74,6 +75,7 @@
 
 #personsContainer {
   display: flex;
+  flex-wrap : wrap;
 }
 
 #recipeName {
@@ -82,6 +84,56 @@
   color : #f89837;
 }
 
-ul {
+ol, ul {
   list-style-type: none;
+  padding-left: 1rem !important;
+}
+
+#moreLessButtons {
+  height : min-content;
+  display : flex;
+  gap : 15px;
+  font-weight: bold;
+  background:#f89837;
+  border-radius:30px;
+  padding : 0px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
+  border:1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor:pointer;
+  user-select: none;
+}
+
+#morePersonButton, #lessPersonButton {
+  padding : 0 10px 0 10px;
+  height: min-content;
+}
+
+#morePersonButton {
+  border-left: 2px solid white;
+}
+
+#numberPersons {
+  width: 25px;
+  margin: 10px;
+  margin: initial;
+  margin-left: 10px;
+}
+
+#relatedRecipesTitle {
+  font-family: 'Playfair Display';
+  text-align : center;
+  color : #a68671;
+}
+
+#relatedRecipes {
+  justify-content: space-around;
+  display : flex;
+  flex-wrap : wrap;
+}
+
+.recipe-card {
+  text-align: center;
 }
