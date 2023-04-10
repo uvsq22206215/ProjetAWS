@@ -2,6 +2,7 @@ import '../assets/css/RecipeCard.css';
 import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import TrendingRecipesCarousel from '../components/TrendingRecipesCarousel';
 
 function HomePage() {
   return(
@@ -45,31 +46,34 @@ function HomePage() {
       </div>
 
       <div id="trending-recipes">
-        <h1 className="block-title">Trending Recipes</h1>
-        <div className="recipe-cards">
-          <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
-           <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
-           <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
+        <div>
+          <h1 className="block-title">Trending Recipes</h1>
+          <div className="recipe-cards">
+            <RecipeCard 
+              title="title"
+              image="/assets/card-image.jpg"
+              description="Lorem ipsum demet dolor..."
+              link="#"
+            />
+            <RecipeCard 
+              title="title"
+              image="/assets/card-image.jpg"
+              description="Lorem ipsum demet dolor..."
+              link="#"
+            />
+            <RecipeCard 
+              title="title"
+              image="/assets/card-image.jpg"
+              description="Lorem ipsum demet dolor..."
+              link="#"
+            />
+          </div>
+          <a className="block-link" href="#">
+            View More Recipes
+          </a>
+          <TrendingRecipesCarousel />
         </div>
-        <a className="block-link" href="#">
-          View More Recipes
-        </a>
-      </div>
+      </div>  
     </div>
       
   );

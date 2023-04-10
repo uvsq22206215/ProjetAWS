@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+html, body {
+  margin: 0;
+}
+
 body {
   font-family: 'Baloo 2', cursive;
 }
@@ -35,6 +39,9 @@ body {
 .block-title {
   font-family: 'Marcellus', serif;
   color: #a68671;
+  font-size: 64px;
+  margin-bottom: 0px;
+  padding-bottom: 30px;
 }
 
 .block-link {
@@ -92,6 +99,56 @@ body {
   font-family: 'Marcellus', serif;
 }
 
+#trending-recipes {
+  height: 100vh;
+  margin: 0;
+}
+
+div#trending-recipes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(/public/assets/trending-recipe-bg.png);
+  background-size: cover;
+}
+
+#trending-recipes .recipe-cards {
+  background-color: white;
+}
+
+@media (max-width: 600px) { 
+  #trending-recipes .recipe-cards {
+    justify-content: center;
+  }
+
+  #trending-recipes .block-title {
+    margin-top: -40px;
+    font-size: 54px;
+    margin: 0px;
+  }
+
+  #slider-hp .carousel-item img {
+    min-height: 600px;
+  }
+
+  .carousel, .carousel-inner, .carousel-item, .carousel-item img {
+    min-height: 100vh!important;
+  }
+
+  .carousel-caption.d-md-block {
+      display: block !important;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    justify-content: unset!important;
+  }
+}
+
+@media (max-width: 900px) {
+  #trending-recipes .block-title {
+    background-color: white;
+  }
+}
 
 @keyframes App-logo-spin {
   from {
