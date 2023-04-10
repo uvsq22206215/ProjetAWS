@@ -1,5 +1,4 @@
 import '../assets/css/SearchPage.css';
-import '../assets/css/RecipeCard.css';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { useState } from 'react';

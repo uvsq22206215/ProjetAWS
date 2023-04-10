@@ -1,4 +1,4 @@
-import '../assets/css/RecipeCard.css';
+import '../assets/css/HomePage.css'
 import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
