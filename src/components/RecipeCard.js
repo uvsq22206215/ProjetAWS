@@ -1,3 +1,5 @@
+import '../assets/css/RecipeCard.css'
+
 function RecipeCard(props) {
   return (
     <div className="recipe-card">
