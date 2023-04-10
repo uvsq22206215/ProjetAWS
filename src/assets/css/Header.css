@@ -59,7 +59,7 @@
   margin-right: 10px;
 }
 
-@media (max-width: 600px)  {
+@media (max-width: 727px)  {
   .search-bar {
     visibility: hidden;
     display: none;
