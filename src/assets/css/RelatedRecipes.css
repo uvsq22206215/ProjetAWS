@@ -1,0 +1,11 @@
+#relatedRecipesTitle {
+  font-family: 'Playfair Display';
+  text-align : center;
+  color : #a68671;
+}
+
+#relatedRecipes {
+  justify-content: space-around;
+  display : flex;
+  flex-wrap : wrap;
+}

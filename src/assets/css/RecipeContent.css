@@ -28,6 +28,7 @@
 
 #recipePhoto img {
   border-radius : 10px;
+  max-height: 350px;
 }
 
 #descriptionRecipe {
@@ -130,18 +131,6 @@ ol, ul {
   margin: 10px;
   margin: initial;
   margin-left: 10px;
-}
-
-#relatedRecipesTitle {
-  font-family: 'Playfair Display';
-  text-align : center;
-  color : #a68671;
-}
-
-#relatedRecipes {
-  justify-content: space-around;
-  display : flex;
-  flex-wrap : wrap;
 }
 
 .recipe-card {

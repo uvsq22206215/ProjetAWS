@@ -28,8 +28,8 @@ function RecipeContent({ recipe }) {
           </div>
           <div id='ingredientsList'>
             <ul>
-              {recipe.recipeIngredient.map((ingredient) => (
-                <li>
+              {recipe.recipeIngredient.map((ingredient, index) => (
+                <li className="ingredient" key={`ingredient-${index}`}>
                   {isNaN(ingredient.quantity) ? '' : Math.round((ingredient.quantity * nbPersons) * 10) / 10 + ' '}
                   {ingredient.name}
                 </li>
