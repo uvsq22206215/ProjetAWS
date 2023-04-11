@@ -28,15 +28,15 @@
   .footer-col ul {
     list-style: none;
     margin-top: 30px;
+    padding: 0px !important;
+    list-style-type: none;
   }
   .footer-col li  {
-    margin-left: 10px;
     margin-bottom: 30px;
   }
   
   .footer-col li a {
     color: rgb(255, 255, 255);
-    margin-left: 10px;
   }
   
   .social-icons {
