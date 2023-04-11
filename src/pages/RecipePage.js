@@ -18,22 +18,22 @@ function RecipePage() {
   const query = useQuery().get("id");
 
   const [loaded, setLoaded] = useState(false);
-  const [recipe, setRecipe] = useState({});
   const [found, setFound] = useState(false);
+  const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
-    setLoaded(true);
     if (query && !loaded) {
       console.log("request sent")
       getDoc(doc(database, "recipe", query))
-        .then((docRef) => {
-          setLoaded(true);
-          if (docRef.exists()) {
-            setRecipe(docRef.data());
-            setFound(true);
-          }
-        })
-        .catch(() => console.log("Erreur"))
+      .then((docRef) => {
+        setLoaded(true);
+        if (docRef.exists()) {
+          setRecipe(docRef.data());
+          setFound(true);
+        }
+        setLoaded(true);
+      })
+      .catch(() => console.log("Erreur"))
     }
   }, [query, loaded]);
 
@@ -49,16 +49,14 @@ function RecipePage() {
       <div id='containerPage'>
         <Header />
         <RecipeContent recipe={recipe} />
-        <RelatedRecipes title='Recettes associées' />
-      </div>
-    );
+        <RelatedRecipes title='Recettes associées' /> {/*TODO : Ajouter criteres de similarité */}
+      </div>);
   }
   return (
     <div id='containerPage'>
       <Header />
       <div>Recette non trouvée !</div>
-    </div>
-  );
+    </div>);
 }
 
 export default RecipePage;
