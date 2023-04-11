@@ -7,6 +7,7 @@ import { collection, doc, getDoc } from 'firebase/firestore';
 import RecipeCard from '../components/RecipeCard';
 import { database } from '../utils/firebase';
 import RecipeContent from '../components/RecipeContent';
+import RelatedRecipes from '../components/RelatedRecipes';
 /*
 champs JSON scrapés utiles
 */
@@ -117,6 +118,7 @@ function RecipePage() {
       <div id='containerPage'>
         <Header />
         <RecipeContent recipe={useRecipe} />
+        <RelatedRecipes />
       </div>
     );
   }

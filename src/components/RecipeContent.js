@@ -4,22 +4,12 @@ import { useEffect, useState } from "react";
 import { database } from "../utils/firebase";
 import { doc, getDocs, query, limit, collection } from "firebase/firestore";
 import RecipePage from "../pages/RecipePage";
+import RelatedRecipes from "./RelatedRecipes";
 
 function RecipeContent({ recipe }) {
 
   const [nbPersons, setNbPersons] = useState(parseInt(recipe.numberPersons));
-  const [relatedRecipesLoaded, setRelRecLoaded] = useState(false);
-  const [relRecipes, setRelRecipes] = useState([]);
-
-  useEffect(() => {
-    if (!relatedRecipesLoaded) {
-      setRelRecLoaded(true);
-      const q = query(collection(database, "recipe"), limit(3));
-      getDocs(q)
-        .then((snapshot) => setRelRecipes(snapshot.docs))
-        .catch((e) => console.log("Erreur à catch", e));
-    }
-  });
+  
 
   return (
     <div id='recipeContent'>
@@ -74,17 +64,7 @@ function RecipeContent({ recipe }) {
           </div>
 
         </div>
-      </div>
-      <div>
-        <h1 id='relatedRecipesTitle'>Recettes associées</h1>
-        {true &&
-          <div id='relatedRecipes'>
-            {relRecipes.map((recipe) => (
-              <RecipeCard title={recipe.data().name} image={recipe.data().image} link={'/recipe?id=' + recipe.id} description=''/>
-            ))}
-          </div>
-        }
-      </div>
+      </div>      
     </div>
   );
 }

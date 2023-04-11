@@ -3,9 +3,10 @@ import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Footer from '../components/Footer';
+import RelatedRecipes from '../components/RelatedRecipes';
 
 function HomePage() {
-  return(
+  return (
     <div id="homepage">
       <Header />
       <div id="slider-hp">
@@ -45,35 +46,10 @@ function HomePage() {
         </MDBCarousel>
       </div>
 
-      <div id="trending-recipes">
-        <h1 className="block-title">Trending Recipes</h1>
-        <div className="recipe-cards">
-          <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
-           <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
-           <RecipeCard 
-            title="title"
-            image="/assets/card-image.jpg"
-            description="Lorem ipsum demet dolor..."
-            link="#"
-          />
-        </div>
-        <a className="block-link" href="#">
-          View More Recipes
-        </a>
-      </div>
+      <RelatedRecipes title='Recettes tendance'/>
       <Footer />
     </div>
-      
+
   );
 }
 
