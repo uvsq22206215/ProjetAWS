@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { collection, doc, getDoc } from 'firebase/firestore';
 import RecipeCard from '../components/RecipeCard';
-import database from '../utils/firebase';
+import { database } from '../utils/firebase';
 import RecipeContent from '../components/RecipeContent';
 /*
 champs JSON scrapés utiles
@@ -86,7 +86,7 @@ function RecipePage() {
   const [useNotFound, setNotFound] = useState(true);
 
   const loadRecipe = () => {
-    if (query) {
+    if (query && !useLoad) { // 
       getDoc(doc(database, "recipe", query))
         .then((docRef) => {
           setLoad(true);

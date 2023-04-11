@@ -1,9 +1,25 @@
 import RecipeCard from "./RecipeCard";
-import { useState } from "react";
+import '../assets/css/RecipeContent.css'
+import { useEffect, useState } from "react";
+import { database } from "../utils/firebase";
+import { doc, getDocs, query, limit, collection } from "firebase/firestore";
+import RecipePage from "../pages/RecipePage";
 
 function RecipeContent({ recipe }) {
 
   const [nbPersons, setNbPersons] = useState(parseInt(recipe.numberPersons));
+  const [relatedRecipesLoaded, setRelRecLoaded] = useState(false);
+  const [relRecipes, setRelRecipes] = useState([]);
+
+  useEffect(() => {
+    if (!relatedRecipesLoaded) {
+      setRelRecLoaded(true);
+      const q = query(collection(database, "recipe"), limit(3));
+      getDocs(q)
+        .then((snapshot) => setRelRecipes(snapshot.docs))
+        .catch((e) => console.log("Erreur à catch", e));
+    }
+  });
 
   return (
     <div id='recipeContent'>
@@ -24,7 +40,7 @@ function RecipeContent({ recipe }) {
             <ul>
               {recipe.recipeIngredient.map((ingredient) => (
                 <li>
-                  {isNaN(ingredient.quantity) ? '' : Math.round((ingredient.quantity * nbPersons)*10) / 10 + ' '}
+                  {isNaN(ingredient.quantity) ? '' : Math.round((ingredient.quantity * nbPersons) * 10) / 10 + ' '}
                   {ingredient.name}
                 </li>
               ))}
@@ -36,6 +52,7 @@ function RecipeContent({ recipe }) {
             <div id='recipeName'>{recipe.name}</div>
             <div id='recipeRating'></div>
           </div>
+          <div id='recipePhoto'><img src={recipe.image} /></div>
           <div id='recipeTags'>
             {/* {recipe.tags.map((tag, index) => (
               <div className='tag' style={{
@@ -45,7 +62,6 @@ function RecipeContent({ recipe }) {
               }}>{tag.nameTag}</div>
             ))} */}
           </div>
-          <div id='recipePhoto'><img src={recipe.image} /></div>
           <div id='recipeSteps'>
             <ul>
               {recipe.recipeInstructions.map((instruction, index) => (
@@ -61,26 +77,13 @@ function RecipeContent({ recipe }) {
       </div>
       <div>
         <h1 id='relatedRecipesTitle'>Recettes associées</h1>
-        <div id='relatedRecipes'>
-          <RecipeCard
-            title="Pesto Pasta"
-            image="/assets/pesto-pasta.jpg"
-            description="This classNameic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-            link="#"
-          />
-          <RecipeCard
-            title="Pesto Pasta"
-            image="/assets/pesto-pasta.jpg"
-            description="This classNameic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-            link="#"
-          />
-          <RecipeCard
-            title="Pesto Pasta"
-            image="/assets/pesto-pasta.jpg"
-            description="This classNameic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-            link="#"
-          />
-        </div>
+        {true &&
+          <div id='relatedRecipes'>
+            {relRecipes.map((recipe) => (
+              <RecipeCard title={recipe.data().name} image={recipe.data().image} link={'/recipe?id=' + recipe.id} description=''/>
+            ))}
+          </div>
+        }
       </div>
     </div>
   );
