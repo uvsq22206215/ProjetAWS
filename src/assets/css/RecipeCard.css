@@ -1,7 +1,9 @@
 .recipe-card {
   /* border: 1px solid brown; */
   /* width: 30%; */
-  padding: 2vh
+  width: 400px;
+  height:auto;
+  padding: 2vh;
 }
 
 .recipe-card .card-image img {
@@ -19,7 +21,8 @@ h1.card-title {
 }
 
 .card-desc {
-  margin-top: 6px;
+  height: 200px;
+  text-overflow: ellipsis;
 }
 
 .card-btn {
@@ -58,11 +61,4 @@ h1.card-title {
 
  .card-btn:hover {
   color: white;
- }
-
- @media (max-width: 600px) { 
-  .recipe-card {
-    width: 90%;
-  }
-  
  }

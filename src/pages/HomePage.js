@@ -1,10 +1,88 @@
-import '../assets/css/RecipeCard.css';
+import '../assets/css/HomePage.css'
 import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
+import { useState, useEffect } from 'react';
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
-import TrendingRecipesCarousel from '../components/TrendingRecipesCarousel';
+import Footer from '../components/Footer';
+import { Link } from "react-router-dom";
+import CreatorCard from '../components/CreatorCard';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function HomePage() {
+
+
+  // const recipeSliderSettings = [
+  //   {
+  //     breakpoint: 1024,
+  //     settings: {
+  //       slidesToShow: 3,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 768,
+  //     settings: {
+  //       slidesToShow: 3,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 480,
+  //     settings: {
+  //       slidesToShow: 1,
+  //     },
+  //   },
+  // ];
+
+  const creatorSliderSettings = [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 5,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ];
+
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // const getSlidesToShow = () => {
+  //   for (let i = 0; i < recipeSliderSettings.length; i++) {
+  //     if (windowWidth >= recipeSliderSettings[i].breakpoint) {
+  //       return recipeSliderSettings[i].settings.slidesToShow;
+  //     }
+  //   }
+  //   return recipeSliderSettings[recipeSliderSettings.length - 1].settings.slidesToShow;
+  // };
+
+  const getSlidesToShow2 = () => {
+    for (let i = 0; i < creatorSliderSettings.length; i++) {
+      if (windowWidth >= creatorSliderSettings[i].breakpoint) {
+        return creatorSliderSettings[i].settings.slidesToShow;
+      }
+    }
+    return creatorSliderSettings[creatorSliderSettings.length - 1].settings.slidesToShow;
+  };
+  
+
   return(
     <div id="homepage">
       <Header />
@@ -49,33 +127,78 @@ function HomePage() {
         <div>
           <h1 className="block-title">Trending Recipes</h1>
           <div className="recipe-cards">
-            <RecipeCard 
-              title="title"
-              image="/assets/card-image.jpg"
-              description="Lorem ipsum demet dolor..."
-              link="#"
-            />
-            <RecipeCard 
-              title="title"
-              image="/assets/card-image.jpg"
-              description="Lorem ipsum demet dolor..."
-              link="#"
-            />
-            <RecipeCard 
-              title="title"
-              image="/assets/card-image.jpg"
-              description="Lorem ipsum demet dolor..."
-              link="#"
-            />
+            {/* <Slider 
+              dots={true}
+              infinite={true}
+              speed={500}
+              slidesToShow={3}
+              slidesToScroll={1}
+              responsive={recipeSliderSettings}
+            > */}
+               <RecipeCard 
+                title="title"
+                image="/assets/card-image.jpg"
+                description="Lorem ipsum demet dolor..."
+                link="#"
+              />
+              <RecipeCard 
+                title="title"
+                image="/assets/card-image.jpg"
+                description="Lorem ipsum demet dolor..."
+                link="#"
+              />
+              <RecipeCard 
+                title="title"
+                image="/assets/card-image.jpg"
+                description="Lorem ipsum demet dolor..."
+                link="#"
+              />
+            {/* </Slider> */}
           </div>
           <a className="block-link" href="#">
             View More Recipes
           </a>
-          <TrendingRecipesCarousel />
         </div>
       </div>  
+      <div id="recipe-gen-block">
+        <div className='container'>
+          <h1 className="block-title">DON'T KNOW<br />WHAT TO COOK?</h1>
+          <div className="block-btn">
+            <Link to="/my-page">
+              <button className='button'> Generate a Recipe</button>
+            </Link>
+          </div>
+        </div>
+        <div className='overlay'></div>
+      </div>
+      <div id="popular-creators">
+        <div id="hp-creators">
+          <h1 className='block-title'>Popular Recipe Creators</h1>
+          <div className='creator-container'>
+            <Slider 
+              dots={true}
+              infinite={true}
+              speed={500}
+              slidesToShow={5}
+              slidesToScroll={1}
+              responsive={creatorSliderSettings}
+            >
+              <CreatorCard name="Nom Prenom" image="/assets/chef.jpg" status="recipe creator" />
+              <CreatorCard name="Nom Prenom" image="/assets/chef.jpg" status="recipe creator" />
+              <CreatorCard name="Nom Prenom" image="/assets/chef.jpg" status="recipe creator" />
+              <CreatorCard name="Nom Prenom" image="/assets/chef.jpg" status="recipe creator" />
+              <CreatorCard name="Nom Prenom" image="/assets/chef.jpg" status="recipe creator" />
+            </Slider>
+          </div>
+          
+        </div>
+        <div id="quotes">
+
+        </div>
+      </div>
+      <Footer />
     </div>
-      
+    
   );
 }
 

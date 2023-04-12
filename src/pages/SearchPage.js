@@ -11,62 +11,86 @@ function SearchPage() {
     setShowMore(true);
   };
 
+  
+
   return (
-    <div id='SearchPage'>
+<div id='SearchPage'>
       <Header />
       <div id="search-container">
       <div id="filter-column">
-        <div class="filter">
-          <h2>Rechercher</h2>
-          <form>
-            <div class="form-group">
-              <label for="ingredients">Ingrédients :</label>
-              <input type="text" id="ingredients" name="ingredients" placeholder="Ajouter des ingrédients" />
-            </div>
-            <div class="form-group">
-              <label for="category">Catégorie :</label>
-              <select id="category" name="category">
-                <option value="">--Choisir une catégorie--</option>
-                <option value="entree">Entrée</option>
-                <option value="plat">Plat</option>
-                <option value="dessert">Dessert</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="time">Temps de préparation :</label>
-              <select id="time" name="time">
-                <option value="">--Choisir un temps--</option>
-                <option value="10">Moins de 10 minutes</option>
-                <option value="20">Moins de 20 minutes</option>
-                <option value="30">Moins de 30 minutes</option>
-                <option value="60">Moins de 1 heure</option>
-                <option value="120">Moins de 2 heures</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="difficulty">Niveau de difficulté :</label>
-              <select id="difficulty" name="difficulty">
-                <option value="">--Choisir un niveau--</option>
-                <option value="facile">Facile</option>
-                <option value="moyen">Moyen</option>
-                <option value="difficile">Difficile</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="culture">Culture :</label>
-              <select id="culture" name="culture">
-                <option value="">--Choisir une culture--</option>
-                <option value="francaise">Française</option>
-                <option value="italienne">Italienne</option>
-                <option value="asiatique">Asiatique</option>
-                <option value="mexicaine">Mexicaine</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <button type="submit">Rechercher</button>
-            </div>
-          </form>
-        </div>
+     
+      <div class="filter-container">
+    <h2>Filter</h2>
+  <form>
+    <div class="filter-group">
+      <h3>Category</h3>
+      <div class="filter-option">
+        <input type="checkbox" id="entree" name="category" value="entree"/>
+        <label for="entree">Entrée</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="plat" name="category" value="plat"/>
+        <label for="plat">Plat</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="dessert" name="category" value="dessert"/>
+        <label for="dessert">Dessert</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Preparation Time</h3>
+      <div class="filter-option">
+        <input type="checkbox" id="15min" name="preparation-time" value="15min"/>
+        <label for="15min">- de 15 minutes</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="15to30min" name="preparation-time" value="15to30min"/>
+        <label for="15to30min">de 15 à 30 minutes</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="30min+" name="preparation-time" value="30min+"/>
+        <label for="30min+">+ de 30 minutes</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Difficulty Level</h3>
+      <div class="filter-option">
+        <input type="checkbox" id="easy" name="difficulty-level" value="easy"/>
+        <label for="easy">Easy</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="medium" name="difficulty-level" value="medium"/>
+        <label for="medium">Medium</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="hard" name="difficulty-level" value="hard"/>
+        <label for="hard">Hard</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>Culture</h3>
+      <div class="filter-option">
+        <input type="checkbox" id="french" name="culture" value="french"/>
+        <label for="french">French</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="italian" name="culture" value="italian"/>
+        <label for="italian">Italian</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="asian" name="culture" value="asian"/>
+        <label for="asian">Asian</label>
+      </div>
+    </div>
+
+    <button type="submit">Apply Filters</button>
+  </form>
+</div>
+
+
       </div>
         <div id="result-column">
           <div id="trending-recipes">
