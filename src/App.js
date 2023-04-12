@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import RecipePage from "./pages/RecipePage";
 import CreateRecipePage from "./pages/CreateRecipePage";
+import CategoriesPage from "./pages/CategoriesPage";
 
 function App() {
   const Main = () => (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/create" element={<CreateRecipePage />} />
+          <Route path="/all-categories" element={<CategoriesPage />} />
         </Routes>
       </BrowserRouter>
     </div>
