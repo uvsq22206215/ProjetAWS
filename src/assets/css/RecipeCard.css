@@ -22,7 +22,14 @@ h1.card-title {
 
 .card-desc {
   height: 200px;
-  text-overflow: ellipsis;
+}
+
+.class-description {
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-btn {

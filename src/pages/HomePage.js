@@ -9,6 +9,7 @@ import CreatorCard from '../components/CreatorCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import RelatedRecipes from '../components/RelatedRecipes';
 
 function HomePage() {
 
@@ -196,6 +197,7 @@ function HomePage() {
 
         </div>
       </div>
+      <RelatedRecipes title='Recettes tendance'/>
       <Footer />
     </div>
     

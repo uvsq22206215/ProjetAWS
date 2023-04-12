@@ -1,4 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import { auth, database } from "../utils/firebase";
+import { useNavigate } from "react-router";
+import { collection, addDoc } from "firebase/firestore";
 import {
   Container,
   TextField,
@@ -20,6 +31,7 @@ import {
   Hidden,
   Tabs,
   Tab,
+  Collapse,
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -65,6 +77,7 @@ function TabPanel(props) {
 }
 
 export default function Uselogin() {
+  let history = useNavigate();
   const avatarStyle = { backgroundColor: "#ff5b00ba" };
   const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -83,12 +96,11 @@ export default function Uselogin() {
       },
     },
   });
-  const handleChange1 = (event, newValue) => {
-    if (login) setValue(0);
-    else setValue(1);
+  const [login, setLogin] = React.useState(true);
+  const handleChange1 = (login) => {
+    login ? setValue(0) : setValue(1);
   };
   const [value, setValue] = React.useState(0);
-  const [login, setLogin] = React.useState(true);
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -100,6 +112,54 @@ export default function Uselogin() {
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
   const handleMouseDownPassword1 = (event) => {
     event.preventDefault();
+  };
+
+  useEffect(() => {
+    handleChange1(login);
+  }, [login]);
+
+  const [openRegister, setOpenRegister] = React.useState(false);
+  const [openlog, setOpenLog] = React.useState(false);
+  const [user, setUser] = React.useState({});
+
+  const register = async (values) => {
+    try {
+      const gender = values.gender;
+
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      ).then((userCrenditial) => {
+        addDoc(collection(database, "users"), {
+          id: userCrenditial.user.uid,
+          username: values.username,
+          gender: values.picked,
+        });
+      });
+      updateProfile(auth.currentUser, {
+        displayName: "Jane Q. User",
+      });
+      setLogin(true);
+      setOpenRegister(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const log = async (values) => {
+    try {
+      const gender = values.gender;
+
+      const user = await signInWithEmailAndPassword(
+        auth,
+        values.username,
+        values.password
+      );
+      history("/");
+    } catch (error) {
+      setOpenLog(true);
+      console.log(error);
+    }
   };
 
   return (
@@ -175,7 +235,7 @@ export default function Uselogin() {
                       .required("password est obligatoire"),
                   })}
                   onSubmit={(values) => {
-                    console.log();
+                    log(values);
                   }}
                 >
                   {({
@@ -210,7 +270,7 @@ export default function Uselogin() {
                                 helperText={touched.username && errors.username}
                                 onBlur={handleBlur}
                                 margin="normal"
-                                label="Nom d'utilisateur"
+                                label="E-mail"
                                 id="username"
                                 name="username"
                                 value={values.username}
@@ -252,10 +312,7 @@ export default function Uselogin() {
                             <Typography>
                               {" "}
                               Vous avez déja un compte ?
-                              <Link
-                                href="#"
-                                onClick={(setLogin(false), handleChange1)}
-                              >
+                              <Link href="#" onClick={() => setLogin(false)}>
                                 {" "}
                                 S'inscrire
                               </Link>
@@ -325,7 +382,7 @@ export default function Uselogin() {
                     ),
                   })}
                   onSubmit={(values) => {
-                    console.log(values);
+                    register(values);
                   }}
                 >
                   {({
@@ -539,6 +596,42 @@ export default function Uselogin() {
             </Grid>
           </TabPanel>
         </Grid>
+        <Collapse
+          in={openRegister}
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "5%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setOpenRegister(false);
+            }}
+          >
+            Compte crée avec succes
+          </Alert>
+        </Collapse>
+        <Collapse
+          in={openlog}
+          style={{
+            width: "100vh",
+            position: "absolute",
+            left: "50%",
+            top: "5%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOpenLog(false);
+            }}
+          >
+            Email ou mot de passe incorrect
+          </Alert>
+        </Collapse>
       </Container>
     </Paper>
   );
