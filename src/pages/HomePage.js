@@ -125,41 +125,7 @@ function HomePage() {
       </div>
 
       <div id="trending-recipes">
-        <div>
-          <h1 className="block-title">Trending Recipes</h1>
-          <div className="recipe-cards">
-            {/* <Slider 
-              dots={true}
-              infinite={true}
-              speed={500}
-              slidesToShow={3}
-              slidesToScroll={1}
-              responsive={recipeSliderSettings}
-            > */}
-               <RecipeCard 
-                title="title"
-                image="/assets/card-image.jpg"
-                description="Lorem ipsum demet dolor..."
-                link="#"
-              />
-              <RecipeCard 
-                title="title"
-                image="/assets/card-image.jpg"
-                description="Lorem ipsum demet dolor..."
-                link="#"
-              />
-              <RecipeCard 
-                title="title"
-                image="/assets/card-image.jpg"
-                description="Lorem ipsum demet dolor..."
-                link="#"
-              />
-            {/* </Slider> */}
-          </div>
-          <a className="block-link" href="#">
-            View More Recipes
-          </a>
-        </div>
+        <RelatedRecipes title='Recettes tendance'/>
       </div>  
       <div id="recipe-gen-block">
         <div className='container'>
