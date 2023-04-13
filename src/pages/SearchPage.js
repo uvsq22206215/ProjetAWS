@@ -138,6 +138,25 @@ function SearchPage() {
   }, [filteredRecipes]);
 
 
+  // Affiche toutes les recettes de base par défaut
+  useEffect(() => {
+    const recipesRef = collection(database, "recipe");
+    let q = query(recipesRef, limit(21));
+    let tmpRecipes = [];
+    getDocs(q)
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          tmpRecipes.push(doc);
+        });
+        setFilteredRecipes(tmpRecipes);
+        console.log("Received from database", tmpRecipes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+
   return (
     <div id='SearchPage'>
       <Header />
