@@ -1,10 +1,11 @@
 import '../assets/css/SearchPage.css';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { database } from '../utils/firebase';
+import { collection, query, where, get, getDocs, doc, limit } from 'firebase/firestore';
 
 function SearchPage() {
   const [showMore, setShowMore] = useState(false);
@@ -21,7 +22,7 @@ function SearchPage() {
     // Valider les filtres et lancer la recherche
     // Code à ajouter ici
   }
-  
+
 
 
   /* gérer les options qui s'ouvrent quand on clique sur un plus*/
@@ -43,7 +44,7 @@ function SearchPage() {
   const handleTempsPreparationClick = () => {
     setIsTempsPreparationOpen(!isTempsPreparationOpen);
   };
- 
+
 
   /* gérer les checkbox */
 
@@ -52,38 +53,89 @@ function SearchPage() {
     moyen: false,
     difficile: false,
   });
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const handleCheckboxChange = (event) => {
+
+  const [prepTime, setPrepTime] = useState({
+    moins30m: false,
+    moins1h: false,
+    moins2h: false
+  });
+
+  const [categorie, setCategorie] = useState({
+    accomp: false,
+    plat: false,
+    dessert: false
+  });
+
+
+  // TODO : factoriser
+  const handleDiffCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setDifficulty((prevState) => ({ ...prevState, [name]: checked }));
   };
 
+  const handlePrepCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setPrepTime((prevState) => ({ ...prevState, [name]: checked }));
+  };
+
+  const handleCatCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setCategorie((prevState) => ({ ...prevState, [name]: checked }));
+  }
+
+
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+
   const filterRecipes = () => {
-    const recipesRef = database.collection("recipe");
+    const recipesRef = collection(database, "recipe");
 
-    let difficultyArray = [];
-    if (difficulty.facile) difficultyArray.push("facile");
-    if (difficulty.moyen) difficultyArray.push("moyen");
-    if (difficulty.difficile) difficultyArray.push("difficile");
+    // let difficultyArray = [];
+    // if (difficulty.facile) difficultyArray.push("facile");
+    // if (difficulty.moyen) difficultyArray.push("moyen");
+    // if (difficulty.difficile) difficultyArray.push("difficile");
 
-    let query = recipesRef;
-    if (difficultyArray.length > 0) {
-      query = query.where("difficulte", "in", difficultyArray);
+    // // TODO : changer en une seule variable
+    // let prepTimeArray = [];
+    // if (prepTime.moins30m) prepTimeArray.push("30M");
+    // if (prepTime.moins1h) prepTimeArray.push("60M");
+    // if (prepTime.moins2h) prepTimeArray.push("120M");
+
+    let categorieArray = [];
+    if (categorie.dessert) categorieArray.push("Dessert");
+    if (categorie.plat) categorieArray.push("Plat principal");
+    if (categorie.accomp) categorieArray.push("Accompagnement");
+
+    let q = query(recipesRef, limit(21));
+    if (categorieArray.length > 0) {
+      q = query(recipesRef, where("categorie", "==", categorieArray[0]));
     }
 
-let filteredRecipes = [];
-    query
-      .get()
+
+    // if (prepTimeArray.length > 0) {
+    //   // à changer
+    //   q = q.where("totalTime", "<=", prepTimeArray);
+    // }
+    // if (difficultyArray.length > 0) {
+    //   q = q.where("difficulte", "in", difficultyArray);
+    // }
+
+    let tmpRecipes = [];
+    getDocs(q)
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          filteredRecipes.push(doc.data());
+          tmpRecipes.push(doc);
         });
-        setFilteredRecipes(filteredRecipes);
+        setFilteredRecipes(tmpRecipes);
+        console.log("Received from database", tmpRecipes);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  useEffect(() => {
+
+  }, [filteredRecipes]);
 
 
   return (
@@ -93,7 +145,7 @@ let filteredRecipes = [];
         <div id="filter-column">
           <div class="filter-container">
             <div class="filter-header">
-              <span class="filter-title" onClick={handleApplyClick}>Filter Search</span>
+              <span class="filter-title" onClick={filterRecipes}>Filter Search</span>
               <span className="filter-clear" onClick={handleClearClick}>Clear</span>
             </div>
             <hr className="separator" />
@@ -106,15 +158,33 @@ let filteredRecipes = [];
 
               <div className={`categories-options ${isCatergoriesOpen ? 'open' : ''}`}>
                 <div className="option">
-                  <input type="checkbox" id="plat" name="plat" value="plat" />
-                  <label for="plat">Plat</label>
+                  <input
+                    type="checkbox"
+                    id="plat"
+                    name="plat"
+                    checked={categorie.plat}
+                    onChange={handleCatCheckboxChange}
+                  />
+                  <label for="plat">Plat principal</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="entree" name="entree" value="entree" />
-                  <label for="entree">Entrée</label>
+                  <input
+                    type="checkbox"
+                    id="accomp"
+                    name="accomp"
+                    checked={categorie.accomp}
+                    onChange={handleCatCheckboxChange}
+                  />
+                  <label for="entree">Accompagnement</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="dessert" name="dessert" value="dessert" />
+                  <input
+                    type="checkbox"
+                    id="dessert"
+                    name="dessert"
+                    value={categorie.dessert}
+                    onChange={handleCatCheckboxChange}
+                  />
 
                   <label for="dessert">Dessert</label>
                 </div>
@@ -134,7 +204,7 @@ let filteredRecipes = [];
                     id="facile"
                     name="facile"
                     checked={difficulty.facile}
-                    onChange={handleCheckboxChange}
+                    onChange={handleDiffCheckboxChange}
                   />
                   <label for="plat">Facile</label>
                 </div>
@@ -144,7 +214,7 @@ let filteredRecipes = [];
                     id="moyen"
                     name="moyen"
                     checked={difficulty.moyen}
-                    onChange={handleCheckboxChange}
+                    onChange={handleDiffCheckboxChange}
                   />
                   <label for="entree">Moyen</label>
                 </div>
@@ -154,7 +224,7 @@ let filteredRecipes = [];
                     id="difficile"
                     name="difficile"
                     checked={difficulty.difficile}
-                    onChange={handleCheckboxChange}
+                    onChange={handleDiffCheckboxChange}
                   />
                   <label for="difficile">difficile</label>
                 </div>
@@ -170,16 +240,34 @@ let filteredRecipes = [];
               </div>
               <div className={`categories-options ${isTempsPreparationOpen ? 'open' : ''}`}>
                 <div className="option">
-                  <input type="checkbox" id="PlusUneHeure" name="PlusUneHeure" value="PlusUneHeure" />
-                  <label htmlFor="PlusUneHeure">Plus d'une heure</label>
+                  <input
+                    type="checkbox"
+                    id="moins30m"
+                    name="moins30m"
+                    checked={prepTime.moins30m}
+                    onChange={handlePrepCheckboxChange}
+                  />
+                  <label htmlFor="PlusUneHeure">Moins de 30 minutes</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="entre30-45" name="entre30-45" value="entre30-45" />
-                  <label htmlFor="entre30-45">entre 30 et 45 mins</label>
+                  <input
+                    type="checkbox"
+                    id="moins1h"
+                    name="moins1h"
+                    checked={prepTime.moins1h}
+                    onChange={handlePrepCheckboxChange}
+                  />
+                  <label htmlFor="Moin30">Moins d'une heure</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="Moin30" name="Moin30" value="Moin30" />
-                  <label htmlFor="Moin30">moins de 30 mins</label>
+                  <input
+                    type="checkbox"
+                    id="moins2h"
+                    name="moins2h"
+                    value={prepTime.moins2h}
+                    onChange={handlePrepCheckboxChange}
+                  />
+                  <label htmlFor="entre30-45">Moins de 2 heures</label>
                 </div>
               </div>
             </div>
@@ -207,91 +295,20 @@ let filteredRecipes = [];
               </div>
             </div>
 
-        
+
 
           </div>
         </div>
         <div id="result-column">
-          <div id="trending-recipes">
+          <div id="result-recipes">
             <h1 className="block-title" style={{ textAlign: 'center' }}>Résultat recherche</h1>
             <div className="recipe-cards">
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/slider1.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/slider2.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/slider3.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/pesto-pasta.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/pesto-pasta.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/pesto-pasta.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/slider2.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/slider3.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
-              <RecipeCard
-                title="Pesto Pasta"
-                image="/assets/pesto-pasta.jpg"
-                description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                link="#"
-              />
+              {filteredRecipes.map((recipe) => (
+                <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
+              ))}
 
               {showMore && (
-                <>
-                  <RecipeCard
-                    title="Pesto Pasta"
-                    image="/assets/slider1.jpg"
-                    description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                    link="#"
-                  />
-                  <RecipeCard
-                    title="Pesto Pasta"
-                    image="/assets/slider1.jpg"
-                    description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                    link="#"
-                  />
-                  <RecipeCard
-                    title="Pesto Pasta"
-                    image="/assets/slider1.jpg"
-                    description="This classic Italian dish features spaghetti tossed in a delicious homemade pesto sauce made with fresh basil, garlic, olive oil, and Parmesan cheese."
-                    link="#"
-                  />
-
-                </>
+                <div>TODO</div>
               )}
             </div>
             {!showMore && (
