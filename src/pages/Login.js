@@ -137,10 +137,8 @@ export default function Uselogin() {
           gender: values.picked,
         });
       });
-      updateProfile(auth.currentUser, {
-        displayName: "Jane Q. User",
-      });
-      setLogin(true);
+   
+     setLogin(true);
       setOpenRegister(true);
     } catch (error) {
       console.log(error);
@@ -155,7 +153,7 @@ export default function Uselogin() {
         values.username,
         values.password
       );
-      history("/");
+      history("/"); //redirection vers cette page
     } catch (error) {
       setOpenLog(true);
       console.log(error);
