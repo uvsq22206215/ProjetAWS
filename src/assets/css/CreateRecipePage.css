@@ -1,0 +1,38 @@
+.createSelectInput, .createInput, .instructionInput, .ingredientInput {
+  height: 50px;
+}
+
+#createTitle {
+  color : orange;
+}
+
+#createForm {
+  color : black;
+}
+
+.createInput input {
+  width : 300px;
+}
+
+.ingredientInput input + input {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.instructionInput input + button {
+  margin-left: 5px;
+}
+
+.buttonMoreLess {
+  border-radius: 50%;
+  width : 32px;
+  background-color: orange;
+  border : none;
+  color: white;
+  font-size : larger
+}
+
+.createSelectInput label + select {
+  margin-left : 10px;
+}
+
