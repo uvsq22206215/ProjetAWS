@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { database } from '../utils/firebase';
-import { collection, query, where, get, getDocs, doc, limit } from 'firebase/firestore';
+import { collection, query, where, get, getDocs, doc, limit, and } from 'firebase/firestore';
 
 function SearchPage() {
   const [showMore, setShowMore] = useState(false);
@@ -27,13 +27,13 @@ function SearchPage() {
 
   /* gérer les options qui s'ouvrent quand on clique sur un plus*/
 
-  const [isCatergoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isCultureOpen, setIsCultureOpen] = useState(false);
   const [isDifficultyOpen, setIsDifficultyOpen] = useState(false);
   const [isTempsPreparationOpen, setIsTempsPreparationOpen] = useState(false);
 
   const handleCategoriesClick = () => {
-    setIsCategoriesOpen(!isCatergoriesOpen);
+    setIsCategoriesOpen(!isCategoriesOpen);
   };
   const handleCultureClick = () => {
     setIsCultureOpen(!isCultureOpen);
@@ -94,30 +94,33 @@ function SearchPage() {
     // if (difficulty.moyen) difficultyArray.push("moyen");
     // if (difficulty.difficile) difficultyArray.push("difficile");
 
-    // // TODO : changer en une seule variable
-    // let prepTimeArray = [];
-    // if (prepTime.moins30m) prepTimeArray.push("30M");
-    // if (prepTime.moins1h) prepTimeArray.push("60M");
-    // if (prepTime.moins2h) prepTimeArray.push("120M");
+    // TODO : changer en une seule variable
+    let prepTimeVal = 0;
+    if (prepTime.moins2h) prepTimeVal = 120;
+    if (prepTime.moins1h) prepTimeVal = 60;
+    if (prepTime.moins30m) prepTimeVal = 30;
 
     let categorieArray = [];
     if (categorie.dessert) categorieArray.push("Dessert");
     if (categorie.plat) categorieArray.push("Plat principal");
     if (categorie.accomp) categorieArray.push("Accompagnement");
 
-    let q = query(recipesRef, limit(21));
+
+    let condition = null;
+
     if (categorieArray.length > 0) {
-      q = query(recipesRef, where("categorie", "==", categorieArray[0]));
+      condition = condition ? 
+                      and(condition, where("categorie", "in", categorieArray)) :
+                      where("categorie", "in", categorieArray);
     }
-
-
-    // if (prepTimeArray.length > 0) {
-    //   // à changer
-    //   q = q.where("totalTime", "<=", prepTimeArray);
+    // TODO : changer le temps dans la base de données en un entier
+    // if (prepTimeVal != 0) {
+    //   condition = condition ? 
+    //                   and(condition, where("totalTime", "<=", prepTimeVal)) :
+    //                   where("totalTime", "<=", prepTimeVal);
     // }
-    // if (difficultyArray.length > 0) {
-    //   q = q.where("difficulte", "in", difficultyArray);
-    // }
+
+    let q = condition ? query(recipesRef, condition, limit(20)) : query(recipesRef, limit(20));
 
     let tmpRecipes = [];
     getDocs(q)
@@ -126,7 +129,7 @@ function SearchPage() {
           tmpRecipes.push(doc);
         });
         setFilteredRecipes(tmpRecipes);
-        console.log("Received from database", tmpRecipes);
+        console.log("Received from database", tmpRecipes, "Args :", prepTimeVal, categorieArray);
       })
       .catch((error) => {
         console.error(error);
@@ -164,18 +167,18 @@ function SearchPage() {
         <div id="filter-column">
           <div class="filter-container">
             <div class="filter-header">
-              <span class="filter-title" onClick={filterRecipes}>Filter Search</span>
-              <span className="filter-clear" onClick={handleClearClick}>Clear</span>
+              <span class="filter-title" onClick={filterRecipes}>Appliquer les filtres</span>
+              <span className="filter-clear" onClick={handleClearClick}>Réinitialiser</span>
             </div>
             <hr className="separator" />
             <div class="filter-typ">
               <div class="option-header" onClick={handleCategoriesClick}>
                 <span class="option-title">Categories</span>
-                <span className={isCatergoriesOpen ? "toggle-minus" : "toggle-plus"}>
-                  <FontAwesomeIcon icon={isCatergoriesOpen ? faMinus : faPlus} /> </span>
+                <span className={isCategoriesOpen ? "toggle-minus" : "toggle-plus"}>
+                  <FontAwesomeIcon icon={isCategoriesOpen ? faMinus : faPlus} /> </span>
               </div>
 
-              <div className={`categories-options ${isCatergoriesOpen ? 'open' : ''}`}>
+              <div className={`categories-options ${isCategoriesOpen ? 'open' : ''}`}>
                 <div className="option">
                   <input
                     type="checkbox"
