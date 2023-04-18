@@ -21,6 +21,7 @@ function SearchPage() {
   const [isCultureOpen, setIsCultureOpen] = useState(false);
   const [isDifficultyOpen, setIsDifficultyOpen] = useState(false);
   const [isTempsPreparationOpen, setIsTempsPreparationOpen] = useState(false);
+  const [isCostOpen, setCostOpen] = useState(false);
   
   const handleCategoriesClick = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
@@ -34,13 +35,17 @@ function SearchPage() {
   const handleTempsPreparationClick = () => {
     setIsTempsPreparationOpen(!isTempsPreparationOpen);
   };
+  const handleCostClick = () => {
+    setCostOpen(!isCostOpen);
+  }
   
   
   /* gérer les checkbox */
 
   const [difficulty, setDifficulty] = useState({
+    tresFacile : false,
     facile: false,
-    moyen: false,
+    moyenne: false,
     difficile: false,
   });
   
@@ -54,6 +59,12 @@ function SearchPage() {
     accomp: false,
     plat: false,
     dessert: false
+  });
+
+  const [cost, setCost] = useState({
+    bonMarche : false,
+    moyen : false,
+    assezCher : false
   });
   
   function handleClearClick() {
@@ -71,6 +82,11 @@ function SearchPage() {
       accomp: false,
       plat: false,
       dessert: false
+    });
+    setCost({
+      bonMarche : false,
+      moyen : false,
+      assezCher : false
     });
   }
   
@@ -90,16 +106,22 @@ function SearchPage() {
     setCategorie((prevState) => ({ ...prevState, [name]: checked }));
   }
 
+  const handleCostCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setCost((prevState) => ({ ...prevState, [name]: checked }));
+  }
+
 
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   const filterRecipes = () => {
     const recipesRef = collection(database, "recipe");
 
-    // let difficultyArray = [];
-    // if (difficulty.facile) difficultyArray.push("facile");
-    // if (difficulty.moyen) difficultyArray.push("moyen");
-    // if (difficulty.difficile) difficultyArray.push("difficile");
+    let difficultyArray = [];
+    if (difficulty.tresFacile) difficultyArray.push("Très facile");
+    if (difficulty.facile) difficultyArray.push("Facile");
+    if (difficulty.moyenne) difficultyArray.push("Moyenne");
+    if (difficulty.difficile) difficultyArray.push("Difficile");
 
     let prepTimeVal = 0;
     if (prepTime.moins2h) prepTimeVal = 120;
@@ -111,22 +133,39 @@ function SearchPage() {
     if (categorie.plat) categorieArray.push("Plat principal");
     if (categorie.accomp) categorieArray.push("Accompagnement");
 
+    let costArray = []
+    if (cost.bonMarche) costArray.push("Bon marché");
+    if (cost.moyen) costArray.push("Moyen");
+    if (cost.assezCher) costArray.push("Assez cher");
 
     let condition = null;
 
+    if (difficultyArray.length > 0) {
+      condition = condition ?
+                    and(condition, where("difficulty", "in", difficultyArray)) :
+                    where("difficulty", "in", difficultyArray);
+    }
+
     if (categorieArray.length > 0) {
       condition = condition ? 
-                      and(condition, where("categorie", "in", categorieArray)) :
-                      where("categorie", "in", categorieArray);
+                    and(condition, where("categorie", "in", categorieArray)) :
+                    where("categorie", "in", categorieArray);
     }
-    // TODO : changer le temps dans la base de données en un entier
-    // if (prepTimeVal != 0) {
-    //   condition = condition ? 
-    //                   and(condition, where("totalTime", "<=", prepTimeVal)) :
-    //                   where("totalTime", "<=", prepTimeVal);
-    // }
 
-    let q = condition ? query(recipesRef, condition, limit(20)) : query(recipesRef, limit(20));
+    if (costArray.length > 0) {
+      condition = condition ?
+                    and(condition, "cost", "in", costArray) :
+                    where("cost", "in", costArray);
+    }
+
+    if (prepTimeVal != 0) {
+      condition = condition ? 
+                      and(condition, where("totalTime", "<=", prepTimeVal)) :
+                      where("totalTime", "<=", prepTimeVal);
+    }
+
+
+    let q = condition ? query(recipesRef, condition, limit(21)) : query(recipesRef, limit(21));
 
     let tmpRecipes = [];
     getDocs(q)
@@ -171,15 +210,15 @@ function SearchPage() {
       <Header />
       <div id="search-container">
         <div id="filter-column">
-          <div class="filter-container">
-            <div class="filter-header">
-              <span class="filter-title" onClick={filterRecipes}>Appliquer les filtres</span>
+          <div className="filter-container">
+            <div className="filter-header">
+              <span className="filter-title" onClick={filterRecipes}>Appliquer les filtres</span>
               <span className="filter-clear" onClick={handleClearClick}>Réinitialiser</span>
             </div>
             <hr className="separator" />
-            <div class="filter-typ">
-              <div class="option-header" onClick={handleCategoriesClick}>
-                <span class="option-title">Categories</span>
+            <div className="filter-typ">
+              <div className="option-header" onClick={handleCategoriesClick}>
+                <span className="option-title">Categories</span>
                 <span className={isCategoriesOpen ? "toggle-minus" : "toggle-plus"}>
                   <FontAwesomeIcon icon={isCategoriesOpen ? faMinus : faPlus} /> </span>
               </div>
@@ -222,14 +261,26 @@ function SearchPage() {
               </div>
             </div>
 
-            <div class="filter-typ">
-              <div class="option-header" onClick={handleDifficultyClick}>
-                <span class="option-title">Niveau de difficulté</span>
+            <div className="filter-typ">
+              <div className="option-header" onClick={handleDifficultyClick}>
+                <span className="option-title">Niveau de difficulté</span>
                 <span className={isDifficultyOpen ? "toggle-minus" : "toggle-plus"}>
                   <FontAwesomeIcon icon={isDifficultyOpen ? faMinus : faPlus} /></span>
               </div>
               <div className={`categories-options ${isDifficultyOpen ? 'open' : ''}`}>
+              <div className="option">
+                  <input
+                    type="checkbox"
+                    className='checkBoxOption'
+                    id="TresFacile"
+                    name="tresFacile"
+                    checked={difficulty.tresFacile}
+                    onChange={handleDiffCheckboxChange}
+                  />
+                  <label for="plat">Très facile</label>
+                </div>
                 <div className="option">
+
                   <input
                     type="checkbox"
                     className='checkBoxOption'
@@ -244,12 +295,12 @@ function SearchPage() {
                   <input
                     type="checkbox"
                     className='checkBoxOption'
-                    id="moyen"
-                    name="moyen"
-                    checked={difficulty.moyen}
+                    id="moyenne"
+                    name="moyenne"
+                    checked={difficulty.moyenne}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="entree">Moyen</label>
+                  <label for="entree">Moyenne</label>
                 </div>
                 <div className="option">
                   <input
@@ -260,7 +311,7 @@ function SearchPage() {
                     checked={difficulty.difficile}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="difficile">difficile</label>
+                  <label for="difficile">Difficile</label>
                 </div>
               </div>
             </div>
@@ -309,9 +360,9 @@ function SearchPage() {
               </div>
             </div>
 
-            <div class="filter-Typ">
-              <div class="option-header" onClick={handleCultureClick}>
-                <span class="option-title">Pays/Culture</span>
+            <div className="filter-Typ">
+              <div className="option-header" onClick={handleCultureClick}>
+                <span className="option-title">Pays/Culture</span>
                 <span className={isCultureOpen ? "toggle-minus" : "toggle-plus"}>
                   <FontAwesomeIcon icon={isCultureOpen ? faMinus : faPlus} />
                 </span>
@@ -328,6 +379,48 @@ function SearchPage() {
                 <div className="option">
                   <input type="checkbox" className='checkBoxOption' id="Japonaise" name="Japonaise" value="Japonaise" />
                   <label for="dessert">Japon</label>
+                </div>
+              </div>
+            </div>
+            <div className="filter-Typ">
+              <div className="option-header" onClick={handleCostClick}>
+                <span className="option-title">Coût</span>
+                <span className={isCostOpen ? "toggle-minus" : "toggle-plus"}>
+                  <FontAwesomeIcon icon={isCostOpen ? faMinus : faPlus} />
+                </span>
+              </div>
+              <div className={`categories-options ${isCostOpen ? 'open' : ''}`}>
+                <div className="option">
+                  <input
+                    type="checkbox"
+                    className='checkBoxOption'
+                    id="bonMarche"
+                    name="bonMarche"
+                    onChange={handleCostCheckboxChange}
+                    checked={cost.bonMarche}
+                  />
+                  <label for="plat">Bon marché</label>
+                </div>
+                <div className="option">
+                  <input
+                    type="checkbox"
+                    className='checkBoxOption'
+                    id="moyen"
+                    name="moyen"
+                    onChange={handleCostCheckboxChange}
+                    checked={cost.moyen}
+                  />
+                  <label for="entree">Moyen</label>
+                </div>
+                <div className="option">
+                  <input
+                    type="checkbox"
+                    className='checkBoxOption'
+                    id="assezCher"
+                    name="assezCher"
+                    onChange={handleCostCheckboxChange}
+                    checked={cost.assezCher}/>
+                  <label for="dessert">Assez cher</label>
                 </div>
               </div>
             </div>
