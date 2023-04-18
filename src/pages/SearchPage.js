@@ -14,24 +14,14 @@ function SearchPage() {
     setShowMore(true);
   };
 
-  function handleClearClick() {
-    // Code pour effacer les filtres ici
-  }
-
-  function handleApplyClick() {
-    // Valider les filtres et lancer la recherche
-    // Code à ajouter ici
-  }
-
-
-
+  
   /* gérer les options qui s'ouvrent quand on clique sur un plus*/
-
+  
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isCultureOpen, setIsCultureOpen] = useState(false);
   const [isDifficultyOpen, setIsDifficultyOpen] = useState(false);
   const [isTempsPreparationOpen, setIsTempsPreparationOpen] = useState(false);
-
+  
   const handleCategoriesClick = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
   };
@@ -44,8 +34,8 @@ function SearchPage() {
   const handleTempsPreparationClick = () => {
     setIsTempsPreparationOpen(!isTempsPreparationOpen);
   };
-
-
+  
+  
   /* gérer les checkbox */
 
   const [difficulty, setDifficulty] = useState({
@@ -53,20 +43,37 @@ function SearchPage() {
     moyen: false,
     difficile: false,
   });
-
+  
   const [prepTime, setPrepTime] = useState({
     moins30m: false,
     moins1h: false,
     moins2h: false
   });
-
+  
   const [categorie, setCategorie] = useState({
     accomp: false,
     plat: false,
     dessert: false
   });
-
-
+  
+  function handleClearClick() {
+    setDifficulty({
+      facile: false,
+      moyen: false,
+      difficile: false,
+    });
+    setPrepTime({
+      moins30m: false,
+      moins1h: false,
+      moins2h: false
+    });
+    setCategorie({
+      accomp: false,
+      plat: false,
+      dessert: false
+    });
+  }
+  
   // TODO : factoriser
   const handleDiffCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -94,7 +101,6 @@ function SearchPage() {
     // if (difficulty.moyen) difficultyArray.push("moyen");
     // if (difficulty.difficile) difficultyArray.push("difficile");
 
-    // TODO : changer en une seule variable
     let prepTimeVal = 0;
     if (prepTime.moins2h) prepTimeVal = 120;
     if (prepTime.moins1h) prepTimeVal = 60;
@@ -182,6 +188,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="plat"
                     name="plat"
                     checked={categorie.plat}
@@ -192,6 +199,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="accomp"
                     name="accomp"
                     checked={categorie.accomp}
@@ -202,9 +210,10 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="dessert"
                     name="dessert"
-                    value={categorie.dessert}
+                    checked={categorie.dessert}
                     onChange={handleCatCheckboxChange}
                   />
 
@@ -223,6 +232,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="facile"
                     name="facile"
                     checked={difficulty.facile}
@@ -233,6 +243,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="moyen"
                     name="moyen"
                     checked={difficulty.moyen}
@@ -243,6 +254,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="difficile"
                     name="difficile"
                     checked={difficulty.difficile}
@@ -264,6 +276,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="moins30m"
                     name="moins30m"
                     checked={prepTime.moins30m}
@@ -274,6 +287,7 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="moins1h"
                     name="moins1h"
                     checked={prepTime.moins1h}
@@ -284,9 +298,10 @@ function SearchPage() {
                 <div className="option">
                   <input
                     type="checkbox"
+                    className='checkBoxOption'
                     id="moins2h"
                     name="moins2h"
-                    value={prepTime.moins2h}
+                    checked={prepTime.moins2h}
                     onChange={handlePrepCheckboxChange}
                   />
                   <label htmlFor="entre30-45">Moins de 2 heures</label>
@@ -296,23 +311,23 @@ function SearchPage() {
 
             <div class="filter-Typ">
               <div class="option-header" onClick={handleCultureClick}>
-                <span class="option-title">Culture</span>
+                <span class="option-title">Pays/Culture</span>
                 <span className={isCultureOpen ? "toggle-minus" : "toggle-plus"}>
                   <FontAwesomeIcon icon={isCultureOpen ? faMinus : faPlus} />
                 </span>
               </div>
               <div className={`categories-options ${isCultureOpen ? 'open' : ''}`}>
                 <div className="option">
-                  <input type="checkbox" id="française" name="française" value="française" />
-                  <label for="plat">française</label>
+                  <input type="checkbox" className='checkBoxOption' id="française" name="française" value="française" />
+                  <label for="plat">France</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="Italienne" name="Italienne" value="Italienne" />
-                  <label for="entree">Italienne</label>
+                  <input type="checkbox" className='checkBoxOption' id="Italienne" name="Italienne" value="Italienne" />
+                  <label for="entree">Italie</label>
                 </div>
                 <div className="option">
-                  <input type="checkbox" id="Japonaise" name="Japonaise" value="Japonaise" />
-                  <label for="dessert">Japonaise</label>
+                  <input type="checkbox" className='checkBoxOption' id="Japonaise" name="Japonaise" value="Japonaise" />
+                  <label for="dessert">Japon</label>
                 </div>
               </div>
             </div>
