@@ -1,8 +1,9 @@
 .recipe-card {
   /* border: 1px solid brown; */
+  /* width: 30%; */
   width: 400px;
   height:auto;
-  padding: 2vh
+  padding: 2vh;
 }
 
 .recipe-card .card-image img {
@@ -16,12 +17,20 @@
 h1.card-title {
   margin: 0;
   font-family: 'Marcellus', serif;
+  font-size:xx-large;
   color: #a68671;
 }
 
 .card-desc {
   height: 200px;
-  text-overflow: ellipsis;
+}
+
+.class-description {
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-btn {

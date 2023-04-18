@@ -65,11 +65,29 @@ import RecipeCard from "../components/RecipeCard";
 */
 
 function CreateRecipePage() {
-  const recipeRef = collection(database, "recipe");
 
-  const pushRecipe = () => {
-    addDoc(recipeRef, {});
-  };
+
+  // const pushRecipe = () => {
+  //   listeRecette.forEach(function(obj) {
+  //     addDoc(collection(database, "recipe"), {
+  //       name : obj.name,
+  //       image : obj.image,
+  //       cookTime : obj.cookTime,
+  //       prepTime : obj.prepTime,
+  //       totalTime : obj.totalTime,
+  //       numberPersons : obj.numberPersons,
+  //       recipeIngredient : obj.recipeIngredient,
+  //       recipeInstructions : obj.recipeInstructions,
+  //       categorie : obj.categorie,
+  //       author : obj.author
+  //     }).then(function(docRef) {
+  //       console.log("Document written with ID: ", docRef.id);
+  //     })
+  //     .catch(function(error) {
+  //         console.error("Error adding document: ", error);
+  //     });
+  //   });
+  // };
 
   const [name, setName] = useState();
   const [cookTime, setCookTime] = useState();

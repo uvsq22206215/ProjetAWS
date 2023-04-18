@@ -1,0 +1,17 @@
+#profil{
+    font-family: "italianno";
+    font-size: 5ch;
+    text-align: center;
+    color: white;
+}
+#child2 {
+    display: flex;
+    margin: auto;
+  }
+  
+  #child2 img {
+    object-fit: contain;
+    height: 50px;
+    max-width: 100%;
+    
+  }

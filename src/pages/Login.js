@@ -137,6 +137,7 @@ export default function Uselogin() {
       });
 
       setLogin(true);
+
       setOpenRegister(true);
     } catch (error) {
       console.log(error);
@@ -149,7 +150,7 @@ export default function Uselogin() {
         values.username,
         values.password
       );
-      history("/");
+      history("/"); //redirection vers cette page
     } catch (error) {
       setOpenLog(true);
       console.log(error);
