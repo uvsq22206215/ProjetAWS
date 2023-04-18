@@ -15,8 +15,8 @@ function RecipeContent({ recipe }) {
     <div id='recipeContent'>
       <div id='container'>
         <div id='infoRecipe'>
-          <div className='containerTime'>Temps de préparation : {recipe.prepTime}</div>
-          <div className='containerTime'>Temps de cuisson : {recipe.cookTime}</div>
+          <div className='containerTime'>Temps de préparation : {recipe.prepTime} minutes</div>
+          <div className='containerTime'>Temps de cuisson : {recipe.cookTime} minutes</div>
           <div id='personsContainer'>Ingrédients pour
             <div id='numberPersons'>{nbPersons}</div>
             personnes

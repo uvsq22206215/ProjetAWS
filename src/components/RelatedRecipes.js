@@ -4,13 +4,18 @@ import { database } from "../utils/firebase";
 import { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 
-// TODO : ajouter prop qui donne les attributs de séléction pour la requête
-function RelatedRecipes({ title }) { 
+
+// Le prop filters permet de séléctionner des filtres de recherche
+// Utile pour par exemple séléctionner rapidement des recettes d'un seul utilisateur
+// On passe ainsi en paramètre filters = [{attribut : "author", op : "==", value : "toto"}]
+// On peut ajouter plusieurs filtres, ex : les desserts d'un utilisateur donné
+function RelatedRecipes({ title, maxLimit, filters }) { 
   const [relRecipes, setRelRecipes] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(database, "recipe"), limit(3));
-    console.log("request related recipes sent");
+    let condition = null;
+    
+    const q = query(collection(database, "recipe"), limit(maxLimit ? maxLimit : 3));
     getDocs(q)
       .then((snapshot) => setRelRecipes(snapshot.docs))
       .catch((e) => console.log("Erreur"));
@@ -23,7 +28,13 @@ function RelatedRecipes({ title }) {
       {true &&
         <div id='relatedRecipes'>
           {relRecipes.map((recipe, index) => (
-            <RecipeCard key={'related-recipe'+index}title={recipe.data().name} image={recipe.data().image} link={'/recipe?id=' + recipe.id} description='' />
+            <RecipeCard 
+              key={'related-recipe-' + index}
+              title={recipe.data().name}
+              image={recipe.data().image}
+              link={'/recipe?id=' + recipe.id}
+              description=''
+            />
           ))}
         </div>
       }

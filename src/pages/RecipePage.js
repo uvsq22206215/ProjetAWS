@@ -36,6 +36,9 @@ function RecipePage() {
       })
       .catch(() => console.log("Erreur"))
     }
+    if (!query) {
+      setLoaded(true);
+    }
   }, [query, loaded]);
 
   if (!loaded) {
@@ -45,6 +48,7 @@ function RecipePage() {
         <div>Loading...</div>
       </div>);
   }
+
   if (found) {
     return (
       <div id='containerPage'>
