@@ -171,7 +171,7 @@ function CreateRecipePage() {
               )}
             </div>
           ))}
-        {/* <button onClick={pushRecipe}>PUSH</button> */}
+        <button id="createRecipeButton">Créer la recette</button>
         </div>
       </div>
       <Footer />
