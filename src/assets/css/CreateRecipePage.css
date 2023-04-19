@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:wght@500&display=swap');
+
+
+#createForm {
+  padding : 30px;
+  /* font-family: 'Abril Fatface'; */
+}
+
 .createSelectInput, .createInput, .instructionInput, .ingredientInput {
   min-height: 50px;
   margin : 5px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -11,21 +20,22 @@
   box-shadow: 0 0 0 2px #f89837;
 }
 
-#createTitle {
-  margin: 5px;
-  color : orange;
-}
-
 #createForm {
-  color : black;
+  color : #a68671;
 }
 
-.createInput input {
+.createInput input, .instructionInput input, .ingredientInput input {
   width : 300px;
+  background-color: cornsilk;
 }
 
 .instructionInput input + button {
   margin-left: 5px;
+}
+
+.createOptions {
+  color : #a68671;
+  opacity: 75%;
 }
 
 .buttonMoreLess {
@@ -39,7 +49,20 @@
 
 .createSelectInput label + select {
   margin-left : 10px;
+  background-color: cornsilk;
+  border-radius: 10px;
+  border : none;
+  box-shadow: 0 0 0 2px #f89837;
 }
+
+.createSelectInput label {
+  display: flex;
+  width : 120px;
+  justify-content: right;
+  font-family: 'Abril Fatface';
+  font-size : x-large;
+}
+
 
 #createRecipeButton {
   color : white;
@@ -47,6 +70,39 @@
   border : none;
   border-radius: 15px;
   font-size: larger;
-  margin : 5px
+  margin : 5px;
+  font-family: 'Abril Fatface';
 }
 
+#resumePage {
+  background: url(/src/assets/img/slider2.jpg);
+  height : 500px;
+  background-size : cover;
+  background-position: center;
+}
+
+#titleCreationPage {
+  color : orange;
+  background-color: cornsilk;
+  justify-content: center;
+  display : flex;
+  padding : 20px;
+  font-size: xxx-large;
+  font-family: 'Abril Fatface';
+}
+
+#descriptionCreationPage {
+  margin : 20px;
+  background-color: cornsilk;
+  border-radius: 10px;
+  width: fit-content;
+  padding : 20px;
+  font-family: 'Abril Fatface';
+  font-size : x-large;
+  color : #a68671;
+}
+
+#leaveEmpty {
+  font-family: 'Abril Fatface';
+  font-size : x-large;
+}
