@@ -21,22 +21,13 @@ import InfoIcon from "@mui/icons-material/Info";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, database } from "../utils/firebase";
 
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
-  const [user, setUser] = useState({});
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
-  let history = useNavigate();
   var myObject = {
     Informations: <InfoIcon sx={{ color: "black" }} />,
-    "Mes recettes": <MilitaryTechIcon sx={{ color: "black" }} />,
+    "Mes-recettes": <MilitaryTechIcon sx={{ color: "black" }} />,
     "Recettes aimées": <FavoriteIcon sx={{ color: "black" }} />,
     Logout: <LogoutIcon sx={{ color: "black" }} />,
   };
@@ -46,39 +37,33 @@ export default function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      history("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const changePage = (text) => {
-    if (text === "Logout") {
-      logout();
-    } else history("/");
-  };
+
   const drawer = (
-    <div>
+    <div className="drawerStyles">
       <Typography id="profil">Mon profil</Typography>
-      <Divider />
       <List>
         {Object.keys(myObject).map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
-              onClick={() => changePage(text)}
-              sx={{ marginTop: 3 }}
+              onClick={() => props.onClick(text)}
+              sx={{
+                marginTop: 3,
+                opacity: props.text === text ? 1.5 : 0.7,
+                backgroundColor: props.text === text ? "#ff8c00" : "inherit",
+                "&:hover": {
+                  backgroundColor: props.text === text ? "#ff8c00" : "#ff5b00",
+                  opacity: 1,
+                },
+              }}
             >
               <ListItemIcon>{myObject[text]}</ListItemIcon>
-              <ListItemText primary={text} sx={{ color: "white" }} />
+              <ListItemText primary={text} sx={{ color: "#FFF" }} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </div>
   );
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -90,12 +75,12 @@ export default function ResponsiveDrawer(props) {
           sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             ml: { sm: `${drawerWidth}px` },
-            backgroundColor: "#e9e9e9",
+            backgroundColor: "#FFF",
           }}
         >
           <Toolbar>
             <IconButton
-              color="#ff5b00ba"
+              color="#FF5B00"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
@@ -132,7 +117,7 @@ export default function ResponsiveDrawer(props) {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: "#ff5b00ba",
+                backgroundColor: "#FF5B00",
               },
             }}
           >
@@ -141,29 +126,18 @@ export default function ResponsiveDrawer(props) {
           <Drawer
             variant="permanent"
             sx={{
-              backgroundColor: "#e4a11b33",
+              backgroundColor: "#E4A11B",
               display: { xs: "none", sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: "#ff5b00ba",
+                backgroundColor: "#FF5B00",
               },
             }}
             open
           >
             {drawer}
           </Drawer>
-        </Box>
-
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}
-        >
-          <Toolbar />
         </Box>
       </Box>
     </div>

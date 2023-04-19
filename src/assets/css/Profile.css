@@ -1,8 +1,11 @@
 #profil{
-    font-family: "italianno";
-    font-size: 5ch;
+   
+    font-size: 4ch ;
     text-align: center;
     color: white;
+    font-weight: bold;
+    margin-top: 1ch;
+    font-family: "italliano";
 }
 #child2 {
     display: flex;

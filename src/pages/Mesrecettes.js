@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "../utils/firebase";
 
-export default function Information() {
+export default function Mesrecettes() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -29,7 +29,7 @@ export default function Information() {
     <Box
       sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#F0F0F0" }}
     >
-      <Drawer text="Informations" onClick={changePage} />
+      <Drawer text="Mes-recettes" onClick={changePage} />
       <Box
         component="main"
         sx={{
