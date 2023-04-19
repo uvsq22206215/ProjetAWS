@@ -95,8 +95,14 @@ function CreateRecipePage() {
   return (
     <div id="createPage">
       <Header />
+      <div id="resumePage">
+        <h4 id="titleCreationPage">Création de recette</h4>
+        <ul id="descriptionCreationPage">
+          <li>Partagez vos recettes au monde entier !</li>
+          <li>Contribuez à une base de données de plus de mille (et une) recettes !</li>
+        </ul>
+      </div>
       <div id="createForm">
-        <h4 id='createTitle'>Création de recette</h4>
         <div className="createInput">
           <input
             placeholder="Nom de la recette"
@@ -116,33 +122,6 @@ function CreateRecipePage() {
             placeholder="Temps de cuisson (en minutes)"
             onChange={(e) => setCookTime(e.target.value)}
             />
-        </div>
-        <div className="createSelectInput">
-          <label>Difficulté :</label>
-          <select name="difficultyOption" className="createOptions">
-            <option value="tresFacile">Très facile</option>
-            <option value="moyenne">Moyenne</option>
-            <option value="difficile">Difficile</option>
-          </select>
-        </div>
-        <div className="createSelectInput">
-          <label>Coût :</label>
-          <select name="costOption" className="createOptions">
-            <option value="bonMarche">Bon marché</option>
-            <option value="moyen">Moyen</option>
-            <option value="assezCher">Assez cher</option>
-          </select>
-        </div>
-        {/* Possibilité de rendre les catégories dynamiques ici */}
-        <div className="createSelectInput">
-          <label>Catégorie :</label>
-          <select name="categoryOption" className="createOptions">
-            <option value="platPrincipal">Plat principal</option>
-            <option value="accompagnement">Accompagnement</option>
-            <option value="boisson">Boisson</option>
-            <option value="co+nfiserie">Confiserie</option>
-            <option value="amuseGueule">Amuse-gueule</option>
-          </select>
         </div>
         <div id="listInstructions">
           {instructions.map((instruction, index) => (
@@ -169,7 +148,7 @@ function CreateRecipePage() {
             onChange={(e) => setNbPersonnes(e.target.value)}
           />
         </div>
-        <label>Laisser le champ quantité vide si nécéssaire.</label>
+        <label id="leaveEmpty">Laisser le champ quantité vide si nécéssaire.</label>
         <div id="listIngredients">
           {listIngredients.map((ingredient, index) => (
             <div className="ingredientInput" key={"ingredient-" + index}>
@@ -208,6 +187,33 @@ function CreateRecipePage() {
               )}
             </div>
           ))}
+        <div className="createSelectInput">
+          <label>Difficulté :</label>
+          <select name="difficultyOption" className="createOptions">
+            <option value="tresFacile">Très facile</option>
+            <option value="moyenne">Moyenne</option>
+            <option value="difficile">Difficile</option>
+          </select>
+        </div>
+        <div className="createSelectInput">
+          <label>Coût :</label>
+          <select name="costOption" className="createOptions">
+            <option value="bonMarche">Bon marché</option>
+            <option value="moyen">Moyen</option>
+            <option value="assezCher">Assez cher</option>
+          </select>
+        </div>
+        {/* Possibilité de rendre les catégories dynamiques ici */}
+        <div className="createSelectInput">
+          <label>Catégorie :</label>
+          <select name="categoryOption" className="createOptions">
+            <option value="platPrincipal">Plat principal</option>
+            <option value="accompagnement">Accompagnement</option>
+            <option value="boisson">Boisson</option>
+            <option value="co+nfiserie">Confiserie</option>
+            <option value="amuseGueule">Amuse-gueule</option>
+          </select>
+        </div>
         {(codeError != "") && <div>{codeError}</div>}
         <button
           id="createRecipeButton"
