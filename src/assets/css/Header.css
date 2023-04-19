@@ -19,6 +19,7 @@
   display: flex;
 }
 
+
 #child2 img {
   object-fit: contain;
   height: 50px;
@@ -58,6 +59,7 @@
 .account-icon {
   margin-right: 10px;
 }
+
 
 @media (max-width: 727px)  {
   .search-bar {
