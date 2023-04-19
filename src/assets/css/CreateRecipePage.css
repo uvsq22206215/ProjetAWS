@@ -5,7 +5,11 @@
   align-items: center;
 }
 
-
+#createForm * input {
+  border-radius: 10px;
+  border:none;
+  box-shadow: 0 0 0 2px #f89837;
+}
 
 #createTitle {
   margin: 5px;

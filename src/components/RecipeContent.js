@@ -9,14 +9,31 @@ import RelatedRecipes from "./RelatedRecipes";
 function RecipeContent({ recipe }) {
 
   const [nbPersons, setNbPersons] = useState(parseInt(recipe.numberPersons));
+
+  const tags = [];
+
+  if (recipe.cost) {
+    tags.push({
+      name : "€ " + recipe.cost,
+      background : "#cbc300",
+      color : "white"
+    })
+  }
+  if (recipe.difficulty) {
+    tags.push({
+      name : recipe.difficulty,
+      background : "#596bc3",
+      color : "white"
+    })
+  }
   
 
   return (
     <div id='recipeContent'>
       <div id='container'>
         <div id='infoRecipe'>
-          <div className='containerTime'>Temps de préparation : {recipe.prepTime}</div>
-          <div className='containerTime'>Temps de cuisson : {recipe.cookTime}</div>
+          <div className='containerTime'>Temps de préparation : {recipe.prepTime} minutes</div>
+          <div className='containerTime'>Temps de cuisson : {recipe.cookTime} minutes</div>
           <div id='personsContainer'>Ingrédients pour
             <div id='numberPersons'>{nbPersons}</div>
             personnes
@@ -42,16 +59,16 @@ function RecipeContent({ recipe }) {
             <div id='recipeName'>{recipe.name}</div>
             <div id='recipeRating'></div>
           </div>
-          <div id='recipePhoto'><img src={recipe.image} /></div>
           <div id='recipeTags'>
-            {/* {recipe.tags.map((tag, index) => (
+            {tags.map((tag, index) => (
               <div className='tag' style={{
                 backgroundColor: tag.background,
                 borderColor: tag.background === "white" ? "solid" : tag.background,
-                color: tag.textColor
-              }}>{tag.nameTag}</div>
-            ))} */}
+                color: tag.color
+              }}>{tag.name}</div>
+            ))}
           </div>
+          <div id='recipePhoto'><img src={recipe.image} /></div>
           <div id='recipeSteps'>
             <ul>
               {recipe.recipeInstructions.map((instruction, index) => (

@@ -9,33 +9,35 @@ import RecipeCard from "../components/RecipeCard";
 
 function CreateRecipePage() {
 
+  
+  
   // const pushRecipe = () => {
-  //   listeRecette.forEach(function(obj) {
-  //     addDoc(collection(database, "recipe"), obj).then(function(docRef) {
-  //       console.log("Document written with ID: ", docRef.id);
-  //     })
-  //     .catch(function(error) {
-  //         console.error("Error adding document: ", error);
-  //     });
-  //   });
-  // };
+    //   listeRecette.forEach(function(obj) {
+      //     addDoc(collection(database, "recipe"), obj).then(function(docRef) {
+        //       console.log("Document written with ID: ", docRef.id);
+        //     })
+        //     .catch(function(error) {
+          //         console.error("Error adding document: ", error);
+          //     });
+    //   });
+    // };
+    
+    const [instructions, setInstructions] = useState([""]);
+    
+    const removeInstruction = (index) => {
+      let newList = [...instructions];
+      newList.splice(index, 1);
+      setInstructions(newList);
+    };
+    
+    const handleChangeIns = (e, index) => {
+      let tmp = [...instructions];
+      tmp[index] = e.target.value;
+      setInstructions(tmp);
+    };
 
-  const [instructions, setInstructions] = useState([""]);
-
-  const removeInstruction = (index) => {
-    let newList = [...instructions];
-    newList.splice(index, 1);
-    setInstructions(newList);
-  };
-
-  const handleChangeIns = (e, index) => {
-    let tmp = [...instructions];
-    tmp[index] = e.target.value;
-    setInstructions(tmp);
-  };
-
-  const [listIngredients, setListIngredients] = useState([
-    { quantite: "", nomIngr: "" },
+    const [listIngredients, setListIngredients] = useState([
+      { quantite: "", nomIngr: "" },
   ]);
 
   const removeIngr = (index) => {
@@ -43,17 +45,52 @@ function CreateRecipePage() {
     newList.splice(index, 1);
     setListIngredients(newList);
   };
-
+  
   const handleChangeIngr = (e, index) => {
     let tmp = [...listIngredients];
     tmp[index][e.target.name] = e.target.value;
     setListIngredients(tmp);
   };
-
+  
   const [name, setName] = useState();
   const [cookTime, setCookTime] = useState();
   const [prepTime, setPrepTime] = useState();
   const [nbPersonnes, setNbPersonnes] = useState();
+  
+  const [codeError, setCodeError] = useState("");
+
+  const handleCreation = () => {
+    setCodeError("");
+    let ingrFiltered = listIngredients.filter((e) => e.nomIngr != "");
+    let instFiltered = instructions.filter((e) => e != "");
+    if (name == null) {
+      setCodeError("La recette doit être nomée.");
+      return;
+    }
+    if (prepTime == null) {
+      setCodeError("Le temps de préparation (même nul) doit être renseigné.");
+      return;
+    }
+    if (cookTime == null) {
+      setCodeError("Le temps de cuisson (même nul) doit être renseigné.");
+      return;
+    }
+    if (instFiltered.length == 0) {
+      setCodeError("La recette doit contenir au moins une instruction.");
+      return;
+    }
+    if (nbPersonnes == null) {
+      setCodeError("Le nombre de personnes doit être renseigné.");
+      return;
+    }
+    if (ingrFiltered.length == 0) {
+      setCodeError("La recette doit contenir au moins un ingrédient.");
+      return;
+    }
+    // TODO : Push la recette dans la base de données
+  };
+
+
 
   return (
     <div id="createPage">
@@ -64,21 +101,21 @@ function CreateRecipePage() {
           <input
             placeholder="Nom de la recette"
             onChange={(e) => setName(e.target.value)}
-          />
+            />
         </div>
         <div className="createInput">
           <input
             type="number"
             placeholder="Temps de préparation (en minutes)"
             onChange={(e) => setPrepTime(e.target.value)}
-          />
+            />
         </div>
         <div className="createInput">
           <input
             type="number"
             placeholder="Temps de cuisson (en minutes)"
             onChange={(e) => setCookTime(e.target.value)}
-          />
+            />
         </div>
         <div className="createSelectInput">
           <label>Difficulté :</label>
@@ -111,7 +148,7 @@ function CreateRecipePage() {
           {instructions.map((instruction, index) => (
             <div className="instructionInput" key={"instruction-" + index}>
               <input
-                placeholder={"Instruction " + index}
+                placeholder={"Instruction " + (index + 1)}
                 onChange={(e) => handleChangeIns(e, index)}
                 value={instructions[index]}
               />
@@ -171,7 +208,13 @@ function CreateRecipePage() {
               )}
             </div>
           ))}
-        <button id="createRecipeButton">Créer la recette</button>
+        {(codeError != "") && <div>{codeError}</div>}
+        <button
+          id="createRecipeButton"
+          onClick={handleCreation}
+        >
+          Créer la recette
+        </button>
         </div>
       </div>
       <Footer />
