@@ -45,13 +45,13 @@ function CategoriesPage() {
         categories.map((category, index) => (
 
         <div key={'category-'+index} className="category-box flip-card">
-          <div class="flip-card-inner">
-              <div class="flip-card-front" style={{ backgroundImage: `url(/assets/${category.data().img})` }}>
-                  <p class="title">{category.data().nom}</p>
+          <div className="flip-card-inner">
+              <div className="flip-card-front" style={{ backgroundImage: `url(/assets/${category.data().img})` }}>
+                  <p className="title">{category.data().nom}</p>
                   <p>Hover Me</p>
               </div>
-              <div class="flip-card-back">
-                  <p class="title">Description</p>
+              <div className="flip-card-back">
+                  <p className="title">Description</p>
                   <a href="#">Click me!</a>
               </div>
           </div>

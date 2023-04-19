@@ -14,6 +14,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import Information from "./pages/Informations";
 import Mesrecettes from "./pages/Mesrecettes";
 import Drawer from "./components/Drawer";
+import SideMenu from "./components/SideMenu";
 
 function App() {
   const Main = () => (
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div>
+      <SideMenu />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

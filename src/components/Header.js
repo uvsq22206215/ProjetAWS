@@ -5,9 +5,9 @@ function Header() {
     <header>
       <div id='container'>
         <div id='child1'>
-          <a href='#'>
+          {/* <a href='#'>
             <img alt='Logo menu' src='/assets/logoMenu.png' height='50'/>
-          </a>
+          </a> */}
         </div>
         <div id='child2'>
           <a href='/'>
