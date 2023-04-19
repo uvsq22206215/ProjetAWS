@@ -56,7 +56,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { blue, pink } from "@mui/material/colors";
-import "../assets/css/Login.css";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -124,8 +124,6 @@ export default function Uselogin() {
 
   const register = async (values) => {
     try {
-      const gender = values.gender;
-
       const user = await createUserWithEmailAndPassword(
         auth,
         values.email,
@@ -137,8 +135,9 @@ export default function Uselogin() {
           gender: values.picked,
         });
       });
-   
-     setLogin(true);
+
+      setLogin(true);
+
       setOpenRegister(true);
     } catch (error) {
       console.log(error);
@@ -146,8 +145,6 @@ export default function Uselogin() {
   };
   const log = async (values) => {
     try {
-      const gender = values.gender;
-
       const user = await signInWithEmailAndPassword(
         auth,
         values.username,

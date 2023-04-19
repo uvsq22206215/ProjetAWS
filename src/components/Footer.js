@@ -26,25 +26,25 @@ function Footer() {
             <img src={logo} alt="Logo" style={{ width: "300px", height: "auto" }} />
           </div>
           <div className="footer-col">
-            <h3 style={{ fontWeight: 'bold' }}>About Us</h3>
+            <h3 style={{ fontWeight: 'bold' }}>À propos de nous</h3>
             <ul>
-              <li><a href="#">Privacy & Policy</a></li>
-              <li><a href="#">Help & Support</a></li>
+              <li><a href="#">Politique de confidentialité</a></li>
+              <li><a href="#">Aide & Support</a></li>
             </ul>
           </div>
           <div className="footer-col">
-            <h3 style={{ fontWeight: 'bold' }}>Useful Information</h3>
+            <h3 style={{ fontWeight: 'bold' }}>Informations utiles</h3>
 
             <ul>
-              <li><a href="#">How it works</a></li>
-              <li><a href="#">Become Creator</a></li>
+              <li><a href="#">Comment ça marche ?</a></li>
+              <li><a href="#">Devenir créateur</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="#">Contact</a></li>
 
             </ul>
           </div>
           <div className="footer-col">
-            <h3 style={{ fontWeight: 'bold' }}>Contact Us</h3>
+            <h3 style={{ fontWeight: 'bold' }}>Contactez nous</h3>
             <ul>
               <li style={{ display: "flex", alignItems: "center" }}><FontAwesomeIcon icon={faEnvelope} className="mail-icon" /> <a href="#">hello@reallygreatsite.com</a> </li>
               <li style={{ display: "inline-block" }}><FontAwesomeIcon icon={faPhone} className="phone-icon" /><a href="tel:+334567890">(+33) 456 7890</a></li>
@@ -52,7 +52,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-col">
-          <h3 style={{ fontWeight: 'bold' }}>SOCIAL MEDIA</h3>
+          <h3 style={{ fontWeight: 'bold' }}>RESEAUX SOCIAUX</h3>
 
           <ul className="social-icons">
             <li>

@@ -129,10 +129,10 @@ function HomePage() {
       </div>  
       <div id="recipe-gen-block">
         <div className='container'>
-          <h1 className="block-title">DON'T KNOW<br />WHAT TO COOK?</h1>
+          <h1 className="block-title">VOUS NE SAVEZ<br />PAS QUOI CUISINER?</h1>
           <div className="block-btn">
             <Link to="/my-page">
-              <button className='button'> Generate a Recipe</button>
+              <button className='button'> Générer une recette</button>
             </Link>
           </div>
         </div>
@@ -140,7 +140,7 @@ function HomePage() {
       </div>
       <div id="popular-creators">
         <div id="hp-creators">
-          <h1 className='block-title'>Popular Recipe Creators</h1>
+          <h1 className='block-title'>Créateurs de recettes populaires</h1>
           <div className='creator-container'>
             <Slider 
               dots={true}

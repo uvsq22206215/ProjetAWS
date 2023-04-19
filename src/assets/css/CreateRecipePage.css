@@ -1,0 +1,52 @@
+.createSelectInput, .createInput, .instructionInput, .ingredientInput {
+  min-height: 50px;
+  margin : 5px;
+  display: flex;
+  align-items: center;
+}
+
+#createForm * input {
+  border-radius: 10px;
+  border:none;
+  box-shadow: 0 0 0 2px #f89837;
+}
+
+#createTitle {
+  margin: 5px;
+  color : orange;
+}
+
+#createForm {
+  color : black;
+}
+
+.createInput input {
+  width : 300px;
+}
+
+.instructionInput input + button {
+  margin-left: 5px;
+}
+
+.buttonMoreLess {
+  border-radius: 50%;
+  width : 32px;
+  background-color: orange;
+  border : none;
+  color: white;
+  font-size : larger
+}
+
+.createSelectInput label + select {
+  margin-left : 10px;
+}
+
+#createRecipeButton {
+  color : white;
+  background-color: orange;
+  border : none;
+  border-radius: 15px;
+  font-size: larger;
+  margin : 5px
+}
+

@@ -54,17 +54,12 @@
 /********************************************************************/
 
 .filter-title {
-  margin-left: 20px;
-  margin-top: 20px;
   font-weight: bold;
   color: #9d7745;
   font-size: 1.2em;
   cursor: pointer;
 }
 
-.filter-header{
-  margin-bottom: 30px;
-}
 
 
 .filter-clear {
@@ -75,30 +70,28 @@
   font-size: 1.2em;
 }
 .option-title{
-  margin-left: 20px;
   color: rgb(157, 119, 69);
   font-weight: bold;
   font-size: 1.2em;
 }
 
 .toggle-plus{
-  margin-left: 50px;
+  margin-left: 10px;
   color: #9d7745;
   font-weight: bold;
   font-size: 1.2em;
 }
 .toggle-minus{
-  margin-left: 50px;
+  margin-left: 10px;
   color: rgb(157, 119, 69);
   font-weight: bold;
   font-size: 1.2em;
 }
 
 .option{
-  margin-left: 40px;
+  margin-left: 20px;
   color: rgb(157, 119, 69);
   font-size: 1.2em;
-  margin-bottom: 5px;
 }
 
  /* cacher les options avant de cliquer sur +*/
@@ -112,9 +105,8 @@
   display: block;
 
 }
-.filter-typ{
-  margin-bottom: 40px;
-}
+
+
 #apply-filters-btn {
   margin-top: 20px;
 }

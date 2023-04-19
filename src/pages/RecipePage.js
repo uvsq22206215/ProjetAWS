@@ -7,6 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { database } from '../utils/firebase';
 import RecipeContent from '../components/RecipeContent';
 import RelatedRecipes from '../components/RelatedRecipes';
+import Footer from '../components/Footer';
 
 
 function useQuery() {
@@ -35,6 +36,9 @@ function RecipePage() {
       })
       .catch(() => console.log("Erreur"))
     }
+    if (!query) {
+      setLoaded(true);
+    }
   }, [query, loaded]);
 
   if (!loaded) {
@@ -44,18 +48,21 @@ function RecipePage() {
         <div>Loading...</div>
       </div>);
   }
+
   if (found) {
     return (
       <div id='containerPage'>
         <Header />
         <RecipeContent recipe={recipe} />
         <RelatedRecipes title='Recettes associées' /> {/*TODO : Ajouter criteres de similarité */}
+        <Footer />
       </div>);
   }
   return (
     <div id='containerPage'>
       <Header />
       <div>Recette non trouvée !</div>
+      <Footer />
     </div>);
 }
 

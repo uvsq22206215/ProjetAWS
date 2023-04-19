@@ -10,7 +10,7 @@ function RecipeCard(props) {
         <div>
           <h1 className="card-title">{props.title}</h1>
           <p className="class-description">{props.description}</p>
-          <a className="card-btn" href={props.link}>View Recipe</a>
+          <a className="card-btn" href={props.link}>Voir la recette</a>
         </div>
       </div>
     </div>
