@@ -163,7 +163,6 @@ function HomePage() {
 
         </div>
       </div>
-      <RelatedRecipes title='Recettes tendance'/>
       <Footer />
     </div>
     

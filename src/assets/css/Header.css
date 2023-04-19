@@ -18,6 +18,9 @@
 #child2 {
   display: flex;
 }
+#child2 :hover {
+  transform: scale(1.1);
+}
 
 #child2 img {
   object-fit: contain;
@@ -57,6 +60,9 @@
 
 .account-icon {
   margin-right: 10px;
+}
+.account-icon :hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 727px)  {
