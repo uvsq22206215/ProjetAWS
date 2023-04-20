@@ -21,16 +21,49 @@ import InfoIcon from "@mui/icons-material/Info";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { UserAuth } from "../context/Usercontext";
+import { makeStyles } from "@mui/styles";
+import { Avatar } from "@mui/material";
+import { Stack, color } from "@mui/system";
+//
 const drawerWidth = 240;
+const useStyles = {
+  selecteditem: {
+    mr: 1,
+    borderRadius: 10,
+    marginTop: 3,
 
+    backgroundColor: "#ff8c00",
+    "&:hover": {
+      backgroundColor: "#ff8c00",
+      opacity: 1,
+    },
+  },
+  notselecteditem: {
+    mr: 1,
+    borderRadius: 10,
+    marginTop: 3,
+
+    backgroundColor: "rgba(255,255,255,0.2)",
+    "&:hover": {
+      backgroundColor: "#ff5b00",
+      opacity: 1,
+    },
+  },
+};
 export default function ResponsiveDrawer(props) {
+  const classes = useStyles;
+  let history = useNavigate();
+  const { logout } = UserAuth();
   var myObject = {
-    Informations: <InfoIcon sx={{ color: "black" }} />,
-    "Mes-recettes": <MilitaryTechIcon sx={{ color: "black" }} />,
-    "Recettes aimées": <FavoriteIcon sx={{ color: "black" }} />,
-    Logout: <LogoutIcon sx={{ color: "black" }} />,
+    Informations: <InfoIcon sx={{ color: "white" }} />,
+    "Mes-recettes": <MilitaryTechIcon sx={{ color: "white" }} />,
+    "Recettes aimées": <FavoriteIcon sx={{ color: "white" }} />,
+    Logout: <LogoutIcon sx={{ color: "white" }} />,
   };
+  const url = useLocation();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -40,21 +73,33 @@ export default function ResponsiveDrawer(props) {
 
   const drawer = (
     <div className="drawerStyles">
-      <Typography id="profil">Mon profil</Typography>
+      <Stack
+        justifyContent={"center"}
+        direction="column"
+        alignItems={"center"}
+        mt={3}
+      >
+        <strong>
+          {" "}
+          <Typography id="profil" variant="h4">
+            Mon profil
+          </Typography>
+        </strong>
+      </Stack>
+
       <List>
         {Object.keys(myObject).map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
-              onClick={() => props.onClick(text)}
-              sx={{
-                marginTop: 3,
-                opacity: props.text === text ? 1.5 : 0.7,
-                backgroundColor: props.text === text ? "#ff8c00" : "inherit",
-                "&:hover": {
-                  backgroundColor: props.text === text ? "#ff8c00" : "#ff5b00",
-                  opacity: 1,
-                },
+              onClick={() => {
+                if (text === "Logout") logout();
+                else history("/" + text);
               }}
+              sx={
+                url.pathname.split("/").at(-1) === text
+                  ? classes.selecteditem
+                  : classes.notselecteditem
+              }
             >
               <ListItemIcon>{myObject[text]}</ListItemIcon>
               <ListItemText primary={text} sx={{ color: "#FFF" }} />
@@ -117,7 +162,7 @@ export default function ResponsiveDrawer(props) {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: "#FF5B00",
+                backgroundColor: "#ff4838",
               },
             }}
           >
@@ -126,12 +171,14 @@ export default function ResponsiveDrawer(props) {
           <Drawer
             variant="permanent"
             sx={{
-              backgroundColor: "#E4A11B",
               display: { xs: "none", sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: "#FF5B00",
+                backgroundColor: "#ff4838",
+                background: "rgb(131,58,180)",
+                background:
+                  "linear-gradient(0deg, rgba(131,58,180,1) 0%, rgba(252,176,69,1) 0%,rgba(253,29,29,1) % )",
               },
             }}
             open

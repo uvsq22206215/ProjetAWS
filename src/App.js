@@ -14,6 +14,9 @@ import CategoriesPage from "./pages/CategoriesPage";
 import Information from "./pages/Informations";
 import Mesrecettes from "./pages/Mesrecettes";
 import Drawer from "./components/Drawer";
+import Contentprofil from "./pages/Contentprofil";
+import { AuthContextProvider } from "./context/Usercontext";
+import ProtectedRoute from "./context/Protectedroutes";
 import SideMenu from "./components/SideMenu";
 
 function App() {
@@ -22,22 +25,38 @@ function App() {
       <HomePage />
     </div>
   );
-  
+
   return (
     <BrowserRouter>
       <div>
-        <SideMenu/>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Main />} />
-          <Route path="/recipe" element={<RecipePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/create" element={<CreateRecipePage />} />
-          <Route path="/all-categories" element={<CategoriesPage />} />
-          <Route path="/Informations" element={<Information />} />
-          <Route path="/Mes-recettes" element={<Mesrecettes />} />
-          <Route path="/drawer" element={<Drawer />} />
-        </Routes>
+        <SideMenu></SideMenu>
+        <AuthContextProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/recipe" element={<RecipePage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/create" element={<CreateRecipePage />} />
+            <Route path="/all-categories" element={<CategoriesPage />} />
+
+            <Route
+              path="/Informations"
+              element={
+                <Contentprofil>
+                  <Information />
+                </Contentprofil>
+              }
+            />
+            <Route
+              path="/Mes-recettes"
+              element={
+                <Contentprofil>
+                  <Mesrecettes />
+                </Contentprofil>
+              }
+            />
+          </Routes>
+        </AuthContextProvider>
       </div>
     </BrowserRouter>
   );
