@@ -1,23 +1,32 @@
 import '../assets/css/Header.css'
 import { database } from '../utils/firebase';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
+import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 
 
-const searchRecipes = async (searchTerm) => {
-  const recipeRef = database.collection('recipe');
-  const query = recipeRef.where('name', '>=', searchTerm)
-  .where('name', '<=', searchTerm + '\uf8ff');
+const SearchResult = (searchTerm) => {
+  const recipeRef = collection(database, "recipe");
+  const [Result, setResult] = useState();
+  let condition = null;
 
-  try {
-    const snapshot = await query.get();
-    const searchResults = snapshot.docs.map((doc) => doc.data());
-    return searchResults;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
+  condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
 
+  let q = query(recipeRef, condition, limit(10));
+  let tmpRecipes = [];
+  
+  getDocs(q)
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          tmpRecipes.push(doc);
+        });
+        setResult(tmpRecipes);
+        console.log("Received from database", tmpRecipes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+}
+ 
 
 function Header() {
   const [isInputExpanded, setIsInputExpanded] = useState(false);
@@ -33,16 +42,9 @@ function Header() {
 
   
   const handleSearch = () => {
-    if (searchTerm) {
-      searchRecipes(searchTerm).then((results) => {
-  
-      });
-    }
+   
   };
   
-
-
-
   return (
     <header>
       <div id='container'>
@@ -68,7 +70,6 @@ function Header() {
               className={isInputExpanded ? 'input-expanded' : ''}
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
-              id='search-input'
             />
           </div>
           <div className='account-icon'>
