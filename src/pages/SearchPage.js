@@ -185,8 +185,7 @@ function SearchPage() {
   useEffect(() => {
 
   }, [filteredRecipes]);
-
-
+  
   // Affiche toutes les recettes de base par défaut
   useEffect(() => {
     const recipesRef = collection(database, "recipe");

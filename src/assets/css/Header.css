@@ -39,6 +39,9 @@ header {
   display: flex;
   flex:1;
   justify-content: flex-end;
+  width: 200px;
+  
+  
 }
 
 #child3 * {
@@ -51,6 +54,12 @@ header {
   border-radius: 7px;
   border: 0px;
   box-shadow: 0 0 0 2px #f89837;
+  width: 200px;
+  transition: width 0.5s ease-in-out;
+}
+
+#child3 input.input-expanded {
+  width: 400px;
 }
 
 #child3 img {
@@ -58,12 +67,12 @@ header {
   border-radius: 9px;
   border: 0px;
   margin:5px;
+  cursor: pointer;
+  
 }
 
-.search-bar {
-  display: flex;
-  margin-right: 20px;
-}
+
+
 
 .account-icon {
   margin-right: 10px;
