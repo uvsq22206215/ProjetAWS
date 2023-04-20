@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faBook, faEye, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faBook, faEye, faUser, faLink } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -37,8 +37,12 @@ function SideMenu() {
           <NavIcon><FontAwesomeIcon icon={faEye} /></NavIcon>
           <NavText>Chercher une recette</NavText>
         </NavItem>
-        <NavItem eventKey="login">
+        {/* <NavItem eventKey="Informations">
           <NavIcon><FontAwesomeIcon icon={faUser} /></NavIcon>
+          <NavText>Mon Profile</NavText>
+        </NavItem> */}
+        <NavItem eventKey="login">
+          <NavIcon><FontAwesomeIcon icon={faLink} /></NavIcon>
           <NavText>Connexion / Inscription</NavText>
         </NavItem>
       </SideNav.Nav>

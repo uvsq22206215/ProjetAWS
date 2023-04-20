@@ -21,6 +21,7 @@ h1.card-title {
   color: #a68671;
   min-height: 60px;
   padding-top: 10px;
+  overflow: hidden;
 }
 
 .card-desc {

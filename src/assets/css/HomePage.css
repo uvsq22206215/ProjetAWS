@@ -92,7 +92,15 @@
 }
 
 #homepage #hp-creators {
+  /* background-color: #F79837; */
+  width: 100%;
+}
+
+#homepage div#popular-creators {
   background-color: #F79837;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
 }
 
 #homepage #hp-creators .block-title {
