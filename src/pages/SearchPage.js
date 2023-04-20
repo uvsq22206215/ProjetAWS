@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { database } from '../utils/firebase';
 import { collection, query, where, get, getDocs, doc, limit, and } from 'firebase/firestore';
+import Footer from '../components/Footer';
 
 function SearchPage() {
   const [showMore, setShowMore] = useState(false);
@@ -449,6 +450,7 @@ function SearchPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

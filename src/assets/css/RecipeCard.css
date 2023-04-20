@@ -19,6 +19,8 @@ h1.card-title {
   font-family: 'Marcellus', serif;
   font-size:x-large;
   color: #a68671;
+  min-height: 60px;
+  padding-top: 10px;
 }
 
 .card-desc {

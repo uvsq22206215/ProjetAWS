@@ -2,10 +2,12 @@
   font-family: 'Playfair Display';
   text-align : center;
   color : #a68671;
+  font-size: 56px;
 }
 
 #relatedRecipes {
   justify-content: space-around;
   display : flex;
   flex-wrap : wrap;
+  padding: 4%;
 }

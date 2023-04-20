@@ -22,11 +22,11 @@ function App() {
       <HomePage />
     </div>
   );
-
+  
   return (
-    <div>
-      <SideMenu />
-      <BrowserRouter>
+    <BrowserRouter>
+      <div>
+        <SideMenu/>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
@@ -38,8 +38,8 @@ function App() {
           <Route path="/Mes-recettes" element={<Mesrecettes />} />
           <Route path="/drawer" element={<Drawer />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

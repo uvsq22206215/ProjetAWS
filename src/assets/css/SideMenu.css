@@ -1,11 +1,12 @@
 nav.sidebar-menu {
   background: transparent;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
-  background: dimgray;
+  background: #1d1313b5;
   border-right: 1px solid grey;
+  min-width: 20%!important;
 }
 
 .sidenav---sidenav-toggle---1KRjR .sidenav---icon-bar---u1f02 {
@@ -19,4 +20,26 @@ nav.sidebar-menu {
 
 nav.sidebar-menu.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv .sidenav---sidenav-nav---3tvij {
   display: none;
+}
+
+nav.sidebar-menu.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv span.sidenav---icon-bar---u1f02 {
+  border-radius: 30px!important;
+  width: 40px!important;
+  height: 7px!important;
+}
+
+.sidenav---navtext---1AE_f {
+  font-size: 16px;
+}
+
+@media (max-width: 1500px) { 
+  .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 40%!important;
+  }
+}
+
+@media (max-width: 900px) { 
+  .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 100%!important;
+  }
 }
