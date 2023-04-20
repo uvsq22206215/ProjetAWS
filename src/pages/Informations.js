@@ -42,14 +42,14 @@ export default function Information() {
   const [user1, setUser1] = useState(
     JSON.parse(sessionStorage.getItem("user-signin"))
   );
-  // const [userdetail, setUserdetail] = useState(
-  //   JSON.parse(sessionStorage.getItem("user"))
-  // );
-  const [userdetail, setUserdetail] = useState(usr);
-  useEffect(() => {
-    console.log(usr);
-    setUserdetail(usr);
-  }, [usr]);
+  const [userdetail, setUserdetail] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+  // const [userdetail, setUserdetail] = useState(usr);
+  // useEffect(() => {
+  //   console.log(usr);
+  //   setUserdetail(usr);
+  // }, [usr]);
 
   return (
     <Card>
@@ -60,7 +60,7 @@ export default function Information() {
         <Formik
           initialValues={{
             username: userdetail?.username,
-            email: user?.email,
+            email: user1?.email,
             password: "",
             password2: "",
           }}

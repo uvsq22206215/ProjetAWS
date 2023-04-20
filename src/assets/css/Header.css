@@ -1,9 +1,18 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
 #container {
   display: flex;
   width: 100%;
   background-color: white;
   padding-top: 10px;
   padding-bottom: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #child1 {
@@ -19,6 +28,7 @@
   display: flex;
 }
 
+
 #child2 img {
   object-fit: contain;
   height: 50px;
@@ -29,6 +39,9 @@
   display: flex;
   flex:1;
   justify-content: flex-end;
+  width: 200px;
+  
+  
 }
 
 #child3 * {
@@ -41,6 +54,12 @@
   border-radius: 7px;
   border: 0px;
   box-shadow: 0 0 0 2px #f89837;
+  width: 200px;
+  transition: width 0.5s ease-in-out;
+}
+
+#child3 input.input-expanded {
+  width: 400px;
 }
 
 #child3 img {
@@ -48,16 +67,17 @@
   border-radius: 9px;
   border: 0px;
   margin:5px;
+  cursor: pointer;
+  
 }
 
-.search-bar {
-  display: flex;
-  margin-right: 20px;
-}
+
+
 
 .account-icon {
   margin-right: 10px;
 }
+
 
 @media (max-width: 727px)  {
   .search-bar {

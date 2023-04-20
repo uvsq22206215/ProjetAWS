@@ -1,3 +1,7 @@
+div#SearchPage {
+  padding-top: 40px;
+}
+
 .recipe-cards {
   display: flex;
   flex-wrap : wrap;
@@ -8,6 +12,7 @@
   margin-top: 120px;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  margin-left: 2%;
 }
 
 #SearchPage div#trending-recipes {
@@ -19,11 +24,11 @@
 
 @media screen {
   #result-column {
-    width : 75% ;
+    max-width : 70% ;
   }
 
   #filter-column {
-    width : 25%;
+    max-width: 25%;
   }
 }
 
@@ -33,12 +38,6 @@
   flex-wrap:wrap;
   margin-top: 50px;
 }
-
-
-#result-column {
-  min-width: 75%;
-}
-
 
 
 .filter-container {
@@ -109,4 +108,15 @@
 
 #apply-filters-btn {
   margin-top: 20px;
+}
+
+
+@media screen and (max-width: 1550px) {
+  #result-column {
+    min-width: fit-content;
+  }
+
+  #filter-column {
+    margin-top: 20px;
+  }
 }

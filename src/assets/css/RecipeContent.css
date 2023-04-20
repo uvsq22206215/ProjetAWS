@@ -6,6 +6,10 @@
   padding: 10px;
 }
 
+#recipeContent {
+  padding-top: 70px;
+}
+
 #infoRecipe, #recipeSteps {
   background-color: cornsilk;
 }

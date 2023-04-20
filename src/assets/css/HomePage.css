@@ -212,4 +212,13 @@
   #trending-recipes .block-title {
     background-color: white;
   }
+
+  #homepage div#trending-recipes .recipe-card {
+    min-width: fit-content;
+    background: white;
+  }
+
+  #homepage div#trending-recipes {
+    height: fit-content;
+  }
 }

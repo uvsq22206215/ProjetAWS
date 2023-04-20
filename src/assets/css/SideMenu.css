@@ -1,0 +1,45 @@
+nav.sidebar-menu {
+  background: transparent;
+  position: fixed;
+}
+
+.sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+  background: #1d1313b5;
+  border-right: 1px solid grey;
+  min-width: 20%!important;
+}
+
+.sidenav---sidenav-toggle---1KRjR .sidenav---icon-bar---u1f02 {
+  background-color: #f89837!important;
+}
+
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *, .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > *, 
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *, .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
+  color: #f89837!important;
+}
+
+nav.sidebar-menu.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv .sidenav---sidenav-nav---3tvij {
+  display: none;
+}
+
+nav.sidebar-menu.sidenav---sidenav---_2tBP.sidenav---collapsed---LQDEv span.sidenav---icon-bar---u1f02 {
+  border-radius: 30px!important;
+  width: 40px!important;
+  height: 7px!important;
+}
+
+.sidenav---navtext---1AE_f {
+  font-size: 16px;
+}
+
+@media (max-width: 1500px) { 
+  .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 40%!important;
+  }
+}
+
+@media (max-width: 900px) { 
+  .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 100%!important;
+  }
+}

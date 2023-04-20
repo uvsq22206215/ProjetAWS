@@ -17,6 +17,7 @@ import Drawer from "./components/Drawer";
 import Contentprofil from "./pages/Contentprofil";
 import { AuthContextProvider } from "./context/Usercontext";
 import ProtectedRoute from "./context/Protectedroutes";
+import SideMenu from "./components/SideMenu";
 
 function App() {
   const Main = () => (
@@ -26,8 +27,9 @@ function App() {
   );
 
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <div>
+        <SideMenu></SideMenu>
         <AuthContextProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -55,8 +57,8 @@ function App() {
             />
           </Routes>
         </AuthContextProvider>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
