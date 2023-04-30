@@ -13,27 +13,21 @@ function SideMenu() {
   return (
     <SideNav
     onSelect={selected=> {
-      console.log('/'+selected);
-      if (selected !== "home") {
-        navigate('/' + selected);
-      }
-      else {
-        navigate('/');
-      }
+      navigate(selected);
     }}
     className="sidebar-menu"
     >
       <SideNav.Toggle />
-      <SideNav.Nav defaultSelected={path === "/" ? "home" : path.replace('/', '')}>
-        <NavItem eventKey="home">
+      <SideNav.Nav defaultSelected={path}>
+        <NavItem eventKey="/">
           <NavIcon><FontAwesomeIcon icon={faHome} /></NavIcon>
           <NavText>Accueil</NavText>
         </NavItem>
-        <NavItem eventKey="all-categories">
+        <NavItem eventKey="/all-categories">
           <NavIcon><FontAwesomeIcon icon={faBook} /></NavIcon>
           <NavText>Categories</NavText>
         </NavItem>
-        <NavItem eventKey="search">
+        <NavItem eventKey="/search">
           <NavIcon><FontAwesomeIcon icon={faEye} /></NavIcon>
           <NavText>Chercher une recette</NavText>
         </NavItem>
@@ -41,7 +35,7 @@ function SideMenu() {
           <NavIcon><FontAwesomeIcon icon={faUser} /></NavIcon>
           <NavText>Mon Profile</NavText>
         </NavItem> */}
-        <NavItem eventKey="login">
+        <NavItem eventKey="/login">
           <NavIcon><FontAwesomeIcon icon={faLink} /></NavIcon>
           <NavText>Connexion / Inscription</NavText>
         </NavItem>

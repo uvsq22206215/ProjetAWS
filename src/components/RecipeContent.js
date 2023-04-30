@@ -29,7 +29,26 @@ function RecipeContent({ recipe }) {
   
 
   return (
-    <div id='recipeContent'>
+    <div>
+      <div id="recipe-header">
+        <div id='recipeResume'>
+          <div id='recipeName'>
+            <h1>{recipe.name}</h1>
+          </div>
+          <div id='recipeRating'></div>
+        </div>
+        <div id='recipeTags'>
+          {tags.map((tag, index) => (
+            <div className='tag' style={{
+              backgroundColor: tag.background,
+              borderColor: tag.background === "white" ? "solid" : tag.background,
+              color: tag.color
+            }}>{tag.name}</div>
+          ))}
+        </div>
+        <div id='recipePhoto'><img src={recipe.image} /></div>
+      </div>
+      <div id='recipeContent'>
       <div id='container'>
         <div id='infoRecipe'>
           <div className='containerTime'>Temps de préparation : {recipe.prepTime} minutes</div>
@@ -55,20 +74,6 @@ function RecipeContent({ recipe }) {
           </div>
         </div>
         <div id='descriptionRecipe'>
-          <div id='recipeResume'>
-            <div id='recipeName'>{recipe.name}</div>
-            <div id='recipeRating'></div>
-          </div>
-          <div id='recipeTags'>
-            {tags.map((tag, index) => (
-              <div className='tag' style={{
-                backgroundColor: tag.background,
-                borderColor: tag.background === "white" ? "solid" : tag.background,
-                color: tag.color
-              }}>{tag.name}</div>
-            ))}
-          </div>
-          <div id='recipePhoto'><img src={recipe.image} /></div>
           <div id='recipeSteps'>
             <ul>
               {recipe.recipeInstructions.map((instruction, index) => (
@@ -83,6 +88,8 @@ function RecipeContent({ recipe }) {
         </div>
       </div>      
     </div>
+    </div>
+    
   );
 }
 

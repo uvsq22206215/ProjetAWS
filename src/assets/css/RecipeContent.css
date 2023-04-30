@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-#recipeContent {
+#recipe-header {
   padding-top: 70px;
 }
 
@@ -26,13 +26,14 @@
 }
 
 #recipePhoto {
-  display : flex;
-  justify-content: center;
+  display : block;
 }
 
 #recipePhoto img {
-  border-radius : 10px;
-  max-height: 350px;
+  border-radius: 10px;
+  height: 60vh;
+  width: 100%;
+  object-fit: cover;
 }
 
 #descriptionRecipe {
@@ -46,7 +47,9 @@
 
 #recipeTags {
   display: flex;
-  flex-wrap : wrap;
+  position: absolute;
+  margin-top: 50vh;
+  margin-left: 5vh;
 }
 
 .tag {
@@ -70,7 +73,6 @@
 
 #recipeSteps {
   border : solid;
-  margin-top : 10px;
   border-radius: 10px;
   height: auto;
   border-color : #f89837;
@@ -93,10 +95,16 @@
   flex-wrap : wrap;
 }
 
-#recipeName {
-  font-size : xxx-large;
+#recipeName h1 {
+  font-size: 60px;
   font-family: 'Abril Fatface';
-  color : #f89837;
+  color: #f89837;
+  text-shadow: 1px 1px 2px grey;
+  overflow: hidden!important;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 ol, ul {
@@ -139,4 +147,12 @@ ol, ul {
 
 .recipe-card {
   text-align: center;
+}
+
+/* new */
+#recipeResume {
+  display: block;
+  position: absolute;
+  left: 2%;
+  margin-top: 37vh;
 }

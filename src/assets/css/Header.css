@@ -39,9 +39,7 @@ header {
   display: flex;
   flex:1;
   justify-content: flex-end;
-  width: 200px;
-  
-  
+  width: auto;
 }
 
 #child3 * {
@@ -54,8 +52,14 @@ header {
   border-radius: 7px;
   border: 0px;
   box-shadow: 0 0 0 2px #f89837;
-  width: 200px;
+  width: auto;
   transition: width 0.5s ease-in-out;
+  padding: 13px 24px;
+  margin-right: 20px;
+}
+
+#child3 .searchbar-mobile {
+  display: none;
 }
 
 #child3 input.input-expanded {
@@ -80,12 +84,19 @@ header {
 
 
 @media (max-width: 727px)  {
-  .search-bar {
-    visibility: hidden;
-    display: none;
-  }
-
   #child2 {
     margin: auto;
+    margin-right: 25px!important;
+  }
+}
+
+@media (max-width: 1000px)  {
+  #child3 .searchbar-mobile {
+    display: block;
+  }
+
+  #child3 .searchbar-desktop {
+    display: none;
+    visibility: hidden;
   }
 }
