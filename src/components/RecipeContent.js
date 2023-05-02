@@ -5,6 +5,7 @@ import { database } from "../utils/firebase";
 import { doc, getDocs, query, limit, collection } from "firebase/firestore";
 import RecipePage from "../pages/RecipePage";
 import RelatedRecipes from "./RelatedRecipes";
+import { Button } from "@mui/material";
 
 function RecipeContent({ recipe }) {
 
@@ -39,12 +40,17 @@ function RecipeContent({ recipe }) {
         </div>
         <div id='recipeTags'>
           {tags.map((tag, index) => (
-            <div className='tag' style={{
+            <div className="tagContainer">
+              <div className='tag' style={{
               backgroundColor: tag.background,
               borderColor: tag.background === "white" ? "solid" : tag.background,
               color: tag.color
-            }}>{tag.name}</div>
+              }}>{tag.name}</div>
+            </div>
           ))}
+          <div className="printer-btn">
+            <Button onClick={() => window.print()}><img alt="printer logo" src="/assets/printer.png"></img></Button>
+          </div>
         </div>
         <div id='recipePhoto'><img src={recipe.image} /></div>
       </div>

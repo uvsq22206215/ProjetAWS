@@ -60,8 +60,18 @@
   border-radius: 20px;
   width: fit-content;
   border:solid;
+  height: fit-content;
 }
 
+.tagContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.printer-btn img {
+  height: 50px;
+}
 
 .containerTime {
   display: flex;
@@ -96,15 +106,16 @@
 }
 
 #recipeName h1 {
-  font-size: 60px;
+  font-size: 4vw;
   font-family: 'Abril Fatface';
   color: #f89837;
   text-shadow: 1px 1px 2px grey;
   overflow: hidden!important;
   display: inline-block;
-  width: 100%;
+  width: 98vw;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height: normal;
 }
 
 ol, ul {
@@ -143,6 +154,23 @@ ol, ul {
   margin: 10px;
   margin: initial;
   margin-left: 10px;
+  font-family: 'Abril Fatface';
+}
+
+li.ingredient {
+  margin: 2px;
+  padding: 0 26px;
+  background: white;
+  border-radius: 10px;
+  border: 1px
+  solid orangered;
+}
+
+li.ingredient:hover {
+  background: darkorange;
+  color: white;
+  font-family: 'Marcellus';
+  cursor: pointer;
 }
 
 .recipe-card {
@@ -155,4 +183,38 @@ ol, ul {
   position: absolute;
   left: 2%;
   margin-top: 37vh;
+}
+
+@media (max-width: 920px)  {
+  #recipeContent #container {
+    display: block;
+  }
+
+  #descriptionRecipe {
+    min-width: 100%;
+  }
+
+  #recipeName h1 {
+    font-size: 7vw;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 500px)  {
+
+  #recipeName h1 {
+    font-size: 11vw;
+    white-space: nowrap;
+  }
+}
+
+@media print {
+  #recipeResume {
+    position: inherit;
+    margin-top: 0;
+  }
+
+  #recipeTags, #recipePhoto, header, #footer, #related-recipes-block {
+    display: none;
+  }
 }

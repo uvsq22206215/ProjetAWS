@@ -23,7 +23,7 @@ function RelatedRecipes({ title, maxLimit, filters }) {
 
 
   return (
-    <div>
+    <div id="related-recipes-block">
       <h1 id='relatedRecipesTitle'>{title}</h1>
       {true &&
         <div id='relatedRecipes'>
