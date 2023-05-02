@@ -1,5 +1,17 @@
+a.logo-img {
+  margin-left: 5%;
+}
+
 @media (max-width: 600px) {
-  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root.css-x3f3af-MuiPaper-root-MuiCard-root {
+  #login-grid .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root {
     width: 42vh!important;
+  }
+
+  a.logo-img {
+    margin-left: 10%;
+  }
+
+  .MuiBox-root {
+    padding-right: 0;
   }
 }

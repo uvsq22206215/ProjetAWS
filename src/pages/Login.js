@@ -10,6 +10,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import { auth, database } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import { collection, addDoc } from "firebase/firestore";
+import '../assets/css/Login.css'
 import {
   Container,
   TextField,
@@ -170,21 +171,24 @@ export default function Uselogin() {
     >
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar mt={-1} style={{ height: "5vh" }}>
-          <img
+          <a href="/" className="logo-img">
+            <img
             src={logo}
             width={220}
             height={220}
             style={{ marginTop: "2vh" }}
           />
-          <Grid container justifyContent="flex-end">
+          </a>
+          
+          {/* <Grid container justifyContent="flex-end">
             <IconButton sx={{ color: "#ff5b00ba", right: "right" }}>
               <MenuIcon></MenuIcon>
             </IconButton>
-          </Grid>
+          </Grid> */}
         </Toolbar>
       </AppBar>
       <Container>
-        <Grid container justifyContent="flex-end">
+        <Grid container justifyContent="flex-end" id="login-grid">
           <TabPanel value={value} index={0}>
             <Grid>
               <Card
