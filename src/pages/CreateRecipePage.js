@@ -7,32 +7,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RecipeCard from "../components/RecipeCard";
 import { UserAuth } from "../context/Usercontext";
-<<<<<<< HEAD
-
-function CreateRecipePage() {
-  // const pushRecipe = () => {
-  //   listeRecette.forEach(function(obj) {
-  //     addDoc(collection(database, "recipe"), obj).then(function(docRef) {
-  //       console.log("Document written with ID: ", docRef.id);
-  //     })
-  //     .catch(function(error) {
-  //         console.error("Error adding document: ", error);
-  //     });
-  //   });
-  // };
-=======
 import { CoPresent } from "@mui/icons-material";
 
-
 function CreateRecipePage() {
-
   const { usr, user } = UserAuth();
 
-
   const pushRecipe = (recipe) => {
-    addDoc(collection(database, "recipe"), recipe).then(function (docRef) {
-      //console.log("Document written with ID: ", docRef.id);
-    })
+    addDoc(collection(database, "recipe"), recipe)
+      .then(function (docRef) {
+        //console.log("Document written with ID: ", docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", error);
       });
@@ -61,7 +45,6 @@ function CreateRecipePage() {
     }
   };
 
-  
   const [cost, setCost] = useState("Bon marché");
   const handleChangeSelectCost = (e) => {
     switch (e.target.value) {
@@ -77,7 +60,7 @@ function CreateRecipePage() {
         break;
     }
   };
-  
+
   const [difficulty, setDifficulty] = useState("Très facile");
   const handleChangeSelectDifficulty = (e) => {
     switch (e.target.value) {
@@ -95,8 +78,6 @@ function CreateRecipePage() {
     }
   };
 
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
-
   const [instructions, setInstructions] = useState([""]);
 
   const removeInstruction = (index) => {
@@ -112,11 +93,7 @@ function CreateRecipePage() {
   };
 
   const [listIngredients, setListIngredients] = useState([
-<<<<<<< HEAD
-    { quantite: "", nomIngr: "" },
-=======
-    { quantity: "", name : "" },
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
+    { quantity: "", name: "" },
   ]);
 
   const removeIngr = (index) => {
@@ -140,12 +117,7 @@ function CreateRecipePage() {
 
   const handleCreation = () => {
     setCodeError("");
-<<<<<<< HEAD
-    const { user } = UserAuth();
-    let ingrFiltered = listIngredients.filter((e) => e.nomIngr != "");
-=======
     let ingrFiltered = listIngredients.filter((e) => e.name != "");
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
     let instFiltered = instructions.filter((e) => e != "");
     if (name == null) {
       setCodeError("La recette doit être nomée.");
@@ -172,28 +144,26 @@ function CreateRecipePage() {
       return;
     }
     // TODO : check si l'utilisateur est connecté, generer les keywords
-    
-    listIngredients.map((ingr) => {ingr.quantity = parseInt(ingr.quantity) / nbPersonnes});
+
+    listIngredients.map((ingr) => {
+      ingr.quantity = parseInt(ingr.quantity) / nbPersonnes;
+    });
     pushRecipe({
       author: usr.username,
-      categorie : category,
-      cookTime : parseInt(cookTime),
-      cost : cost,
-      difficulty : difficulty,
+      categorie: category,
+      cookTime: parseInt(cookTime),
+      cost: cost,
+      difficulty: difficulty,
       // TODO : image
-      name : name,
-      numberPersons : parseInt(nbPersonnes),
-      prepTime : parseInt(prepTime),
-      recipeIngredient : ingrFiltered,
-      recipeInstructions : instFiltered,
-      totalTime : parseInt(prepTime) + parseInt(cookTime)
-    })
+      name: name,
+      numberPersons: parseInt(nbPersonnes),
+      prepTime: parseInt(prepTime),
+      recipeIngredient: ingrFiltered,
+      recipeInstructions: instFiltered,
+      totalTime: parseInt(prepTime) + parseInt(cookTime),
+    });
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
   return (
     <div id="createPage">
       <Header />
@@ -295,7 +265,7 @@ function CreateRecipePage() {
                   onClick={() =>
                     setListIngredients([
                       ...listIngredients,
-                      { quantity : "", name: "" },
+                      { quantity: "", name: "" },
                     ])
                   }
                 >
@@ -306,24 +276,23 @@ function CreateRecipePage() {
           ))}
           <div className="createSelectInput">
             <label>Difficulté :</label>
-<<<<<<< HEAD
-            <select name="difficultyOption" className="createOptions">
-=======
-            <select name="difficultyOption" className="createOptions" onChange={handleChangeSelectDifficulty}>
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
+            <select
+              name="difficultyOption"
+              className="createOptions"
+              onChange={handleChangeSelectDifficulty}
+            >
               <option value="tresFacile">Très facile</option>
               <option value="moyenne">Moyenne</option>
               <option value="difficile">Difficile</option>
             </select>
           </div>
           <div className="createSelectInput">
-<<<<<<< HEAD
             <label>Coût :</label>
-            <select name="costOption" className="createOptions">
-=======
-            <label>Coût :</label> 
-            <select name="costOption" className="createOptions" onChange={handleChangeSelectCost}>
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
+            <select
+              name="costOption"
+              className="createOptions"
+              onChange={handleChangeSelectCost}
+            >
               <option value="bonMarche">Bon marché</option>
               <option value="moyen">Moyen</option>
               <option value="assezCher">Assez cher</option>
@@ -332,19 +301,11 @@ function CreateRecipePage() {
           {/* Possibilité de rendre les catégories dynamiques ici */}
           <div className="createSelectInput">
             <label>Catégorie :</label>
-<<<<<<< HEAD
-            <select name="categoryOption" className="createOptions">
-              <option value="platPrincipal">Plat principal</option>
-              <option value="accompagnement">Accompagnement</option>
-              <option value="boisson">Boisson</option>
-              <option value="co+nfiserie">Confiserie</option>
-              <option value="amuseGueule">Amuse-gueule</option>
-            </select>
-          </div>
-          {codeError != "" && <div>{codeError}</div>}
-          <button id="createRecipeButton" onClick={handleCreation}>
-=======
-            <select name="categoryOption" className="createOptions" onChange={handleChangeSelectCategory}>
+            <select
+              name="categoryOption"
+              className="createOptions"
+              onChange={handleChangeSelectCategory}
+            >
               <option value="platPrincipal">Plat principal</option>
               <option value="accompagnement">Accompagnement</option>
               <option value="boisson">Boisson</option>
@@ -352,12 +313,8 @@ function CreateRecipePage() {
               <option value="amuseGueule">Amuse-gueule</option>
             </select>
           </div>
-          {(codeError != "") && <div>{codeError}</div>}
-          <button
-            id="createRecipeButton"
-            onClick={handleCreation}
-          >
->>>>>>> cb89070e79c4f477ddeb053902cbd51f3d3be4fa
+          {codeError != "" && <div>{codeError}</div>}
+          <button id="createRecipeButton" onClick={handleCreation}>
             Créer la recette
           </button>
         </div>

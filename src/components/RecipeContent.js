@@ -9,7 +9,6 @@ import { Box, Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconContext } from "react-icons";
 import { UserAuth } from "../context/Usercontext";
-import { Button } from "@mui/material";
 
 function RecipeContent({ recipe }) {
   const [nbPersons, setNbPersons] = useState(parseInt(recipe.numberPersons));
