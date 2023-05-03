@@ -149,18 +149,18 @@ function CreateRecipePage() {
     }
     // TODO : check si l'utilisateur est connecté, generer les keywords
     
-    listIngredients.map((ingr) => {ingr.quantity = parseInt(ingr.quantity)});
+    listIngredients.map((ingr) => {ingr.quantity = parseInt(ingr.quantity) / nbPersonnes});
     pushRecipe({
       author: usr.username,
       categorie : category,
       cookTime : parseInt(cookTime),
-      cost : parseInt(cost),
+      cost : cost,
       difficulty : difficulty,
       // TODO : image
       name : name,
       numberPersons : parseInt(nbPersonnes),
       prepTime : parseInt(prepTime),
-      listIngredients : ingrFiltered,
+      recipeIngredient : ingrFiltered,
       recipeInstructions : instFiltered,
       totalTime : parseInt(prepTime) + parseInt(cookTime)
     })
