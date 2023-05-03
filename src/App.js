@@ -36,23 +36,33 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/recipe" element={<RecipePage />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/create" element={<CreateRecipePage />} />
+            <Route
+              path="/create"
+              element={
+                <ProtectedRoute>
+                  <CreateRecipePage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/all-categories" element={<CategoriesPage />} />
-
             <Route
               path="/Informations"
               element={
-                <Contentprofil>
-                  <Information />
-                </Contentprofil>
+                <ProtectedRoute>
+                  <Contentprofil>
+                    <Information />
+                  </Contentprofil>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/Mes-recettes"
               element={
-                <Contentprofil>
-                  <Mesrecettes />
-                </Contentprofil>
+                <ProtectedRoute>
+                  <Contentprofil>
+                    <Mesrecettes />
+                  </Contentprofil>
+                </ProtectedRoute>
               }
             />
           </Routes>

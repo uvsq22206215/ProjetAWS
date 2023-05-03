@@ -56,7 +56,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { blue, pink } from "@mui/material/colors";
-
+import "../assets/css/Login.css";
+import { UserAuth } from "../context/Usercontext";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -96,6 +97,8 @@ export default function Uselogin() {
       },
     },
   });
+  const [openusername, setOpenusername] = React.useState(false);
+  const { checkUsernameExists } = UserAuth();
   const [login, setLogin] = React.useState(true);
   const handleChange1 = (login) => {
     login ? setValue(0) : setValue(1);
@@ -124,21 +127,25 @@ export default function Uselogin() {
 
   const register = async (values) => {
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password
-      ).then((userCrenditial) => {
-        addDoc(collection(database, "users"), {
-          id: userCrenditial.user.uid,
-          username: values.username,
-          gender: values.picked,
-        });
+      checkUsernameExists(values.username).then((result) => {
+        if (!result) {
+          const user = createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+          ).then((userCrenditial) => {
+            addDoc(collection(database, "users"), {
+              id: userCrenditial.user.uid,
+              username: values.username,
+              gender: values.picked,
+            });
+          });
+          setLogin(true);
+          setOpenRegister(true);
+        } else {
+          setOpenusername(true);
+        }
       });
-
-      setLogin(true);
-
-      setOpenRegister(true);
     } catch (error) {
       console.log(error);
     }
@@ -322,7 +329,7 @@ export default function Uselogin() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Grid item xs={12}>
+            <Grid item xs={12} className="">
               <Card
                 sx={{
                   mt: 5,
@@ -625,6 +632,25 @@ export default function Uselogin() {
             }}
           >
             Email ou mot de passe incorrect
+          </Alert>
+        </Collapse>
+        <Collapse
+          in={openusername}
+          style={{
+            width: "100vh",
+            position: "absolute",
+            left: "50%",
+            top: "5%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOpenusername(false);
+            }}
+          >
+            Username existe déja
           </Alert>
         </Collapse>
       </Container>

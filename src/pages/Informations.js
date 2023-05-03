@@ -1,7 +1,9 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
+  Collapse,
   Container,
   Stack,
   TextField,
@@ -11,16 +13,27 @@ import {
 import Drawer from "../components/Drawer";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import {
+  signOut,
+  onAuthStateChanged,
+  updateEmail,
+  updatePassword,
+} from "firebase/auth";
 import { auth, database } from "../utils/firebase";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
-import { AccountBox, Edit } from "@mui/icons-material";
+import {
+  AccountBox,
+  Edit,
+  PlaylistAddCheckCircleRounded,
+} from "@mui/icons-material";
 import { UserAuth } from "../context/Usercontext";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyIcon from "@mui/icons-material/Key";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import { doc, updateDoc } from "firebase/firestore";
+
 const useStyles = makeStyles({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -38,18 +51,44 @@ const useStyles = makeStyles({
 });
 export default function Information() {
   const classes = useStyles();
-  const { user, usr } = UserAuth();
+  const [openusername, setOpenusername] = React.useState(false);
+  const { user, usr, logout, checkUsernameExists } = UserAuth();
   const [user1, setUser1] = useState(
     JSON.parse(sessionStorage.getItem("user-signin"))
   );
   const [userdetail, setUserdetail] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
-  // const [userdetail, setUserdetail] = useState(usr);
-  // useEffect(() => {
-  //   console.log(usr);
-  //   setUserdetail(usr);
-  // }, [usr]);
+
+  const updateUser = async (values) => {
+    try {
+      if (values.username === userdetail.username) {
+        const newData = { username: values.username };
+        const userRef = doc(database, "users", usr.id);
+        await updateDoc(userRef, newData);
+        await updateEmail(auth.currentUser, values.email);
+        await updatePassword(auth.currentUser, values.password);
+        console.log("User profile updated successfully!");
+        logout();
+      } else {
+        checkUsernameExists(values.username).then((result) => {
+          if (!result) {
+            const newData = { username: values.username };
+            const userRef = doc(database, "users", usr.id);
+            updateDoc(userRef, newData);
+            updateEmail(auth.currentUser, values.email);
+            updatePassword(auth.currentUser, values.password);
+            console.log("User profile updated successfully!");
+            logout();
+          } else {
+            setOpenusername(true);
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error updating user profile: ", error);
+    }
+  };
 
   return (
     <Card>
@@ -83,7 +122,9 @@ export default function Information() {
               "Les mots de passes se ne correspondent pas"
             ),
           })}
-          onSubmit={(values, actions) => {}}
+          onSubmit={(values) => {
+            updateUser(values);
+          }}
         >
           {({
             setFieldValue,
@@ -208,6 +249,8 @@ export default function Information() {
                 alignItems={"center"}
               >
                 <Button
+                  variant="contained"
+                  type="submit"
                   sx={{
                     bgcolor: "#ff4838",
                     ":hover": {
@@ -215,8 +258,6 @@ export default function Information() {
                     },
                   }}
                   startIcon={<Edit></Edit>}
-                  variant="contained"
-                  type="submit"
                 >
                   Modifier
                 </Button>
@@ -224,6 +265,25 @@ export default function Information() {
             </Form>
           )}
         </Formik>
+        <Collapse
+          in={openusername}
+          style={{
+            width: "50vh",
+            position: "absolute",
+            left: "60%",
+            top: "20%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOpenusername(false);
+            }}
+          >
+            Username existe déja
+          </Alert>
+        </Collapse>
       </Container>
     </Card>
   );
