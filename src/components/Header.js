@@ -59,7 +59,7 @@ function Header() {
           </a>
         </div>
         <div id='child3'>
-          <div>
+          <div className='searchbar-desktop'>
             <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' onClick={handleSearch} />
             <input
               type='text'
@@ -71,6 +71,9 @@ function Header() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
+          </div>
+          <div className='searchbar-mobile'>
+            <a href='/search'><img alt='Logo barre de recherche' src='/assets/loupe.png' height='35'/></a>
           </div>
           <div className='account-icon'>
             <a href={`${process.env.REACT_APP_BASE_URL}/login`}><img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/></a>

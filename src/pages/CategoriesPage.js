@@ -27,7 +27,7 @@ function CategoriesPage() {
 
   getAllDistinctCategories();
   useEffect(() => {
-    const q = query(collection(database, "categorie-recette"));
+    const q = query(collection(database, "category"));
     getDocs(q)
       .then((snapshot) => setCategories(snapshot.docs))
       .catch((e) => console.log("Erreur"));

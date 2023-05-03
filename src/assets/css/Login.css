@@ -1,3 +1,7 @@
+a.logo-img {
+  margin-left: 5%;
+}
+
 @media (max-width: 600px) {
   .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root.css-1ye8wnt-MuiPaper-root-MuiCard-root {
     width: 42vh!important;

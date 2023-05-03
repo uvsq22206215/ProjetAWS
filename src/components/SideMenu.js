@@ -4,6 +4,7 @@ import {
   faBook,
   faEye,
   faUser,
+  faLink,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import SideNav, {
@@ -24,33 +25,37 @@ function SideMenu() {
   return (
     <SideNav
       onSelect={(selected) => {
-        history(selected);
+        navigate(selected);
       }}
       className="sidebar-menu"
     >
       <SideNav.Toggle />
       <SideNav.Nav defaultSelected={path}>
-        <NavItem eventKey="home">
+        <NavItem eventKey="/">
           <NavIcon>
             <FontAwesomeIcon icon={faHome} />
           </NavIcon>
           <NavText>Accueil</NavText>
         </NavItem>
-        <NavItem eventKey="all-categories">
+        <NavItem eventKey="/all-categories">
           <NavIcon>
             <FontAwesomeIcon icon={faBook} />
           </NavIcon>
           <NavText>Categories</NavText>
         </NavItem>
-        <NavItem eventKey="search">
+        <NavItem eventKey="/search">
           <NavIcon>
             <FontAwesomeIcon icon={faEye} />
           </NavIcon>
           <NavText>Chercher une recette</NavText>
         </NavItem>
-        <NavItem eventKey="login">
+        {/* <NavItem eventKey="Informations">
+          <NavIcon><FontAwesomeIcon icon={faUser} /></NavIcon>
+          <NavText>Mon Profile</NavText>
+        </NavItem> */}
+        <NavItem eventKey="/login">
           <NavIcon>
-            <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon icon={faLink} />
           </NavIcon>
           <NavText>Connexion / Inscription</NavText>
         </NavItem>
