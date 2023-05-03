@@ -14,6 +14,7 @@ import Contentprofil from "./pages/Contentprofil";
 import { AuthContextProvider } from "./context/Usercontext";
 import SideMenu from "./components/SideMenu";
 import RecipeGenerator from "./pages/RecipeGenerator";
+import ProtectedRoute from "./context/Protectedroutes";
 
 function App() {
   const Main = () => (

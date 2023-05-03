@@ -6,7 +6,7 @@ import {
   faUser,
   faLink,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import SideNav, {
   Toggle,
   Nav,
@@ -25,7 +25,7 @@ function SideMenu() {
   return (
     <SideNav
       onSelect={(selected) => {
-        navigate(selected);
+        Navigate(selected);
       }}
       className="sidebar-menu"
     >
