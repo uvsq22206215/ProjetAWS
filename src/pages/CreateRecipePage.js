@@ -229,6 +229,7 @@ function CreateRecipePage() {
             <div className="ingredientInput" key={"ingredient-" + index}>
               <input
                 name="quantity"
+                className="ingredientQuantityInput"
                 type="number"
                 placeholder="Quantité"
                 onChange={(e) => handleChangeIngr(e, index)}
