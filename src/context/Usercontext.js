@@ -45,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const updateMail = async (email) => {
-    console.log(email);
+    //console.log(email);
     await updateEmail(auth.currentUser, email)
       .then((resp) => {})
       .catch((error) => {

@@ -21,20 +21,13 @@ function RecipeGenerator() {
 
   const intersectionRecipes = (recipes1, recipes2) => {
     let tmp = [];
-    console.log("args :", recipes1.rec, recipes2.rec);
     for (let i = 0; i < recipes1.rec.length; i++) {
       for (let k = 0; k < recipes2.rec.length; k++) {
-        if ((recipes1.rec)[i].data().name === (recipes2.rec[k]).data().name) {
+        if ((recipes1.rec)[i].id === (recipes2.rec[k]).id) {
           tmp.push(recipes1.rec[i]);
         }
       }
     }
-    if (tmp.length === 0) {
-      console.log("intersection vide");
-    } else {
-      console.log("tmp :", tmp);
-    }
-
     return {ingrNames : [...new Set([...recipes1.ingrNames, ...recipes2.ingrNames])], rec : [...tmp]};
   };
 
@@ -64,12 +57,10 @@ function RecipeGenerator() {
       } else {
         result = intersectionRecipes(result, tmpRecipes[i])
       } 
-      console.log("resultat intersection", i, ":", result);
     }
     if (result != null) {
       setRecipes(result);
     }
-    //console.log("résultat intersection des 3 :", result);
   }
 
   return (

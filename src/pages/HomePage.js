@@ -1,10 +1,8 @@
 import "../assets/css/HomePage.css";
-import RecipeCard from "../components/RecipeCard";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 import CreatorCard from "../components/CreatorCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -132,7 +130,7 @@ function HomePage() {
             PAS QUOI CUISINER?
           </h1>
           <div className="block-btn">
-            <button className="button"> Générer une recette</button>
+            <button className="button"><a href="/recipe-generator" id="test">Générer une recette</a></button>
           </div>
         </div>
         <div className="overlay"></div>

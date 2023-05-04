@@ -1,6 +1,6 @@
 import '../assets/css/Header.css'
 import { database } from '../utils/firebase';
-import { useState} from 'react';
+import { useState } from 'react';
 import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -31,7 +31,7 @@ function Header() {
         console.error(error);
       });
   };
-  
+
   return (
     <header>
       <div id='container'>
@@ -42,7 +42,7 @@ function Header() {
         </div>
         <div id='child2'>
           <a href='/'>
-            <img alt='main logo' src='/assets/logo.webp'/>
+            <img alt='main logo' src='/assets/logo.webp' />
           </a>
         </div>
         <div id='child3'>
@@ -68,7 +68,9 @@ function Header() {
             />
           </div>
           <div className='account-icon'>
-            <a href={`${process.env.REACT_APP_BASE_URL}/login`}><img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/></a>
+            <a href={JSON.parse(sessionStorage.getItem("user-signin")) == null ? "/login" : "/informations"}>
+              <img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/>
+            </a>
           </div>
         </div>
       </div>
