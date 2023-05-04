@@ -1,21 +1,21 @@
 import "../assets/css/CreateRecipePage.css";
 import { database } from "../utils/firebase";
 import { useState } from "react";
-import { getDocs, addDoc, collection, getFirestore } from "firebase/firestore";
-import { IconButton } from "@mui/material";
+import { addDoc, collection } from "firebase/firestore";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import RecipeCard from "../components/RecipeCard";
 import { UserAuth } from "../context/Usercontext";
-import { CoPresent } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 function CreateRecipePage() {
-  const { usr, user } = UserAuth();
+  const { usr } = UserAuth();
+  let history = useNavigate();
 
   const pushRecipe = (recipe) => {
     addDoc(collection(database, "recipe"), recipe)
       .then(function (docRef) {
         //console.log("Document written with ID: ", docRef.id);
+        history("/recipe?id=" + docRef.id);
       })
       .catch(function (error) {
         console.error("Error adding document: ", error);
@@ -56,6 +56,7 @@ function CreateRecipePage() {
         break;
       case "assezCher":
         setCost("Assez cher");
+        break;
       default:
         break;
     }
@@ -117,8 +118,8 @@ function CreateRecipePage() {
 
   const handleCreation = () => {
     setCodeError("");
-    let ingrFiltered = listIngredients.filter((e) => e.name != "");
-    let instFiltered = instructions.filter((e) => e != "");
+    let ingrFiltered = listIngredients.filter((e) => e.name !== "");
+    let instFiltered = instructions.filter((e) => e !== "");
     if (name == null) {
       setCodeError("La recette doit être nomée.");
       return;
@@ -131,7 +132,7 @@ function CreateRecipePage() {
       setCodeError("Le temps de cuisson (même nul) doit être renseigné.");
       return;
     }
-    if (instFiltered.length == 0) {
+    if (instFiltered.length === 0) {
       setCodeError("La recette doit contenir au moins une instruction.");
       return;
     }
@@ -139,17 +140,17 @@ function CreateRecipePage() {
       setCodeError("Le nombre de personnes doit être renseigné.");
       return;
     }
-    if (ingrFiltered.length == 0) {
+    if (ingrFiltered.length === 0) {
       setCodeError("La recette doit contenir au moins un ingrédient.");
       return;
     }
     // TODO : check si l'utilisateur est connecté, generer les keywords
 
-    listIngredients.map((ingr) => {
+    listIngredients.forEach((ingr) => {
       ingr.quantity = parseInt(ingr.quantity) / nbPersonnes;
     });
     pushRecipe({
-      author: usr.username,
+      author: usr.data().username,
       categorie: category,
       cookTime: parseInt(cookTime),
       cost: cost,
@@ -313,7 +314,7 @@ function CreateRecipePage() {
               <option value="amuseGueule">Amuse-gueule</option>
             </select>
           </div>
-          {codeError != "" && <div>{codeError}</div>}
+          {codeError !== "" && <div>{codeError}</div>}
           <button id="createRecipeButton" onClick={handleCreation}>
             Créer la recette
           </button>

@@ -24,7 +24,6 @@ function RecipePage() {
 
   useEffect(() => {
     if (query && !loaded) {
-      console.log("request sent");
       getDoc(doc(database, "recipe", query))
         .then((docRef) => {
           setLoaded(true);
