@@ -1,4 +1,4 @@
-import "../assets/css/CreateRecipePage.css"
+import "../assets/css/CreateRecipePage.css";
 import { database } from "../utils/firebase";
 import { useState } from "react";
 import { getDocs, addDoc, collection, getFirestore } from "firebase/firestore";
@@ -9,16 +9,14 @@ import RecipeCard from "../components/RecipeCard";
 import { UserAuth } from "../context/Usercontext";
 import { CoPresent } from "@mui/icons-material";
 
-
 function CreateRecipePage() {
-
   const { usr, user } = UserAuth();
 
-
   const pushRecipe = (recipe) => {
-    addDoc(collection(database, "recipe"), recipe).then(function (docRef) {
-      //console.log("Document written with ID: ", docRef.id);
-    })
+    addDoc(collection(database, "recipe"), recipe)
+      .then(function (docRef) {
+        //console.log("Document written with ID: ", docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", error);
       });
@@ -47,7 +45,6 @@ function CreateRecipePage() {
     }
   };
 
-  
   const [cost, setCost] = useState("Bon marché");
   const handleChangeSelectCost = (e) => {
     switch (e.target.value) {
@@ -63,7 +60,7 @@ function CreateRecipePage() {
         break;
     }
   };
-  
+
   const [difficulty, setDifficulty] = useState("Très facile");
   const handleChangeSelectDifficulty = (e) => {
     switch (e.target.value) {
@@ -81,7 +78,6 @@ function CreateRecipePage() {
     }
   };
 
-
   const [instructions, setInstructions] = useState([""]);
 
   const removeInstruction = (index) => {
@@ -97,7 +93,7 @@ function CreateRecipePage() {
   };
 
   const [listIngredients, setListIngredients] = useState([
-    { quantity: "", name : "" },
+    { quantity: "", name: "" },
   ]);
 
   const removeIngr = (index) => {
@@ -148,24 +144,25 @@ function CreateRecipePage() {
       return;
     }
     // TODO : check si l'utilisateur est connecté, generer les keywords
-    
-    listIngredients.map((ingr) => {ingr.quantity = parseInt(ingr.quantity) / nbPersonnes});
+
+    listIngredients.map((ingr) => {
+      ingr.quantity = parseInt(ingr.quantity) / nbPersonnes;
+    });
     pushRecipe({
       author: usr.username,
-      categorie : category,
-      cookTime : parseInt(cookTime),
-      cost : cost,
-      difficulty : difficulty,
+      categorie: category,
+      cookTime: parseInt(cookTime),
+      cost: cost,
+      difficulty: difficulty,
       // TODO : image
-      name : name,
-      numberPersons : parseInt(nbPersonnes),
-      prepTime : parseInt(prepTime),
-      recipeIngredient : ingrFiltered,
-      recipeInstructions : instFiltered,
-      totalTime : parseInt(prepTime) + parseInt(cookTime)
-    })
+      name: name,
+      numberPersons: parseInt(nbPersonnes),
+      prepTime: parseInt(prepTime),
+      recipeIngredient: ingrFiltered,
+      recipeInstructions: instFiltered,
+      totalTime: parseInt(prepTime) + parseInt(cookTime),
+    });
   };
-
 
   return (
     <div id="createPage">
@@ -174,7 +171,10 @@ function CreateRecipePage() {
         <h4 id="titleCreationPage">Création de recette</h4>
         <ul id="descriptionCreationPage">
           <li>Partagez vos recettes au monde entier !</li>
-          <li>Contribuez à une base de données de plus de mille (et une) recettes !</li>
+          <li>
+            Contribuez à une base de données de plus de mille (et une) recettes
+            !
+          </li>
         </ul>
       </div>
       <div id="createForm">
@@ -207,9 +207,17 @@ function CreateRecipePage() {
                 value={instructions[index]}
               />
               {index ? (
-                <button className="buttonMoreLess" onClick={() => removeInstruction(index)}>-</button>
+                <button
+                  className="buttonMoreLess"
+                  onClick={() => removeInstruction(index)}
+                >
+                  -
+                </button>
               ) : (
-                <button className="buttonMoreLess" onClick={() => setInstructions([...instructions, ""])}>
+                <button
+                  className="buttonMoreLess"
+                  onClick={() => setInstructions([...instructions, ""])}
+                >
                   +
                 </button>
               )}
@@ -223,7 +231,9 @@ function CreateRecipePage() {
             onChange={(e) => setNbPersonnes(e.target.value)}
           />
         </div>
-        <label id="leaveEmpty">Laisser le champ quantité vide si nécéssaire.</label>
+        <label id="leaveEmpty">
+          Laisser le champ quantité vide si nécéssaire.
+        </label>
         <div id="listIngredients">
           {listIngredients.map((ingredient, index) => (
             <div className="ingredientInput" key={"ingredient-" + index}>
@@ -245,7 +255,8 @@ function CreateRecipePage() {
               {index ? (
                 <button
                   onClick={() => removeIngr(index)}
-                  className="buttonMoreLess">
+                  className="buttonMoreLess"
+                >
                   -
                 </button>
               ) : (
@@ -254,7 +265,7 @@ function CreateRecipePage() {
                   onClick={() =>
                     setListIngredients([
                       ...listIngredients,
-                      { quantity : "", name: "" },
+                      { quantity: "", name: "" },
                     ])
                   }
                 >
@@ -265,15 +276,23 @@ function CreateRecipePage() {
           ))}
           <div className="createSelectInput">
             <label>Difficulté :</label>
-            <select name="difficultyOption" className="createOptions" onChange={handleChangeSelectDifficulty}>
+            <select
+              name="difficultyOption"
+              className="createOptions"
+              onChange={handleChangeSelectDifficulty}
+            >
               <option value="tresFacile">Très facile</option>
               <option value="moyenne">Moyenne</option>
               <option value="difficile">Difficile</option>
             </select>
           </div>
           <div className="createSelectInput">
-            <label>Coût :</label> 
-            <select name="costOption" className="createOptions" onChange={handleChangeSelectCost}>
+            <label>Coût :</label>
+            <select
+              name="costOption"
+              className="createOptions"
+              onChange={handleChangeSelectCost}
+            >
               <option value="bonMarche">Bon marché</option>
               <option value="moyen">Moyen</option>
               <option value="assezCher">Assez cher</option>
@@ -282,7 +301,11 @@ function CreateRecipePage() {
           {/* Possibilité de rendre les catégories dynamiques ici */}
           <div className="createSelectInput">
             <label>Catégorie :</label>
-            <select name="categoryOption" className="createOptions" onChange={handleChangeSelectCategory}>
+            <select
+              name="categoryOption"
+              className="createOptions"
+              onChange={handleChangeSelectCategory}
+            >
               <option value="platPrincipal">Plat principal</option>
               <option value="accompagnement">Accompagnement</option>
               <option value="boisson">Boisson</option>
@@ -290,18 +313,14 @@ function CreateRecipePage() {
               <option value="amuseGueule">Amuse-gueule</option>
             </select>
           </div>
-          {(codeError != "") && <div>{codeError}</div>}
-          <button
-            id="createRecipeButton"
-            onClick={handleCreation}
-          >
+          {codeError != "" && <div>{codeError}</div>}
+          <button id="createRecipeButton" onClick={handleCreation}>
             Créer la recette
           </button>
         </div>
       </div>
       <Footer />
     </div>
-
   );
 }
 
