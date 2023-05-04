@@ -14,7 +14,12 @@
   align-items: center;
 }
 
+.ingredientInput input {
+  margin-right : 5px;
+}
+
 #createForm * input {
+  padding-left : 5px;
   border-radius: 10px;
   border:none;
   box-shadow: 0 0 0 2px #f89837;
