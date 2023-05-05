@@ -2,50 +2,34 @@ import '../assets/css/Header.css'
 import { database } from '../utils/firebase';
 import { useState } from 'react';
 import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
-import { UserAuth } from '../context/Usercontext';
-import { Navigate } from 'react-router';
-
-
-const SearchResult = (searchTerm) => {
-  const recipeRef = collection(database, "recipe");
-  const [result, setResult] = useState();
-  let condition = null;
-
-  condition = and(where('name', '>=', searchTerm), where('name', '<=', searchTerm + '\uf8ff'));
-
-  let q = query(recipeRef, condition, limit(10));
-  let tmpRecipes = [];
-
-  getDocs(q)
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        tmpRecipes.push(doc);
-      });
-      setResult(tmpRecipes);
-      //console.log("Received from database", tmpRecipes);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 function Header() {
-  const { usr } = UserAuth();
-  const [isInputExpanded, setIsInputExpanded] = useState(false);
+  const recipeRef = collection(database, "recipe");
+  const [result, setResult] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value); //searchterm == avec la valeur recherché 
+   //la requete
+    let condition = null;
+    condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
+    let q = query(recipeRef, condition, limit(10));
 
-  const handleInputClick = () => {
-    setIsInputExpanded(true);
-  };
+    let tmpRecipes = [];
+    getDocs(q)
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          tmpRecipes.push(doc);
+        });
 
-  const handleInputBlur = () => {
-    setIsInputExpanded(false);
-  };
-
-
-  const handleSearch = () => {
-
+        let recipeNames = tmpRecipes.map(doc => doc.data().name); //les nomes des recettes result.
+        setResult(recipeNames); //result remplit de recipe name.
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -62,21 +46,26 @@ function Header() {
           </a>
         </div>
         <div id='child3'>
-          <div className='searchbar-desktop'>
+          <div>
             <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' onClick={handleSearch} />
-            <input
-              type='text'
-              size='30'
-              placeholder='Rechercher une recette'
-              onClick={handleInputClick}
-              onBlur={handleInputBlur}
-              className={isInputExpanded ? 'input-expanded' : ''}
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
+            <Autocomplete
+              sx={{
+                display: 'inline-block',
+                '& input': {
+                  width: 200,
+                  bgcolor: 'background.paper',
+                  color: (theme) =>
+                    theme.palette.getContrastText(theme.palette.background.paper),
+                },
+              }}
+              id="custom-input-demo"
+              options={result}
+              renderInput={(params) => (
+                <div ref={params.InputProps.ref}>
+                  <input type="text" {...params.inputProps} onChange={handleSearch} />
+                </div>
+              )}
             />
-          </div>
-          <div className='searchbar-mobile'>
-            <a href='/search'><img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' /></a>
           </div>
           <div className='account-icon'>
             <a href={JSON.parse(sessionStorage.getItem("user-signin")) == null ? "/login" : "/informations"}>
