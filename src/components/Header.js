@@ -10,26 +10,29 @@ function Header() {
   const [result, setResult] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value); //searchterm == avec la valeur recherché 
-   //la requete
-    let condition = null;
-    condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
-    let q = query(recipeRef, condition, limit(10));
-
-    let tmpRecipes = [];
-    getDocs(q)
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          tmpRecipes.push(doc);
+  const handleSearch = (input) => {
+    if (input) {
+      console.log(input);
+      //la requete
+      let condition = null;
+      condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
+      let q = query(recipeRef, condition, limit(10));
+  
+      let tmpRecipes = [];
+      getDocs(q)
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            tmpRecipes.push(doc);
+          });
+  
+          let recipeNames = tmpRecipes.map(doc => doc.data().name); //les nomes des recettes result.
+          setResult(recipeNames); //result remplit de recipe name.
+        })
+        .catch((error) => {
+          console.error(error);
         });
 
-        let recipeNames = tmpRecipes.map(doc => doc.data().name); //les nomes des recettes result.
-        setResult(recipeNames); //result remplit de recipe name.
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }
   };
 
   return (
@@ -47,7 +50,7 @@ function Header() {
         </div>
         <div id='child3'>
           <div>
-            <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' onClick={handleSearch} />
+            <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' />
             <Autocomplete
               sx={{
                 display: 'inline-block',
@@ -62,7 +65,7 @@ function Header() {
               options={result}
               renderInput={(params) => (
                 <div ref={params.InputProps.ref}>
-                  <input type="text" {...params.inputProps} onChange={handleSearch} />
+                  <input type="text" onChange={handleSearch(params.inputProps.value)} {...params.inputProps} />
                 </div>
               )}
             />
