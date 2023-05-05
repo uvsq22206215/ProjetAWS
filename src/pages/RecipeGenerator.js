@@ -67,21 +67,28 @@ function RecipeGenerator() {
     <div id="RecipeGeneratorRoot">
       <Header />
       <div id="RecipeGeneratorContent">
+      <div id="resumeGeneratorPage">
+        <h4 id="titleGeneratorPage">Génération de recette</h4>
+        <ul id="descriptionGeneratorPage">
+          <li>Trouvez facilement des recettes en fonction des ingrédients à votre disposition !</li>
+          <li></li>
+        </ul>
+      </div>
         <div id="ingredients-inputs">
           <input
-            className="ingredientInput"
+            className="generate-ingredientInput"
             placeholder="Nom de l'ingrédient"
             onChange={(e) => handleInputChange(0, e.target.value)}
           >
           </input>
           <input
-            className="ingredientInput"
+            className="generate-ingredientInput"
             placeholder="Nom de l'ingrédient"
             onChange={(e) => handleInputChange(1, e.target.value)}
           >
           </input>
           <input
-            className="ingredientInput"
+            className="generate-ingredientInput"
             placeholder="Nom de l'ingrédient"
             onChange={(e) => handleInputChange(2, e.target.value)}
           >
@@ -89,7 +96,7 @@ function RecipeGenerator() {
 
 
         </div>
-        <button onClick={generateRecipes}>Générer recettes</button>
+        <button id="generateRecipeButton" onClick={generateRecipes}>Générer recettes</button>
         <div className="recipe-cards">
               {recipes.rec && recipes.rec.map((recipe) => (
                 <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
