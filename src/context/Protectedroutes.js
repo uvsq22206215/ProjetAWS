@@ -1,15 +1,9 @@
-import React from "react";
-import { redirect } from "react-router-dom";
-import { UserAuth } from "../context/Usercontext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, logout } = UserAuth();
-
   let data = JSON.parse(sessionStorage.getItem("user-signin"));
-
-  if (!data || !user) {
-    logout();
-    return redirect("/login");
+  if (data == null) {
+    return <Navigate to="/login" />;
   }
   return children;
 };

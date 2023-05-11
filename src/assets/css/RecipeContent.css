@@ -12,6 +12,7 @@
 
 #infoRecipe, #recipeSteps {
   background-color: cornsilk;
+  
 }
 
 #infoRecipe {
@@ -41,7 +42,7 @@
   min-width: 300px;
   flex-grow: 6;
   border: none;
-  padding: 5px;
+  padding-bottom: 40px;
   border-radius: 10px;
 }
 

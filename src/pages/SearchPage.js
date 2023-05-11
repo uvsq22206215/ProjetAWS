@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { database } from '../utils/firebase';
-import { collection, query, where, get, getDocs, doc, limit, and } from 'firebase/firestore';
+import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 import Footer from '../components/Footer';
 
 function SearchPage() {
@@ -159,7 +159,7 @@ function SearchPage() {
                     where("cost", "in", costArray);
     }
 
-    if (prepTimeVal != 0) {
+    if (prepTimeVal !== 0) {
       condition = condition ? 
                       and(condition, where("totalTime", "<=", prepTimeVal)) :
                       where("totalTime", "<=", prepTimeVal);
@@ -175,7 +175,6 @@ function SearchPage() {
           tmpRecipes.push(doc);
         });
         setFilteredRecipes(tmpRecipes);
-        console.log("Received from database", tmpRecipes, "Args :", prepTimeVal, categorieArray);
       })
       .catch((error) => {
         console.error(error);
@@ -197,7 +196,6 @@ function SearchPage() {
           tmpRecipes.push(doc);
         });
         setFilteredRecipes(tmpRecipes);
-        console.log("Received from database", tmpRecipes);
       })
       .catch((error) => {
         console.error(error);

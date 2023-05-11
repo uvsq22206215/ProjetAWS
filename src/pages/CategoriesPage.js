@@ -17,7 +17,7 @@ function getAllDistinctCategories() {
       console.log(distinctCategories);
       return distinctCategories;
     })
-    .catch((e) => console.log("Erreur"));
+    .catch((e) => console.error(e));
     return null;
 }
 
@@ -30,7 +30,7 @@ function CategoriesPage() {
     const q = query(collection(database, "category"));
     getDocs(q)
       .then((snapshot) => setCategories(snapshot.docs))
-      .catch((e) => console.log("Erreur"));
+      .catch((e) => console.error(e));
   }, []);
 
 

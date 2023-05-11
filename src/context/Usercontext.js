@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("user-signin");
     signOut(auth);
-    history("/");
+    history("/login");
   };
 
   const getUsr = async (e) => {
@@ -45,12 +45,25 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const updateMail = async (email) => {
-    console.log(email);
+    //console.log(email);
     await updateEmail(auth.currentUser, email)
       .then((resp) => {})
       .catch((error) => {
         // logout()
       });
+  };
+  const checkUsernameExists = async (username) => {
+    const querySnapshot = await getDocs(collection(database, "users"));
+    const documents = querySnapshot.docs;
+
+    for (const doc of documents) {
+      const data = doc.data();
+      if (data.username === username) {
+        return true; // Le username existe déjà
+      }
+    }
+
+    return false; // Le username n'existe pas encore
   };
 
   useEffect(() => {
@@ -65,12 +78,11 @@ export const AuthContextProvider = ({ children }) => {
         detailRef = collection(database, "users");
         q = await query(detailRef, where("id", "==", currentUser.uid));
         querySnapshot = await getDocs(q);
+        await querySnapshot.forEach(async (doc) => {
+          setUsr(doc);
+          sessionStorage.setItem("user", JSON.stringify(doc.data()));
+        });
       }
-
-      await querySnapshot.forEach(async (doc) => {
-        setUsr(doc.data());
-        sessionStorage.setItem("user", JSON.stringify(doc.data()));
-      });
     });
     return () => {
       unsubscribe();
@@ -79,7 +91,15 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, usr, getUsr, logout, signIn, updateMail }}
+      value={{
+        user,
+        usr,
+        getUsr,
+        logout,
+        signIn,
+        updateMail,
+        checkUsernameExists,
+      }}
     >
       {children}
     </UserContext.Provider>

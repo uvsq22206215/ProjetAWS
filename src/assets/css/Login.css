@@ -3,15 +3,15 @@ a.logo-img {
 }
 
 @media (max-width: 600px) {
-  #login-grid .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root {
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root.css-1ye8wnt-MuiPaper-root-MuiCard-root {
     width: 42vh!important;
   }
 
-  a.logo-img {
-    margin-left: 10%;
-  }
-
-  .MuiBox-root {
-    padding-right: 0;
-  }
+  .MuiBox-root.css-19kzrtu {
+    padding: 24px 0!important;
+}
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation20.MuiCard-root.css-1kwuntl-MuiPaper-root-MuiCard-root {
+  width: 40vh !important;
+}
+ 
 }
