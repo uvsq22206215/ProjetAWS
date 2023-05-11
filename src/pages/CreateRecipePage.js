@@ -149,7 +149,7 @@ function CreateRecipePage() {
       ingr.quantity = parseInt(ingr.quantity) / nbPersonnes;
     });
     pushRecipe({
-      author: usr.username,
+      author: usr.data().username,
       categorie: category,
       cookTime: parseInt(cookTime),
       cost: cost,

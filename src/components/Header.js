@@ -1,36 +1,44 @@
-import '../assets/css/Header.css'
-import { database } from '../utils/firebase';
-import { useState} from 'react';
-import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
-
+import "../assets/css/Header.css";
+import { database } from "../utils/firebase";
+import { useState } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit,
+  and,
+} from "firebase/firestore";
 
 const SearchResult = (searchTerm) => {
   const recipeRef = collection(database, "recipe");
   const [Result, setResult] = useState();
   let condition = null;
 
-  condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
+  condition = and(
+    where("name", ">=", searchTerm),
+    where("name", "<=", searchTerm + "\uf8ff")
+  );
 
   let q = query(recipeRef, condition, limit(10));
   let tmpRecipes = [];
-  
+
   getDocs(q)
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          tmpRecipes.push(doc);
-        });
-        setResult(tmpRecipes);
-        console.log("Received from database", tmpRecipes);
-      })
-      .catch((error) => {
-        console.error(error);
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        tmpRecipes.push(doc);
       });
-}
- 
+      setResult(tmpRecipes);
+      console.log("Received from database", tmpRecipes);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
 
 function Header() {
   const [isInputExpanded, setIsInputExpanded] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputClick = () => {
     setIsInputExpanded(true);
@@ -40,43 +48,57 @@ function Header() {
     setIsInputExpanded(false);
   };
 
-  
-  const handleSearch = () => {
-   
-  };
-  
+  const handleSearch = () => {};
+
   return (
     <header>
-      <div id='container'>
-        <div id='child1'>
+      <div id="container">
+        <div id="child1">
           {/* <a href='#'>
             <img alt='Logo menu' src='/assets/logoMenu.png' height='50'/>
           </a> */}
         </div>
-        <div id='child2'>
-          <a href='/'>
-            <img alt='main logo' src='/assets/logo.webp'/>
+        <div id="child2">
+          <a href="/">
+            <img alt="main logo" src="/assets/logo.webp" />
           </a>
         </div>
-        <div id='child3'>
-          <div className='searchbar-desktop'>
-            <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' onClick={handleSearch} />
+        <div id="child3">
+          <div className="searchbar-desktop">
+            <img
+              alt="Logo barre de recherche"
+              src="/assets/loupe.png"
+              height="35"
+              onClick={handleSearch}
+            />
             <input
-              type='text'
-              size='30'
-              placeholder='Rechercher une recette'
+              type="text"
+              size="30"
+              placeholder="Rechercher une recette"
               onClick={handleInputClick}
               onBlur={handleInputBlur}
-              className={isInputExpanded ? 'input-expanded' : ''}
+              className={isInputExpanded ? "input-expanded" : ""}
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
           </div>
-          <div className='searchbar-mobile'>
-            <a href='/search'><img alt='Logo barre de recherche' src='/assets/loupe.png' height='35'/></a>
+          <div className="searchbar-mobile">
+            <a href="/search">
+              <img
+                alt="Logo barre de recherche"
+                src="/assets/loupe.png"
+                height="35"
+              />
+            </a>
           </div>
-          <div className='account-icon'>
-            <a href={`${process.env.REACT_APP_BASE_URL}/login`}><img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/></a>
+          <div className="account-icon">
+            <a href={`/login`}>
+              <img
+                alt="Logo utilisateur"
+                src="/assets/utilisateur.png"
+                height="50"
+              />
+            </a>
           </div>
         </div>
       </div>
