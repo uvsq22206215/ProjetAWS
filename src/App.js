@@ -18,6 +18,7 @@ import Contentprofil from "./pages/Contentprofil";
 import { AuthContextProvider } from "./context/Usercontext";
 import ProtectedRoute from "./context/Protectedroutes";
 import SideMenu from "./components/SideMenu";
+import AuthorPage from "./pages/AuthorPage";
 
 function App() {
   const Main = () => (
@@ -38,7 +39,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/create" element={<CreateRecipePage />} />
             <Route path="/all-categories" element={<CategoriesPage />} />
-
+            <Route path="/author" element={<AuthorPage />} />
             <Route
               path="/Informations"
               element={
