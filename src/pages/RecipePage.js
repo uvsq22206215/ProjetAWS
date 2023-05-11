@@ -33,7 +33,7 @@ function RecipePage() {
           }
           setLoaded(true);
         })
-        .catch(() => console.log("Erreur"));
+        .catch((e) => console.error(e));
     }
     if (!query) {
       setLoaded(true);

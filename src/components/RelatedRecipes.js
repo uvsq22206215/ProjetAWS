@@ -18,7 +18,7 @@ function RelatedRecipes({ title, maxLimit, filters }) {
     const q = query(collection(database, "recipe"), limit(maxLimit ? maxLimit : 3));
     getDocs(q)
       .then((snapshot) => setRelRecipes(snapshot.docs))
-      .catch((e) => console.log("Erreur"));
+      .catch((e) => console.error(e));
   }, []);
 
 

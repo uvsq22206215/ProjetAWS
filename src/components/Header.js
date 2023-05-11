@@ -11,6 +11,7 @@ function Header() {
   const [searchTerm, setSearchTerm] = useState('');
   
   const handleSearch = (input) => {
+
     if (input) {
       console.log(input);
       //la requete

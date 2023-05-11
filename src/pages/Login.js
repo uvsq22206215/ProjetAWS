@@ -148,7 +148,7 @@ export default function Uselogin() {
         }
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const log = async (values) => {
@@ -161,7 +161,7 @@ export default function Uselogin() {
       history("/"); //redirection vers cette page
     } catch (error) {
       setOpenLog(true);
-      console.log(error);
+      console.error(error);
     }
   };
 
