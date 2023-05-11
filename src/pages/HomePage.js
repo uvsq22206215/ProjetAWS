@@ -8,8 +8,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RelatedRecipes from "../components/RelatedRecipes";
+import { useNavigate } from "react-router";
 
 function HomePage() {
+  let history = useNavigate();
+  let generatorRedirect = () => {
+    history("/recipe-generator");
+  };
   // const recipeSliderSettings = [
   //   {
   //     breakpoint: 1024,
@@ -130,7 +135,7 @@ function HomePage() {
             PAS QUOI CUISINER?
           </h1>
           <div className="block-btn">
-            <button className="button"><a href="/recipe-generator" id="test">Générer une recette</a></button>
+            <button className="button" onClick={generatorRedirect}>Générer une recette</button>
           </div>
         </div>
         <div className="overlay"></div>

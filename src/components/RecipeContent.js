@@ -124,7 +124,7 @@ function RecipeContent({ recipe }) {
               </ul>
             </div>
           </div>
-          {recipe.author === usr.data().username ? (
+          {recipe.author === usr.username ? (
             <Stack
               container
               direction="column"

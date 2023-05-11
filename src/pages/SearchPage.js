@@ -9,17 +9,11 @@ import { collection, query, where, getDocs, limit, and } from 'firebase/firestor
 import Footer from '../components/Footer';
 
 function SearchPage() {
-  const [showMore, setShowMore] = useState(false);
-
-  const handleShowMore = () => {
-    setShowMore(true);
-  };
-
-  
+ 
   /* gérer les options qui s'ouvrent quand on clique sur un plus*/
   
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [isCultureOpen, setIsCultureOpen] = useState(false);
+  // const [isCultureOpen, setIsCultureOpen] = useState(false);
   const [isDifficultyOpen, setIsDifficultyOpen] = useState(false);
   const [isTempsPreparationOpen, setIsTempsPreparationOpen] = useState(false);
   const [isCostOpen, setCostOpen] = useState(false);
@@ -27,9 +21,7 @@ function SearchPage() {
   const handleCategoriesClick = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
   };
-  const handleCultureClick = () => {
-    setIsCultureOpen(!isCultureOpen);
-  };
+
   const handleDifficultyClick = () => {
     setIsDifficultyOpen(!isDifficultyOpen);
   };
@@ -231,7 +223,7 @@ function SearchPage() {
                     checked={categorie.plat}
                     onChange={handleCatCheckboxChange}
                   />
-                  <label for="plat">Plat principal</label>
+                  <label>Plat principal</label>
                 </div>
                 <div className="option">
                   <input
@@ -242,7 +234,7 @@ function SearchPage() {
                     checked={categorie.accomp}
                     onChange={handleCatCheckboxChange}
                   />
-                  <label for="entree">Accompagnement</label>
+                  <label>Accompagnement</label>
                 </div>
                 <div className="option">
                   <input
@@ -254,7 +246,7 @@ function SearchPage() {
                     onChange={handleCatCheckboxChange}
                   />
 
-                  <label for="dessert">Dessert</label>
+                  <label>Dessert</label>
                 </div>
               </div>
             </div>
@@ -275,7 +267,7 @@ function SearchPage() {
                     checked={difficulty.tresFacile}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="plat">Très facile</label>
+                  <label>Très facile</label>
                 </div>
                 <div className="option">
 
@@ -287,7 +279,7 @@ function SearchPage() {
                     checked={difficulty.facile}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="plat">Facile</label>
+                  <label>Facile</label>
                 </div>
                 <div className="option">
                   <input
@@ -298,7 +290,7 @@ function SearchPage() {
                     checked={difficulty.moyenne}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="entree">Moyenne</label>
+                  <label>Moyenne</label>
                 </div>
                 <div className="option">
                   <input
@@ -309,7 +301,7 @@ function SearchPage() {
                     checked={difficulty.difficile}
                     onChange={handleDiffCheckboxChange}
                   />
-                  <label for="difficile">Difficile</label>
+                  <label>Difficile</label>
                 </div>
               </div>
             </div>
@@ -331,7 +323,7 @@ function SearchPage() {
                     checked={prepTime.moins30m}
                     onChange={handlePrepCheckboxChange}
                   />
-                  <label htmlFor="PlusUneHeure">Moins de 30 minutes</label>
+                  <label>Moins de 30 minutes</label>
                 </div>
                 <div className="option">
                   <input
@@ -342,7 +334,7 @@ function SearchPage() {
                     checked={prepTime.moins1h}
                     onChange={handlePrepCheckboxChange}
                   />
-                  <label htmlFor="Moin30">Moins d'une heure</label>
+                  <label>Moins d'une heure</label>
                 </div>
                 <div className="option">
                   <input
@@ -353,30 +345,7 @@ function SearchPage() {
                     checked={prepTime.moins2h}
                     onChange={handlePrepCheckboxChange}
                   />
-                  <label htmlFor="entre30-45">Moins de 2 heures</label>
-                </div>
-              </div>
-            </div>
-
-            <div className="filter-Typ">
-              <div className="option-header" onClick={handleCultureClick}>
-                <span className="option-title">Pays/Culture</span>
-                <span className={isCultureOpen ? "toggle-minus" : "toggle-plus"}>
-                  <FontAwesomeIcon icon={isCultureOpen ? faMinus : faPlus} />
-                </span>
-              </div>
-              <div className={`categories-options ${isCultureOpen ? 'open' : ''}`}>
-                <div className="option">
-                  <input type="checkbox" className='checkBoxOption' id="française" name="française" value="française" />
-                  <label for="plat">France</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" className='checkBoxOption' id="Italienne" name="Italienne" value="Italienne" />
-                  <label for="entree">Italie</label>
-                </div>
-                <div className="option">
-                  <input type="checkbox" className='checkBoxOption' id="Japonaise" name="Japonaise" value="Japonaise" />
-                  <label for="dessert">Japon</label>
+                  <label>Moins de 2 heures</label>
                 </div>
               </div>
             </div>
@@ -397,7 +366,7 @@ function SearchPage() {
                     onChange={handleCostCheckboxChange}
                     checked={cost.bonMarche}
                   />
-                  <label for="plat">Bon marché</label>
+                  <label>Bon marché</label>
                 </div>
                 <div className="option">
                   <input
@@ -408,7 +377,7 @@ function SearchPage() {
                     onChange={handleCostCheckboxChange}
                     checked={cost.moyen}
                   />
-                  <label for="entree">Moyen</label>
+                  <label>Moyen</label>
                 </div>
                 <div className="option">
                   <input
@@ -418,7 +387,7 @@ function SearchPage() {
                     name="assezCher"
                     onChange={handleCostCheckboxChange}
                     checked={cost.assezCher}/>
-                  <label for="dessert">Assez cher</label>
+                  <label>Assez cher</label>
                 </div>
               </div>
             </div>
@@ -434,16 +403,7 @@ function SearchPage() {
               {filteredRecipes.map((recipe) => (
                 <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
               ))}
-
-              {showMore && (
-                <div>TODO</div>
-              )}
             </div>
-            {!showMore && (
-              <a onClick={handleShowMore} className="block-link" href="#">
-                View More Recipes
-              </a>
-            )}
           </div>
         </div>
       </div>
