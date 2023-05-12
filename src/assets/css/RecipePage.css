@@ -1,0 +1,9 @@
+#loadingRecipeText, #recipeNotFoundText {
+  padding: 100px;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
+  font-size: xxx-large;
+  font-family: 'Abril Fatface';
+  color: orange;
+}

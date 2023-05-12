@@ -3,7 +3,6 @@ import { database } from '../utils/firebase';
 import { useState } from 'react';
 import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Fragment } from 'react';
 import { TextField } from '@mui/material';
 import { useNavigate } from 'react-router';
 
@@ -40,7 +39,8 @@ function Header() {
         .catch((error) => {
           console.error(error);
         });
-
+    } else {
+      setResult([]);
     }
   };
 
@@ -48,9 +48,6 @@ function Header() {
     <header>
       <div id='container'>
         <div id='child1'>
-          {/* <a href='#'>
-            <img alt='Logo menu' src='/assets/logoMenu.png' height='50'/>
-          </a> */}
         </div>
         <div id='child2'>
           <a href='/'>
@@ -62,7 +59,7 @@ function Header() {
           <Autocomplete
             id="asynchronous-demo"
             freeSolo
-            sx={{ width: 400 }}
+            sx={{ width: 400}}
             options={result}
             getOptionLabel={(recette) => recette.data().name}
             onInputChange={(e,v) => handleSearch(v)}

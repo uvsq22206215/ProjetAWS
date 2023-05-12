@@ -18,55 +18,30 @@ function useQuery() {
 function RecipePage() {
   const query = useQuery().get("id");
 
-  const [loaded, setLoaded] = useState(false);
-  const [found, setFound] = useState(false);
   const [recipe, setRecipe] = useState({});
+  const [notFound, setNotFound] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (query && !loaded) {
-      getDoc(doc(database, "recipe", query))
-        .then((docRef) => {
-          setLoaded(true);
-          if (docRef.exists()) {
-            setRecipe(docRef.data());
-            setFound(true);
-          }
-          setLoaded(true);
-        })
-        .catch((e) => console.error(e));
-    }
-    if (!query) {
-      setLoaded(true);
-    }
-  }, [query, loaded]);
+  if (query) {
+    getDoc(doc(database, "recipe", query))
+      .then((docRef) => {
+        if (docRef.exists()) {
+          setRecipe(docRef.data());
+          setNotFound(false);
+        }
+        setLoading(false);
+      })
+      .catch((e) => console.error(e));
+  };
 
-  if (!loaded) {
     return (
       <div id="containerPage">
         <Header />
-        <div>Loading...</div>
-      </div>
-    );
-  }
-
-  if (found) {
-    return (
-      <div id="containerPage">
-        <Header />
-        <RecipeContent recipe={recipe} />
-        <RelatedRecipes title="Recettes associées" />{" "}
-        {/*TODO : Ajouter criteres de similarité */}
+        {loading ?<div id="loadingRecipeText">Chargement...</div> : notFound ? <div id="recipeNotFoundText">Recette non trouvée</div> : <div><RecipeContent recipe={recipe} /><RelatedRecipes title="Recettes associées" /></div>}
+        
         <Footer />
       </div>
     );
-  }
-  return (
-    <div id="containerPage">
-      <Header />
-      <div>Recette non trouvée !</div>
-      <Footer />
-    </div>
-  );
 }
 
 export default RecipePage;
