@@ -3,31 +3,39 @@ import { database } from '../utils/firebase';
 import { useState } from 'react';
 import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Fragment } from 'react';
+import { TextField } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 
 function Header() {
+  let history = useNavigate();
   const recipeRef = collection(database, "recipe");
   const [result, setResult] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  
+
+
+  const execSearch = () => {
+    if (result.length === 1) {
+      history("/recipe?id=" + result[0].id);
+      setResult([]);
+    }
+  };
+
   const handleSearch = (input) => {
 
-    if (input) {
-      console.log(input);
-      //la requete
+    if (input && input.length >= 3) {
       let condition = null;
-      condition = and(where('name', '>=',searchTerm), where('name', '<=', searchTerm+ '\uf8ff'));
+      input = input.charAt(0).toUpperCase() + input.slice(1);
+      condition = and(where('name', '>=', input), where('name', '<=', input + '\uf8ff'));
       let q = query(recipeRef, condition, limit(10));
-  
+
       let tmpRecipes = [];
       getDocs(q)
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             tmpRecipes.push(doc);
           });
-  
-          let recipeNames = tmpRecipes.map(doc => doc.data().name); //les nomes des recettes result.
-          setResult(recipeNames); //result remplit de recipe name.
+          setResult(tmpRecipes); 
         })
         .catch((error) => {
           console.error(error);
@@ -50,30 +58,27 @@ function Header() {
           </a>
         </div>
         <div id='child3'>
-          <div>
-            <img alt='Logo barre de recherche' src='/assets/loupe.png' height='35' />
-            <Autocomplete
-              sx={{
-                display: 'inline-block',
-                '& input': {
-                  width: 200,
-                  bgcolor: 'background.paper',
-                  color: (theme) =>
-                    theme.palette.getContrastText(theme.palette.background.paper),
-                },
-              }}
-              id="custom-input-demo"
-              options={result}
-              renderInput={(params) => (
-                <div ref={params.InputProps.ref}>
-                  <input type="text" onChange={handleSearch(params.inputProps.value)} {...params.inputProps} />
-                </div>
-              )}
-            />
-          </div>
+          <img onClick={() => {execSearch()}} alt='Logo barre de recherche' src='/assets/loupe.png' height='35' />
+          <Autocomplete
+            id="asynchronous-demo"
+            freeSolo
+            sx={{ width: 400 }}
+            options={result}
+            getOptionLabel={(recette) => recette.data().name}
+            onInputChange={(e,v) => handleSearch(v)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Recherche de recette"
+                InputProps={{
+                  ...params.InputProps,
+                }}
+              />
+            )}
+          />
           <div className='account-icon'>
             <a href={JSON.parse(sessionStorage.getItem("user-signin")) == null ? "/login" : "/informations"}>
-              <img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50'/>
+              <img alt='Logo utilisateur' src='/assets/utilisateur.png' height='50' />
             </a>
           </div>
         </div>
