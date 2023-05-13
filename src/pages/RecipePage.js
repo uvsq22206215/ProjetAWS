@@ -24,7 +24,6 @@ function RecipePage() {
 
   useEffect(() => {
     if (query && !loaded) {
-      console.log("request sent");
       getDoc(doc(database, "recipe", query))
         .then((docRef) => {
           setLoaded(true);
@@ -34,7 +33,7 @@ function RecipePage() {
           }
           setLoaded(true);
         })
-        .catch(() => console.log("Erreur"));
+        .catch((e) => console.error(e));
     }
     if (!query) {
       setLoaded(true);

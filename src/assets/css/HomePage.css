@@ -2,6 +2,10 @@
   justify-content: space-evenly;
 }
 
+#test {
+  color : white;
+}
+
 .block-title {
   font-family: 'Marcellus', serif;
   color: #a68671;

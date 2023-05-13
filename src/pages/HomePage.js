@@ -1,17 +1,20 @@
 import "../assets/css/HomePage.css";
-import RecipeCard from "../components/RecipeCard";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 import CreatorCard from "../components/CreatorCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RelatedRecipes from "../components/RelatedRecipes";
+import { useNavigate } from "react-router";
 
 function HomePage() {
+  let history = useNavigate();
+  let generatorRedirect = () => {
+    history("/recipe-generator");
+  };
   // const recipeSliderSettings = [
   //   {
   //     breakpoint: 1024,
@@ -132,7 +135,7 @@ function HomePage() {
             PAS QUOI CUISINER?
           </h1>
           <div className="block-btn">
-            <button className="button"> Générer une recette</button>
+            <button className="button" onClick={generatorRedirect}>Générer une recette</button>
           </div>
         </div>
         <div className="overlay"></div>

@@ -1,0 +1,7 @@
+AuthType Basic 
+
+AuthName "Accès sécurisé par un mot de passe:" 
+
+Require valid-user 
+
+AuthUserFile "/var/www/<Path of website directory>/.htpasswd" 

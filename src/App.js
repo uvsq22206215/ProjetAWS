@@ -13,6 +13,7 @@ import Mesrecettes from "./pages/Mesrecettes";
 import Contentprofil from "./pages/Contentprofil";
 import { AuthContextProvider } from "./context/Usercontext";
 import SideMenu from "./components/SideMenu";
+import AuthorPage from "./pages/AuthorPage";
 import RecipeGenerator from "./pages/RecipeGenerator";
 import ProtectedRoute from "./context/Protectedroutes";
 
@@ -42,6 +43,7 @@ function App() {
               }
             />
             <Route path="/all-categories" element={<CategoriesPage />} />
+            <Route path="/author" element={<AuthorPage />} />
             <Route path="recipe-generator" element={<RecipeGenerator />} />
             <Route
               path="/Informations"

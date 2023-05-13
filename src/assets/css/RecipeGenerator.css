@@ -1,3 +1,55 @@
 #RecipeGeneratorContent {
   margin-top: 70px;
 }
+
+#resumeGeneratorPage {
+  background: url(/public/assets/create.jpg);
+  height : 500px;
+  background-size : cover;
+  background-position: center;
+}
+
+#titleGeneratorPage {
+  color : orange;
+  background-color: cornsilk;
+  justify-content: center;
+  display : flex;
+  padding : 20px;
+  font-size: xxx-large;
+  font-family: 'Abril Fatface';
+}
+
+
+#descriptionGeneratorPage {
+  margin : 20px;
+  background-color: cornsilk;
+  border-radius: 10px;
+  width: fit-content;
+  padding : 20px;
+  font-family: 'Abril Fatface';
+  font-size : x-large;
+  color : #a68671;
+}
+
+.generate-ingredientInput {
+  min-height: 30px;
+  margin : 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left : 5px;
+  border-radius: 10px;
+  border:none;
+  box-shadow: 0 0 0 2px #f89837;
+  background-color: cornsilk;
+}
+
+#generateRecipeButton {
+  color : white;
+  background-color: orange;
+  border : none;
+  border-radius: 15px;
+  font-size: larger;
+  margin : 0px 0px 15px 15px;
+  font-family: 'Abril Fatface';
+}
