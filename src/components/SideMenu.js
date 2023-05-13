@@ -5,6 +5,8 @@ import {
   faEye,
   faUser,
   faLink,
+  faPlus,
+  faPlateWheat
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import SideNav, {
@@ -16,18 +18,23 @@ import SideNav, {
 } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "../assets/css/SideMenu.css";
+import { useState } from "react";
 
 function SideMenu() {
   let history = useNavigate();
   const url = useLocation();
   const path = url.pathname; // Extract the path from the current location
+  const [opened, setOpened] = useState(false);
 
   return (
     <SideNav
       onSelect={(selected) => {
-        Navigate(selected);
+        history(selected);
+        setOpened(false);
       }}
       className="sidebar-menu"
+      expanded={opened}
+      onToggle={(e) => {console.log(e); setOpened(e);}}
     >
       <SideNav.Toggle />
       <SideNav.Nav defaultSelected={path}>
@@ -49,16 +56,28 @@ function SideMenu() {
           </NavIcon>
           <NavText>Chercher une recette</NavText>
         </NavItem>
-        {/* <NavItem eventKey="Informations">
-          <NavIcon><FontAwesomeIcon icon={faUser} /></NavIcon>
-          <NavText>Mon Profile</NavText>
-        </NavItem> */}
-        <NavItem eventKey="/login">
-          <NavIcon>
-            <FontAwesomeIcon icon={faLink} />
-          </NavIcon>
-          <NavText>Connexion / Inscription</NavText>
+        <NavItem eventKey="create">
+          <NavIcon><FontAwesomeIcon icon={faPlus} /></NavIcon>
+          <NavText>Créer une recette</NavText>
         </NavItem>
+        <NavItem eventKey="recipe-generator">
+          <NavIcon><FontAwesomeIcon icon={faPlateWheat} /></NavIcon>
+          <NavText>Générer une recette</NavText>
+        </NavItem>
+        {
+          JSON.parse(sessionStorage.getItem("user-signin")) == null ?
+            <NavItem eventKey="/login">
+              <NavIcon>
+                <FontAwesomeIcon icon={faLink} />
+              </NavIcon>
+              <NavText>Connexion / Inscription</NavText>
+            </NavItem> 
+            :
+            <NavItem eventKey="Informations">
+              <NavIcon><FontAwesomeIcon icon={faUser} /></NavIcon>
+              <NavText>Mon Profil</NavText>
+            </NavItem>
+        }
       </SideNav.Nav>
     </SideNav>
   );
