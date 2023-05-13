@@ -5,6 +5,8 @@ import {
   faEye,
   faUser,
   faLink,
+  faPlus,
+  faPlateWheat
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import SideNav, {
@@ -53,6 +55,14 @@ function SideMenu() {
             <FontAwesomeIcon icon={faEye} />
           </NavIcon>
           <NavText>Chercher une recette</NavText>
+        </NavItem>
+        <NavItem eventKey="create">
+          <NavIcon><FontAwesomeIcon icon={faPlus} /></NavIcon>
+          <NavText>Créer une recette</NavText>
+        </NavItem>
+        <NavItem eventKey="recipe-generator">
+          <NavIcon><FontAwesomeIcon icon={faPlateWheat} /></NavIcon>
+          <NavText>Générer une recette</NavText>
         </NavItem>
         {
           JSON.parse(sessionStorage.getItem("user-signin")) == null ?
