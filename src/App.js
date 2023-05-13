@@ -17,6 +17,7 @@ import SideMenu from "./components/SideMenu";
 import AuthorPage from "./pages/AuthorPage";
 import RecipeGenerator from "./pages/RecipeGenerator";
 import ProtectedRoute from "./context/Protectedroutes";
+import Error404 from "./components/Error404";
 
 function App() {
   const Main = () => (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/recipe" element={<RecipePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/*" element={<Error404 />} />
             <Route
               path="/create"
               element={

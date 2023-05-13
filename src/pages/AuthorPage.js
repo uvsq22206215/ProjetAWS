@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { database } from '../utils/firebase';
 import Footer from '../components/Footer';
+import Error404 from '../components/Error404';
 
 function useQuery() {
   const { search } = useLocation();
@@ -41,8 +42,11 @@ function AuthorPage() {
   if (!loaded) {
     return (
       <div id='authorPage'>
-        <Header />
-        <div id='author-profile'>Loading...</div>
+        <div id="root">
+            <div className="loader-wrapper">
+              <div className="loader"></div>
+            </div>
+          </div>
       </div>);
   }
 
@@ -70,11 +74,7 @@ function AuthorPage() {
       </div>);
   }
   return (
-    <div id='authorPage'>
-      <Header />
-      <div id='author-profile'>Créateur non trouvée !</div>
-      <Footer />
-    </div>);
+    <Error404 />);
 }
 
 export default AuthorPage;

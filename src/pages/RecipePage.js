@@ -9,6 +9,7 @@ import RecipeContent from "../components/RecipeContent";
 import RelatedRecipes from "../components/RelatedRecipes";
 import Footer from "../components/Footer";
 import { Button } from "@mui/material";
+import Error404 from "../components/Error404";
 
 function useQuery() {
   const { search } = useLocation();
@@ -37,7 +38,15 @@ function RecipePage() {
     return (
       <div id="containerPage">
         <Header />
-        {loading ?<div id="loadingRecipeText">Chargement...</div> : notFound ? <div id="recipeNotFoundText">Recette non trouvée</div> : <div><RecipeContent recipe={recipe} /><RelatedRecipes title="Recettes associées" /></div>}
+        {loading ?
+          <div id="loadingRecipeText"><div id="root">
+            <div className="loader-wrapper">
+              <div className="loader"></div>
+                </div>
+            </div>
+          </div>
+        : notFound ? <Error404 /> : 
+        <div><RecipeContent recipe={recipe} /><RelatedRecipes title="Recettes associées" /></div>}
         
         <Footer />
       </div>

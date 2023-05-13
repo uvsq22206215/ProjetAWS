@@ -12,8 +12,7 @@ function RecipeCard(props) {
   );
 
   const checkIfAssociationExists = async () => {
-    await getDocs(query(collection(database, "favorite"), where("user", "==", userdetail.id)), 
-                                                          where("recipe", "==", props.id))
+    await getDocs(query(collection(database, "favorite"), where("user", "==", userdetail.id)), where("recipe", "==", props.id))
       .then((snapshot) => {
         if (snapshot.empty) {
           console.log(`No document found in collection`);
@@ -33,7 +32,7 @@ function RecipeCard(props) {
     console.log(userdetail.id + " - " + props.id);
     const documentExists = await checkIfAssociationExists();
     console.log(`Does document exist in collection favorite collection?`, documentExists);
-    if(!documentExists) {
+    if(documentExists !== false) {
     // addDoc(collection(database, "favorite"), favorite)
     //   .then(function (docRef) {
     //     //console.log("Document written with ID: ", docRef.id);

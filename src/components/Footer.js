@@ -17,7 +17,7 @@ function Footer() {
       <div className="footer-container">
         <div className='footer-row'>
           <div className='footer-col'>
-            <h1>SPREAD HAPPINESS TODAY</h1>
+            <h1>" On apprend la cuisine avec celle des autres... "</h1>
 
           </div>
         </div>
