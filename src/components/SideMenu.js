@@ -6,12 +6,10 @@ import {
   faUser,
   faLink,
   faPlus,
-  faPlateWheat
+  faFlask
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import SideNav, {
-  Toggle,
-  Nav,
   NavItem,
   NavIcon,
   NavText,
@@ -61,7 +59,7 @@ function SideMenu() {
           <NavText>Créer une recette</NavText>
         </NavItem>
         <NavItem eventKey="recipe-generator">
-          <NavIcon><FontAwesomeIcon icon={faPlateWheat} /></NavIcon>
+          <NavIcon><FontAwesomeIcon icon={faFlask} /></NavIcon>
           <NavText>Générer une recette</NavText>
         </NavItem>
         {

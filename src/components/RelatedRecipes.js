@@ -13,8 +13,6 @@ function RelatedRecipes({ title, maxLimit, filters }) {
   const [relRecipes, setRelRecipes] = useState([]);
 
   useEffect(() => {
-    let condition = null;
-    
     const q = query(collection(database, "recipe"), limit(maxLimit ? maxLimit : 3));
     getDocs(q)
       .then((snapshot) => setRelRecipes(snapshot.docs))

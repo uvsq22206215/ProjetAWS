@@ -1,13 +1,7 @@
-import RecipeCard from "./RecipeCard";
 import "../assets/css/RecipeContent.css";
-import { useEffect, useState } from "react";
-import { database } from "../utils/firebase";
-import { doc, getDocs, query, limit, collection } from "firebase/firestore";
-import RecipePage from "../pages/RecipePage";
-import RelatedRecipes from "./RelatedRecipes";
-import { Box, Button, Stack } from "@mui/material";
+import { useState } from "react";
+import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconContext } from "react-icons";
 import { UserAuth } from "../context/Usercontext";
 
 function RecipeContent({ recipe }) {
