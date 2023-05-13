@@ -9,32 +9,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RelatedRecipes from "../components/RelatedRecipes";
 import { useNavigate } from "react-router";
+import 'react-animated-slider/build/horizontal.css';
+
 
 function HomePage() {
   let history = useNavigate();
   let generatorRedirect = () => {
     history("/recipe-generator");
   };
-  // const recipeSliderSettings = [
-  //   {
-  //     breakpoint: 1024,
-  //     settings: {
-  //       slidesToShow: 3,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 768,
-  //     settings: {
-  //       slidesToShow: 3,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 480,
-  //     settings: {
-  //       slidesToShow: 1,
-  //     },
-  //   },
-  // ];
 
   const creatorSliderSettings = [
     {
@@ -65,63 +47,54 @@ function HomePage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // const getSlidesToShow = () => {
-  //   for (let i = 0; i < recipeSliderSettings.length; i++) {
-  //     if (windowWidth >= recipeSliderSettings[i].breakpoint) {
-  //       return recipeSliderSettings[i].settings.slidesToShow;
-  //     }
-  //   }
-  //   return recipeSliderSettings[recipeSliderSettings.length - 1].settings.slidesToShow;
-  // };
-
-  const getSlidesToShow2 = () => {
-    for (let i = 0; i < creatorSliderSettings.length; i++) {
-      if (windowWidth >= creatorSliderSettings[i].breakpoint) {
-        return creatorSliderSettings[i].settings.slidesToShow;
-      }
-    }
-    return creatorSliderSettings[creatorSliderSettings.length - 1].settings
-      .slidesToShow;
-  };
-  // Code causant l'erreur
-  // <MDBCarousel showIndicators showControls fade>
-  //         <MDBCarouselItem
-  //           className="w-100 d-block"
-  //           itemId={1}
-  //           src="/assets/slider1.jpg"
-  //           alt="..."
-  //         >
-  //           <h5 className="slider-title">First slide label</h5>
-  //           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-  //         </MDBCarouselItem>
-
-  //         <MDBCarouselItem
-  //           className="w-100 d-block"
-  //           itemId={2}
-  //           src="/assets/slider2.jpg"
-  //           alt="..."
-  //         >
-  //           {/* Pas besoin de mettre le contenu dans un div car un div(slider-caption) est automatiquement généré */}
-  //           <h5 className="slider-title">Second slide label</h5>
-  //           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  //         </MDBCarouselItem>
-
-  //         <MDBCarouselItem
-  //           className="w-100 d-block"
-  //           itemId={3}
-  //           src="/assets/slider3.jpg"
-  //           alt="..."
-  //         >
-  //           <h5 className="slider-title">Third slide label</h5>
-  //           <p>
-  //             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-  //           </p>
-  //         </MDBCarouselItem>
-  //       </MDBCarousel>
   return (
     <div id="homepage">
       <Header />
       <div id="slider-hp">
+          <div id="myCarousel" className="carousel slide" data-ride="carousel">
+            <ol className="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider1.jpg")'}}>
+                  <div className="overlay"></div>
+                  <div className="carousel-caption d-none d-md-block">
+                    <h5 className="slider-title">First slide label</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider2.jpg")'}}>
+                  <div className="overlay"></div>
+                  <div className="carousel-caption d-none d-md-block">
+                    <h5 className="slider-title">Second slide label</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item">
+                <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider3.jpg")'}}>
+                  <div className="overlay"></div>
+                  <div className="carousel-caption d-none d-md-block">
+                    <h5 className="slider-title">Third slide label</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="sr-only">Previous</span>
+            </a>
+            <a className="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="sr-only">Next</span>
+            </a>
+          </div>
       </div>
 
       <div id="trending-recipes">

@@ -11,6 +11,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import Information from "./pages/Informations";
 import Mesrecettes from "./pages/Mesrecettes";
 import Contentprofil from "./pages/Contentprofil";
+import Contact from "./pages/Contact";
 import { AuthContextProvider } from "./context/Usercontext";
 import SideMenu from "./components/SideMenu";
 import AuthorPage from "./pages/AuthorPage";
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/recipe" element={<RecipePage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/contact" element={<Contact />} />
             <Route
               path="/create"
               element={
