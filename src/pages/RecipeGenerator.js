@@ -99,7 +99,7 @@ function RecipeGenerator() {
         <button id="generateRecipeButton" onClick={generateRecipes}>Générer recettes</button>
         <div className="recipe-cards">
               {recipes.rec && recipes.rec.map((recipe) => (
-                <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
+                <RecipeCard image={recipe.data().image} title={recipe.data().name} id={recipe.id} link={"/recipe?id=" + recipe.id} />
               ))}
             </div>
         <Footer />

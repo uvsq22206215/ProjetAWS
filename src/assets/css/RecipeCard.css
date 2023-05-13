@@ -94,7 +94,7 @@ div.favorite-btn {
   height: 45px;
 }
 
-.favorite-btn svg.svg-inline--fa.fa-heart:hover {
+.favorite-btn svg.svg-inline--fa.fa-heart:hover, .redFill svg.svg-inline--fa.fa-heart {
   color: red;
 }
 

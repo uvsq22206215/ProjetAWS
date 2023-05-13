@@ -60,6 +60,7 @@ export default function Mesrecettes() {
                     key={"related-recipe-" + index}
                     title={recipe.data().name}
                     image={recipe.data().image}
+                    id={recipe.id}
                     link={"/recipe?id=" + recipe.id}
                     description=""
                   />

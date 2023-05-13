@@ -401,7 +401,7 @@ function SearchPage() {
             <h1 className="block-title" style={{ textAlign: 'center' }}>Résultat recherche</h1>
             <div className="recipe-cards">
               {filteredRecipes.map((recipe) => (
-                <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
+                <RecipeCard image={recipe.data().image} title={recipe.data().name} id={recipe.id} link={"/recipe?id=" + recipe.id} />
               ))}
             </div>
           </div>
