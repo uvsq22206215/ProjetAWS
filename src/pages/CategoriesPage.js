@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../assets/css/CategoriesPage.css";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router";
 
 function getAllDistinctCategories() {
   const q2 = query(collection(database, "recipe"));
@@ -22,6 +23,8 @@ function getAllDistinctCategories() {
 }
 
 function CategoriesPage() { 
+
+  const history = useNavigate();
 
   const [categories, setCategories] = useState([]);
 
@@ -52,7 +55,7 @@ function CategoriesPage() {
               </div>
               <div className="flip-card-back">
                   <p className="title">Description</p>
-                  <a href="#">Click me!</a>
+                  <a onClick={() => {history("/search?category=" + category.data().nom)}}>Click me!</a>
               </div>
           </div>
       </div>
