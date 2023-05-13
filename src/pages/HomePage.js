@@ -1,7 +1,6 @@
 import "../assets/css/HomePage.css";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
-//import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 import Footer from "../components/Footer";
 import CreatorCard from "../components/CreatorCard";
 import Slider from "react-slick";
@@ -9,7 +8,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RelatedRecipes from "../components/RelatedRecipes";
 import { useNavigate } from "react-router";
-import 'react-animated-slider/build/horizontal.css';
 
 
 function HomePage() {
