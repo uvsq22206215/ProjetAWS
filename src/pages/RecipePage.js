@@ -22,35 +22,43 @@ function RecipePage() {
   const [recipe, setRecipe] = useState({});
   const [notFound, setNotFound] = useState(true);
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (query) {
+      getDoc(doc(database, "recipe", query))
+        .then((docRef) => {
+          if (docRef.exists()) {
+            setRecipe(docRef);
+            setNotFound(false);
+          }
+          setLoading(false);
+        })
+        .catch((e) => console.error(e));
+    }
+  }, []);
 
-  if (query) {
-    getDoc(doc(database, "recipe", query))
-      .then((docRef) => {
-        if (docRef.exists()) {
-          setRecipe(docRef.data());
-          setNotFound(false);
-        }
-        setLoading(false);
-      })
-      .catch((e) => console.error(e));
-  };
-
-    return (
-      <div id="containerPage">
-        <Header />
-        {loading ?
-          <div id="loadingRecipeText"><div id="root">
+  return (
+    <div id="containerPage">
+      <Header />
+      {loading ? (
+        <div id="loadingRecipeText">
+          <div id="root">
             <div className="loader-wrapper">
               <div className="loader"></div>
-                </div>
             </div>
           </div>
-        : notFound ? <Error404 /> : 
-        <div><RecipeContent recipe={recipe} /><RelatedRecipes title="Recettes associées" /></div>}
-        
-        <Footer />
-      </div>
-    );
+        </div>
+      ) : notFound ? (
+        <Error404 />
+      ) : (
+        <div>
+          <RecipeContent recipe={recipe} />
+          <RelatedRecipes title="Recettes associées" />
+        </div>
+      )}
+
+      <Footer />
+    </div>
+  );
 }
 
 export default RecipePage;
