@@ -42,21 +42,17 @@ function RecipeCard(props) {
 
   const addToFavorite = async () => {
     console.log(userdetail.id + " - " + props.id);
-    const documentExists = await checkIfAssociationExists();
-    console.log(
-      `Does document exist in collection favorite collection?`,
-      documentExists
-    );
-
-    if (documentExists !== false) {
-      // addDoc(collection(database, "favorite"), favorite)
-      //   .then(function (docRef) {
-      //     //console.log("Document written with ID: ", docRef.id);
-      //   })
-      //   .catch(function (error) {
-      //     console.error("Error adding document: ", error);
-      //   });
-    }
+    // const documentExists = await checkIfAssociationExists();
+    // console.log(`Does document exist in collection favorite collection?`, documentExists);
+    // if(documentExists !== false) {
+    // // addDoc(collection(database, "favorite"), favorite)
+    // //   .then(function (docRef) {
+    // //     //console.log("Document written with ID: ", docRef.id);
+    // //   })
+    // //   .catch(function (error) {
+    // //     console.error("Error adding document: ", error);
+    // //   });
+    // }
   };
 
   return (
@@ -65,8 +61,9 @@ function RecipeCard(props) {
         {JSON.parse(sessionStorage.getItem("user-signin")) !== null ? (
           <div className="favorite-btn">
             <i
-              className={checkIfAssociationExists ? "redFill" : ""}
-              onClick={addToFavorite}
+              /*className={ checkIfAssociationExists ? "redFill" : ""}*/ onClick={
+                addToFavorite
+              }
             >
               <FontAwesomeIcon icon={faHeart} />
             </i>
