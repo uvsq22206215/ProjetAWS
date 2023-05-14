@@ -51,11 +51,11 @@ function CategoriesPage() {
           <div className="flip-card-inner">
               <div className="flip-card-front" style={{ backgroundImage: `url(/assets/${category.data().img})` }}>
                   <p className="title">{category.data().nom}</p>
-                  <p>Hover Me</p>
+                  {/* <p>Hover Me</p> */}
               </div>
               <div className="flip-card-back">
-                  <p className="title">Description</p>
-                  <a onClick={() => {history("/search?category=" + category.data().nom)}}>Click me!</a>
+                  <p className="title">{category.data().description}</p>
+                  <a onClick={() => {history("/search?category=" + category.data().nom)}}>Cliquez pour voir les recettes!</a>
               </div>
           </div>
       </div>
