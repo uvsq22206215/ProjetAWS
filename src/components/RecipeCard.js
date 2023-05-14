@@ -6,10 +6,11 @@ import { database } from "../utils/firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   getDocs,
   limit,
   query,
-  where,
+  where, doc
 } from "firebase/firestore";
 
 function RecipeCard(props) {
@@ -17,43 +18,52 @@ function RecipeCard(props) {
     JSON.parse(sessionStorage.getItem("user"))
   );
 
+  const[isFavorite, setIsFavorite] = useState(false);
+  const[favoriteId, setFavoriteId] = useState(null);
+  
   const checkIfAssociationExists = async () => {
     await getDocs(
       query(
         collection(database, "favorite"),
-        where("user", "==", userdetail.id)
+        where("user", "==", userdetail.id), where("recipe", "==", props.id)
       ),
-      where("recipe", "==", props.id)
-    )
-      .then((snapshot) => {
+    ).then((snapshot) => {
         if (snapshot.empty) {
           console.log(`No document found in collection`);
-          return false;
+          setIsFavorite(false);
         } else {
           console.log(`Document found in collection.`);
-          return true;
+          snapshot.docs.map((favorite, id)=> (setFavoriteId(favorite.id)));
+          setIsFavorite(true);
         }
       })
       .catch((error) => {
         console.error(error);
-        return false;
+        setIsFavorite(false);
       });
   };
 
   const addToFavorite = async () => {
     console.log(userdetail.id + " - " + props.id);
-    // const documentExists = await checkIfAssociationExists();
-    // console.log(`Does document exist in collection favorite collection?`, documentExists);
-    // if(documentExists !== false) {
-    // // addDoc(collection(database, "favorite"), favorite)
-    // //   .then(function (docRef) {
-    // //     //console.log("Document written with ID: ", docRef.id);
-    // //   })
-    // //   .catch(function (error) {
-    // //     console.error("Error adding document: ", error);
-    // //   });
-    // }
+    checkIfAssociationExists();
+    if(!isFavorite){
+      const favorite = {recipe: props.id, user: userdetail.id}
+      addDoc(collection(database, "favorite"), favorite)
+        .then(function (docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+    else {
+      const documentRef = doc(collection(database, "favorite"), favoriteId);
+      await deleteDoc(documentRef);
+      checkIfAssociationExists();
+    }
   };
+
+  useEffect(() => {checkIfAssociationExists();}, []);
 
   return (
     <div className="recipe-card">
@@ -61,7 +71,7 @@ function RecipeCard(props) {
         {JSON.parse(sessionStorage.getItem("user-signin")) !== null ? (
           <div className="favorite-btn">
             <i
-              /*className={ checkIfAssociationExists ? "redFill" : ""}*/ onClick={
+              className={ isFavorite ? "redFill" : ""} onClick={
                 addToFavorite
               }
             >
