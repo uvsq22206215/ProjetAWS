@@ -75,7 +75,7 @@ function Header() {
             sx={{ width: 400 }}
             options={result}
             getOptionLabel={(recette) => recette.data().name}
-            // onInputChange={(e, v) => handleSearch(v)}
+            onInputChange={(e, v) => handleSearch(v)}
             renderInput={(params) => (
               <TextField
                 {...params}
