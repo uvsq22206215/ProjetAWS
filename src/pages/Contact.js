@@ -5,7 +5,7 @@ function Contact() {
   return (
     <div>
       <Header></Header>
-      <div class="static_contact">
+      <div class="static">
         CONTACT PAGE
       </div>
       <Footer></Footer>

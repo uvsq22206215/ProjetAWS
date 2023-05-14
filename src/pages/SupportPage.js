@@ -5,7 +5,7 @@ function Support() {
   return (
     <div>
       <Header></Header>
-      <div class="static_contact">
+      <div class="static">
         SUPPORT PAGE
       </div>
       <Footer></Footer>
