@@ -25,13 +25,21 @@ export default function Recettesfavoris() {
   const recipesPerPage = 3;
 
   const fetchrecipes = async () => {
-    var Myrecipes = null;
-    var q = null;
+    const favoritesQuerySnapshot = await getDocs(
+      query(
+        collection(database, "favorite"),
+        where("user", "==", userdetail.id)
+      )
+    );
+    const favoriteRecipes = favoritesQuerySnapshot.docs.map(
+      (doc) => doc.data().recipe
+    );
 
-    Myrecipes = collection(database, "favorite");
-    q = await query(Myrecipes, where("user", "==", userdetail.id));
-    const querySnapshot = await getDocs(q);
-    setQuerySnapshot(querySnapshot.docs);
+    const recipesQuerySnapshot = await getDocs(
+      query(collection(database, "recipe"), where("id", "in", favoriteRecipes))
+    );
+    recipesQuerySnapshot.docs.map((doc) => console.log(doc.data()));
+    // setQuerySnapshot(querySnapshot.docs);
   };
 
   useEffect(() => {
