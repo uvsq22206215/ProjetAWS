@@ -52,7 +52,7 @@ return (
         <h3>Creations par cet auteur:</h3>
           <div id="id-recipeCard" className="recipe-cards"  style={{display: "flex", flexWrap: "wrap"}}>
             
-        {recipe.map((recipe) => (
+        {recipe.length > 0 ? recipe.map((recipe) => (
                <RecipeCard 
                 key={recipe.id}
                 image={recipe.data().image} 
@@ -60,7 +60,8 @@ return (
                 id={recipe.id} 
                 link={"/recipe?id=" + recipe.id} 
              />
-           ))}
+           ))
+          : <div id="noRecipeFound">Aucune recette publiée par cet utilisateur</div>}
         </div>
 </div>
 

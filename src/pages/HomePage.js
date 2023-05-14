@@ -124,22 +124,22 @@ function HomePage() {
               responsive={creatorSliderSettings}
             >
               <CreatorCard
-                name="Oussama Bouakaz"
+                name="Oussama"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Younes Amrane"
+                name="Younes"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Louis Delahaye"
+                name="Louis"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Tasneem Durbas"
+                name="Tasneem"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
