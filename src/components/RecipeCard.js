@@ -6,10 +6,11 @@ import { database } from "../utils/firebase";
 import {
   addDoc,
   collection,
+  deleteDoc,
   getDocs,
   limit,
   query,
-  where,
+  where, doc
 } from "firebase/firestore";
 
 function RecipeCard(props) {
@@ -18,28 +19,27 @@ function RecipeCard(props) {
   );
 
   const[isFavorite, setIsFavorite] = useState(false);
+  const[favoriteId, setFavoriteId] = useState(null);
   
   const checkIfAssociationExists = async () => {
     await getDocs(
       query(
         collection(database, "favorite"),
-        where("user", "==", userdetail.id)
-      ), where("recipe", "==", props.id)
+        where("user", "==", userdetail.id), where("recipe", "==", props.id)
+      ),
     ).then((snapshot) => {
         if (snapshot.empty) {
           console.log(`No document found in collection`);
           setIsFavorite(false);
-          return false;
         } else {
           console.log(`Document found in collection.`);
+          snapshot.docs.map((favorite, id)=> (setFavoriteId(favorite.id)));
           setIsFavorite(true);
-          return true;
         }
       })
       .catch((error) => {
         console.error(error);
         setIsFavorite(false);
-        return false;
       });
   };
 
@@ -57,7 +57,9 @@ function RecipeCard(props) {
         });
     }
     else {
-
+      const documentRef = doc(collection(database, "favorite"), favoriteId);
+      await deleteDoc(documentRef);
+      checkIfAssociationExists();
     }
   };
 
