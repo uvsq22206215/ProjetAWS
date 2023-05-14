@@ -41,7 +41,7 @@ function CategoriesPage() {
     <div id="all-categories">
       <Header />
       <div className="title">
-        <h1 className='block-title'>All Categories</h1>
+        <h1 className='block-title'>Nos Catégories de Recettes</h1>
       </div>
       <div className="categories-container">
       {
@@ -49,7 +49,7 @@ function CategoriesPage() {
 
         <div key={'category-'+index} className="category-box flip-card">
           <div className="flip-card-inner">
-              <div className="flip-card-front" style={{ backgroundImage: `url(/assets/${category.data().img})` }}>
+              <div className="flip-card-front" style={{ backgroundImage: `url(/assets/categories/${category.data().img})` }}>
                   <p className="title">{category.data().nom}</p>
                   {/* <p>Hover Me</p> */}
               </div>

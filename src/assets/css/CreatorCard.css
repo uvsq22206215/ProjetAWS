@@ -22,6 +22,10 @@
   align-items: center;
 }
 
+.hp-creator {
+  cursor: pointer;
+}
+
 /* .hp-creator:hover{
   transform: scale(1.1);
 } */

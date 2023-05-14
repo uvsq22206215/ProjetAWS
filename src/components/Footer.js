@@ -64,7 +64,7 @@ function Footer() {
             <ul>
               <li style={{ display: "flex", alignItems: "center" }}>
                 <FontAwesomeIcon icon={faEnvelope} className="mail-icon" />{" "}
-                <a href="#">hello@reallygreatsite.com</a>{" "}
+                <a href="mailto:contact@reciperdv.com">contact@reciperdv.com</a>{" "}
               </li>
               <li style={{ display: "inline-block" }}>
                 <FontAwesomeIcon icon={faPhone} className="phone-icon" />

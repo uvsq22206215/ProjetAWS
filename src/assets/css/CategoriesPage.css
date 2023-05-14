@@ -6,6 +6,12 @@ div#all-categories {
   display: flex;
   justify-content: center;
   padding: 40px 30px 0;
+  text-shadow: 1px 1px 2px black;
+  color: white;
+}
+
+#all-categories .title .block-title {
+  text-shadow: none;
 }
 
 .category-box
@@ -38,6 +44,7 @@ div#all-categories {
   height: 254px;
   perspective: 1000px;
   font-family: sans-serif;
+  cursor: pointer;
 }
 
 .title {

@@ -28,10 +28,13 @@ function App() {
     </div>
   );
 
+  const login = window.location.pathname === '/login';
+
   return (
     <BrowserRouter>
       <div>
-        <SideMenu></SideMenu>
+        {!login && <SideMenu></SideMenu>}
+        
         <AuthContextProvider>
           <ScrollToTop />
           <Routes>
