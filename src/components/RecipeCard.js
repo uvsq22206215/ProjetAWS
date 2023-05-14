@@ -17,43 +17,51 @@ function RecipeCard(props) {
     JSON.parse(sessionStorage.getItem("user"))
   );
 
+  const[isFavorite, setIsFavorite] = useState(false);
+  
   const checkIfAssociationExists = async () => {
     await getDocs(
       query(
         collection(database, "favorite"),
         where("user", "==", userdetail.id)
-      ),
-      where("recipe", "==", props.id)
-    )
-      .then((snapshot) => {
+      ), where("recipe", "==", props.id)
+    ).then((snapshot) => {
         if (snapshot.empty) {
           console.log(`No document found in collection`);
+          setIsFavorite(false);
           return false;
         } else {
           console.log(`Document found in collection.`);
+          setIsFavorite(true);
           return true;
         }
       })
       .catch((error) => {
         console.error(error);
+        setIsFavorite(false);
         return false;
       });
   };
 
   const addToFavorite = async () => {
     console.log(userdetail.id + " - " + props.id);
-    // const documentExists = await checkIfAssociationExists();
-    // console.log(`Does document exist in collection favorite collection?`, documentExists);
-    // if(documentExists !== false) {
-    // // addDoc(collection(database, "favorite"), favorite)
-    // //   .then(function (docRef) {
-    // //     //console.log("Document written with ID: ", docRef.id);
-    // //   })
-    // //   .catch(function (error) {
-    // //     console.error("Error adding document: ", error);
-    // //   });
-    // }
+    checkIfAssociationExists();
+    if(!isFavorite){
+      const favorite = {recipe: props.id, user: userdetail.id}
+      addDoc(collection(database, "favorite"), favorite)
+        .then(function (docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+    else {
+
+    }
   };
+
+  useEffect(() => {checkIfAssociationExists();}, []);
 
   return (
     <div className="recipe-card">
@@ -61,7 +69,7 @@ function RecipeCard(props) {
         {JSON.parse(sessionStorage.getItem("user-signin")) !== null ? (
           <div className="favorite-btn">
             <i
-              /*className={ checkIfAssociationExists ? "redFill" : ""}*/ onClick={
+              className={ isFavorite ? "redFill" : ""} onClick={
                 addToFavorite
               }
             >
