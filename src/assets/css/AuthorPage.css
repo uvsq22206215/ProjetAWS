@@ -43,3 +43,16 @@ div#author-profile {
   align-items: center;
   margin-left: 20px;
 }
+
+#id-recipeCard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+#noRecipeFound {
+  font-family: 'Abril Fatface';
+  color: orange;
+  font-size: xx-large;
+  margin: 20px;
+}
