@@ -19,6 +19,7 @@ import AuthorPage from "./pages/AuthorPage";
 import RecipeGenerator from "./pages/RecipeGenerator";
 import ProtectedRoute from "./context/Protectedroutes";
 import Error404 from "./components/Error404";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   const Main = () => (
@@ -32,6 +33,7 @@ function App() {
       <div>
         <SideMenu></SideMenu>
         <AuthContextProvider>
+          <ScrollToTop />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Main />} />
