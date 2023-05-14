@@ -142,7 +142,7 @@ function RecipeContent({ recipe }) {
             </div>
           </div>
 
-          {recipe.data().author === usr.data().username ? (
+          {recipe.data().author === usr.username ? (
             <Stack
               container
               direction="column"

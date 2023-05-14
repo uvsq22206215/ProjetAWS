@@ -60,7 +60,7 @@ export default function ResponsiveDrawer(props) {
   var myObject = {
     Informations: <InfoIcon sx={{ color: "white" }} />,
     "Mes-recettes": <MilitaryTechIcon sx={{ color: "white" }} />,
-    "Recettes-aimées": <FavoriteIcon sx={{ color: "white" }} />,
+    "Recettes-aimees": <FavoriteIcon sx={{ color: "white" }} />,
     Logout: <LogoutIcon sx={{ color: "white" }} />,
   };
   const url = useLocation();

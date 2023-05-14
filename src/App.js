@@ -52,11 +52,13 @@ function App() {
             <Route path="/author" element={<AuthorPage />} />
             <Route path="recipe-generator" element={<RecipeGenerator />} />
             <Route
-              path="Recettes-aimées"
+              path="Recettes-aimees"
               element={
-                <Contentprofil>
-                  <Recettefavoris />
-                </Contentprofil>
+                <ProtectedRoute>
+                  <Contentprofil>
+                    <Recettefavoris />
+                  </Contentprofil>
+                </ProtectedRoute>
               }
             />
             <Route

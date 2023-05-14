@@ -12,7 +12,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "../utils/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  FieldPath,
+  documentId,
+} from "firebase/firestore";
 import RecipeCard from "../components/RecipeCard";
 import "../assets/css/RelatedRecipes.css";
 
@@ -24,26 +31,33 @@ export default function Recettesfavoris() {
   const [page, setPage] = useState(1);
   const recipesPerPage = 3;
 
-  const fetchrecipes = async () => {
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  const fetchRecipes = async () => {
     const favoritesQuerySnapshot = await getDocs(
       query(
         collection(database, "favorite"),
         where("user", "==", userdetail.id)
       )
     );
-    const favoriteRecipes = favoritesQuerySnapshot.docs.map(
-      (doc) => doc.data().recipe
-    );
+    const favoriteRecipes = favoritesQuerySnapshot.docs.map((doc) => {
+      console.log(doc.data());
+      return doc.data().recipe;
+    });
 
     const recipesQuerySnapshot = await getDocs(
-      query(collection(database, "recipe"), where("id", "in", favoriteRecipes))
+      query(
+        collection(database, "recipe"),
+        where(documentId(), "in", favoriteRecipes)
+      )
     );
-    recipesQuerySnapshot.docs.map((doc) => console.log(doc.data()));
-    // setQuerySnapshot(querySnapshot.docs);
+
+    const fetchedRecipes = recipesQuerySnapshot.docs.map((doc) => doc);
+    setFavoriteRecipes(fetchedRecipes);
   };
 
   useEffect(() => {
-    fetchrecipes();
+    fetchRecipes();
   }, []);
 
   const handleClick = (event, pageNumber) => {
@@ -59,8 +73,8 @@ export default function Recettesfavoris() {
       elevation={0}
     >
       <Grid container direction="row" spacing={1}>
-        {querySnapshot.length != 0 ? (
-          querySnapshot.slice(startIndex, endIndex).map((recipe, index) => (
+        {favoriteRecipes.length != 0 ? (
+          favoriteRecipes.slice(startIndex, endIndex).map((recipe, index) => (
             <Grid item xs={12} md={4} key={recipe.id}>
               <Card sx={{ height: 400, borderRadius: 3 }} elevation={5}>
                 <Grid container>
