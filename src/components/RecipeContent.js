@@ -100,7 +100,7 @@ function RecipeContent({ recipe }) {
   };
   if (recipe.data().cost) {
     tags.push({
-      name: "€ " + recipe.cost,
+      name: "€ " + recipe.data().cost,
       background: "#cbc300",
       color: "white",
     });

@@ -180,7 +180,7 @@ function CreateRecipePage() {
       recipeInstructions: instFiltered,
       totalTime: parseInt(prepTime) + parseInt(cookTime),
     };
-    setDoc(doc(collection(database, "recipe"), docRef), recipe)
+    addDoc(collection(database, "recipe"), recipe)
       .then(function (docRef) {
         //console.log("Document written with ID: ", docRef.id);
         history("/recipe?id=" + docRef.id);
