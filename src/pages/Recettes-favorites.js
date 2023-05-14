@@ -75,7 +75,7 @@ export default function Recettesfavoris() {
       <Grid container direction="row" spacing={1}>
         {favoriteRecipes.length != 0 ? (
           favoriteRecipes.slice(startIndex, endIndex).map((recipe, index) => (
-            <Grid item xs={12} md={4} key={recipe.id}>
+            <Grid item xs={12} md={4} key={recipe.id} id={"div-"+recipe.id}>
               <Card sx={{ height: 400, borderRadius: 3 }} elevation={5}>
                 <Grid container>
                   <RecipeCard

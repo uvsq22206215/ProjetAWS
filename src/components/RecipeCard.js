@@ -76,6 +76,11 @@ function RecipeCard(props) {
       const documentRef = doc(collection(database, "favorite"), favoriteId);
       await deleteDoc(documentRef);
       checkIfAssociationExists();
+      if (window.location.href.includes('Recettes-aimees')) {
+        const element = document.getElementById("div-" + props.id);
+        console.log("deleting the html");
+        element.innerHTML = "";
+      }
     }
   };
 
