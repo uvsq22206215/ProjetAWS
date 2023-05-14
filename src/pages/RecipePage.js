@@ -9,6 +9,7 @@ import RecipeContent from "../components/RecipeContent";
 import RelatedRecipes from "../components/RelatedRecipes";
 import Footer from "../components/Footer";
 import { Button } from "@mui/material";
+import Error404 from "../components/Error404";
 
 function useQuery() {
   const { search } = useLocation();
@@ -18,52 +19,43 @@ function useQuery() {
 function RecipePage() {
   const query = useQuery().get("id");
 
-  const [loaded, setLoaded] = useState(false);
-  const [found, setFound] = useState(false);
   const [recipe, setRecipe] = useState({});
-
+  const [notFound, setNotFound] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (query && !loaded) {
+    if (query) {
       getDoc(doc(database, "recipe", query))
         .then((docRef) => {
-          setLoaded(true);
           if (docRef.exists()) {
-            setRecipe(docRef.data());
-            setFound(true);
+            setRecipe(docRef);
+            setNotFound(false);
           }
-          setLoaded(true);
+          setLoading(false);
         })
         .catch((e) => console.error(e));
     }
-    if (!query) {
-      setLoaded(true);
-    }
-  }, [query, loaded]);
+  }, []);
 
-  if (!loaded) {
-    return (
-      <div id="containerPage">
-        <Header />
-        <div>Loading...</div>
-      </div>
-    );
-  }
-
-  if (found) {
-    return (
-      <div id="containerPage">
-        <Header />
-        <RecipeContent recipe={recipe} />
-        <RelatedRecipes title="Recettes associées" />{" "}
-        {/*TODO : Ajouter criteres de similarité */}
-        <Footer />
-      </div>
-    );
-  }
   return (
     <div id="containerPage">
       <Header />
-      <div>Recette non trouvée !</div>
+      {loading ? (
+        <div id="loadingRecipeText">
+          <div id="root">
+            <div className="loader-wrapper">
+              <div className="loader"></div>
+            </div>
+          </div>
+        </div>
+      ) : notFound ? (
+        <Error404 />
+      ) : (
+        <div>
+          <RecipeContent recipe={recipe} />
+          <RelatedRecipes title="Recettes associées" />
+        </div>
+      )}
+
       <Footer />
     </div>
   );

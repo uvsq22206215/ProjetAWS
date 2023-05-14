@@ -21,15 +21,6 @@
 }
 
 /* Slider styles */
-.carousel-item {
-  max-height: 650px;
-}
-
-.carousel-item img {
-  object-fit: cover;
-  align-content: center;
-}
-
 .carousel-control-next-icon::after {
   content: url(../../../public/assets/arrow-right.png)!important;
 }
@@ -38,18 +29,40 @@
   content: url(../../../public/assets/arrow-left.png)!important;
 }
 
-.carousel-caption {
-  bottom: 0!important;
-  top: 6.25rem!important;
-  color: white!important;
-}
-
 #slider-hp, #trending-recipes {
   margin-bottom: 6vh;
 }
 
 #slider-hp {
   position: relative;
+}
+
+#slider-hp .carousel {
+  margin-top: 75px;
+}
+
+#slider-hp .carousel-image {
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+#slider-hp .overlay {
+  background-color: rgba(0,0,0,0.5);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#slider-hp .carousel-caption {
+  bottom: 50%!important;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%!important;
+  transform: translate(-50%, -50%);
 }
 
 .carousel-item::before {
@@ -202,21 +215,17 @@
     font-size: 54px;
     margin: 0px;
   }
-
-  #slider-hp .carousel-item img {
-    min-height: 600px;
-  }
-
-  .carousel, .carousel-inner, .carousel-item, .carousel-item img {
-    min-height: 100vh!important;
-  }
-
+ 
   .carousel-caption.d-md-block {
       display: block !important;
-  }
+  } 
 
   .carousel-control-prev, .carousel-control-next {
     justify-content: unset!important;
+  }
+
+  .MuiAutocomplete-root {
+      width: 280px!important;
   }
 }
 
@@ -232,5 +241,10 @@
 
   #homepage div#trending-recipes {
     height: fit-content;
+  }
+
+  #slider-hp .carousel-caption {
+    bottom: 0!important;
+    top: unset!important;
   }
 }

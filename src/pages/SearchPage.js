@@ -7,8 +7,17 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { database } from '../utils/firebase';
 import { collection, query, where, getDocs, limit, and } from 'firebase/firestore';
 import Footer from '../components/Footer';
+import { useLocation } from 'react-router';
+import { useMemo } from 'react';
+
+function useQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 function SearchPage() {
+
+  const categoryQuery = useQuery().get("category");
  
   /* gérer les options qui s'ouvrent quand on clique sur un plus*/
   
@@ -176,11 +185,18 @@ function SearchPage() {
   useEffect(() => {
 
   }, [filteredRecipes]);
+
+  
   
   // Affiche toutes les recettes de base par défaut
   useEffect(() => {
-    const recipesRef = collection(database, "recipe");
-    let q = query(recipesRef, limit(21));
+    let q;
+    if (categoryQuery) {
+      q = query(collection(database, "recipe"),
+                where("categorie", "==", categoryQuery), limit(21));
+    } else {
+      q = query(collection(database, "recipe"), limit(21));
+    }
     let tmpRecipes = [];
     getDocs(q)
       .then((snapshot) => {
@@ -401,7 +417,7 @@ function SearchPage() {
             <h1 className="block-title" style={{ textAlign: 'center' }}>Résultat recherche</h1>
             <div className="recipe-cards">
               {filteredRecipes.map((recipe) => (
-                <RecipeCard image={recipe.data().image} title={recipe.data().name} link={"/recipe?id=" + recipe.id} />
+                <RecipeCard image={recipe.data().image} title={recipe.data().name} id={recipe.id} link={"/recipe?id=" + recipe.id} />
               ))}
             </div>
           </div>

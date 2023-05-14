@@ -207,7 +207,7 @@ export default function Information() {
                       className={classes.root}
                       value={values.password}
                       onChange={handleChange}
-                      type="possword"
+                      type="password"
                       placeholder="Mot de passe"
                       name="password"
                     />

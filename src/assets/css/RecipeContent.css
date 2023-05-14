@@ -38,11 +38,12 @@
 }
 
 #descriptionRecipe {
+
   width: min-content;
   min-width: 300px;
   flex-grow: 6;
   border: none;
-  padding-bottom: 40px;
+  padding: 5px;
   border-radius: 10px;
 }
 
