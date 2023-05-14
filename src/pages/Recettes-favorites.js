@@ -118,7 +118,7 @@ export default function Recettesfavoris() {
             },
           }}
           variant="contained"
-          disabled={endIndex >= querySnapshot.length}
+          disabled={endIndex >= favoriteRecipes.length}
           onClick={(event) => handleClick(event, page + 1)}
         >
           Suivant
