@@ -34,7 +34,7 @@ function RecipePage() {
         })
         .catch((e) => console.error(e));
     }
-  }, []);
+  }, [query]);
 
   return (
     <div id="containerPage">

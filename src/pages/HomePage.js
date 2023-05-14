@@ -15,7 +15,7 @@ function HomePage() {
   let generatorRedirect = () => {
     history("/recipe-generator");
   };
-
+  
   const creatorSliderSettings = [
     {
       breakpoint: 1024,
@@ -124,27 +124,27 @@ function HomePage() {
               responsive={creatorSliderSettings}
             >
               <CreatorCard
-                name="Nom Prenom"
+                name="Oussama Bouakaz"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Nom Prenom"
+                name="Younes Amrane"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Nom Prenom"
+                name="Louis Delahaye"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Nom Prenom"
+                name="Tasneem Durbas"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />
               <CreatorCard
-                name="Nom Prenom"
+                name="Marmiton"
                 image="/assets/chef.jpg"
                 status="recipe creator"
               />

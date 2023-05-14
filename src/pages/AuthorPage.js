@@ -3,10 +3,13 @@ import '../assets/css/AuthorPage.css'
 import Header from '../components/Header'
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import {getDocs,query, collection, where, limit } from 'firebase/firestore';
 import { database } from '../utils/firebase';
 import Footer from '../components/Footer';
 import Error404 from '../components/Error404';
+import { useParams } from "react-router-dom";
+import RecipeCard from '../components/RecipeCard';
+import { display } from '@mui/system';
 
 function useQuery() {
   const { search } = useLocation();
@@ -14,67 +17,57 @@ function useQuery() {
 }
 
 function AuthorPage() {
-  const query = useQuery().get("id");
+  const params = useParams();
 
-  const [loaded, setLoaded] = useState(false);
-  const [found, setFound] = useState(false);
-  const [author, setAuthor] = useState({});
-
+ 
+  const [recipe, setRecipe] = useState([]);
+ 
   useEffect(() => {
-    if (query && !loaded) {
-      console.log("request sent")
-      getDoc(doc(database, "users", query))
-      .then((docRef) => {
-        setLoaded(true);
-        if (docRef.exists()) {
-          setAuthor(docRef.data());
-          setFound(true);
-        }
-        setLoaded(true);
-      })
-      .catch(() => console.log("Erreur"))
-    }
-    if (!query) {
-      setLoaded(true);
-    }
-  }, [query, loaded]);
-
-  if (!loaded) {
-    return (
-      <div id='authorPage'>
-        <div id="root">
-            <div className="loader-wrapper">
-              <div className="loader"></div>
-            </div>
-          </div>
-      </div>);
-  }
-
-  if (found) {
-    return (
+    const fetchRecipes = async () => {
+      const q = query(collection(database, 'recipe'), where('author', '==', params.name), limit(20));
+      const recipes = await getDocs(q);
+      console.log('Recipes:', recipes);
+      setRecipe(recipes.docs);
+    };
+  
+    fetchRecipes();
+  }, [params.name]);
+  
+ 
+return (
       <div id='authorPage'>
         <Header />
         <div id='author-profile'>
           <div><img alt='chef-image' src='/assets/chef.jpg'/></div>
           <div className='info'>
             <div>
-              <h1>{author.username}</h1>
+            <h1>{params.name}</h1>
               <p>Créateur de recettes</p>
             </div>
           </div>
           
         </div>
         <div id='author-recipes'>
-          <div className="recipe-cards">
-            <h3>Creations par cet auteur:</h3>
+        <div id='author-recipes'>
+        <h3>Creations par cet auteur:</h3>
+          <div id="id-recipeCard" className="recipe-cards"  style={{display: "flex", flexWrap: "wrap"}}>
+            
+        {recipe.map((recipe) => (
+               <RecipeCard 
+                key={recipe.id}
+                image={recipe.data().image} 
+                title={recipe.data().name} 
+                id={recipe.id} 
+                link={"/recipe?id=" + recipe.id} 
+             />
+           ))}
+        </div>
+</div>
 
-          </div>
         </div>
         <Footer />
       </div>);
-  }
-  return (
-    <Error404 />);
+
 }
 
 export default AuthorPage;
