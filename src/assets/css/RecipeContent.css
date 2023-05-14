@@ -187,6 +187,16 @@ li.ingredient:hover {
   margin-top: 37vh;
 }
 
+#recipeTags div.favorite-btn {
+  height: 0px;
+  position: initial;
+}
+
+#recipeTags div.favorite-btn i {
+  padding: 10px 14px;
+}
+
+
 @media (max-width: 920px)  {
   #recipeContent #container {
     display: block;
