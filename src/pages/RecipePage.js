@@ -22,6 +22,7 @@ function RecipePage() {
   const [recipe, setRecipe] = useState({});
   const [notFound, setNotFound] = useState(true);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (query) {
       getDoc(doc(database, "recipe", query))

@@ -10,6 +10,7 @@ import CreateRecipePage from "./pages/CreateRecipePage";
 import CategoriesPage from "./pages/CategoriesPage";
 import Information from "./pages/Informations";
 import Mesrecettes from "./pages/Mesrecettes";
+import Recettefavoris from "./pages/Recettes-favorites";
 import Contentprofil from "./pages/Contentprofil";
 import Contact from "./pages/Contact";
 import { AuthContextProvider } from "./context/Usercontext";
@@ -52,6 +53,16 @@ function App() {
             <Route path="/all-categories" element={<CategoriesPage />} />
             <Route path="/author" element={<AuthorPage />} />
             <Route path="recipe-generator" element={<RecipeGenerator />} />
+            <Route
+              path="Recettes-aimees"
+              element={
+                <ProtectedRoute>
+                  <Contentprofil>
+                    <Recettefavoris />
+                  </Contentprofil>
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/Informations"
               element={
