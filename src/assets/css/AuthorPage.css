@@ -48,3 +48,11 @@ div#author-profile {
   display: flex;
   flex-wrap: wrap;
 }
+
+
+#noRecipeFound {
+  font-family: 'Abril Fatface';
+  color: orange;
+  font-size: xx-large;
+  margin: 20px;
+}
