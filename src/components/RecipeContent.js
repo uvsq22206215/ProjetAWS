@@ -1,10 +1,12 @@
 import "../assets/css/RecipeContent.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { UserAuth } from "../context/Usercontext";
 import { database } from "../utils/firebase";
 import { useNavigate } from "react-router";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   collection,
   deleteDoc,
@@ -12,6 +14,7 @@ import {
   query,
   where,
   getDocs,
+  addDoc,
   limit,
   and,
 } from "firebase/firestore";
@@ -22,6 +25,69 @@ function RecipeContent({ recipe }) {
   );
   const { usr } = UserAuth();
   const tags = [];
+
+  const [userdetail, setUserdetail] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+  const[isFavorite, setIsFavorite] = useState(false);
+  const[favoriteId, setFavoriteId] = useState(null);
+
+  const addClassRedFill = (id) => {
+    const element = document.getElementById(id);
+    element.classList.add("redFill");
+  }
+
+  const removeClassRedFill = (id) => {
+    const element = document.getElementById(id);
+    element.classList.remove("redFill");
+  }
+  
+
+  const checkIfAssociationExists = async () => {
+    await getDocs(
+      query(
+        collection(database, "favorite"),
+        where("user", "==", userdetail.id), where("recipe", "==", recipe.id)
+      ),
+    ).then((snapshot) => {
+        if (snapshot.empty) {
+          console.log(`No document found in collection`);
+          setIsFavorite(false);
+          removeClassRedFill(recipe.id);
+        } else {
+          console.log(`Document found in collection.`);
+          snapshot.docs.map((favorite, id)=> (setFavoriteId(favorite.id)));
+          setIsFavorite(true);
+          addClassRedFill(recipe.id);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsFavorite(false);
+        removeClassRedFill(recipe.id);
+      });
+  };
+
+  const addToFavorite = async () => {
+    checkIfAssociationExists();
+    if(!isFavorite){
+      const favorite = {recipe: recipe.id, user: userdetail.id}
+      addDoc(collection(database, "favorite"), favorite)
+        .then(function (docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          addClassRedFill(recipe.id);
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+    else {
+      const documentRef = doc(collection(database, "favorite"), favoriteId);
+      await deleteDoc(documentRef);
+      checkIfAssociationExists();
+    }
+  };
+
   const handleDelete = async () => {
     try {
       const documentRef = doc(collection(database, "recipe"), recipe.id);
@@ -46,6 +112,10 @@ function RecipeContent({ recipe }) {
       color: "white",
     });
   }
+
+  useEffect(() => {
+    removeClassRedFill(recipe.id);
+    checkIfAssociationExists();}, []);
 
   return (
     <div>
@@ -76,6 +146,15 @@ function RecipeContent({ recipe }) {
             <Button onClick={() => window.print()}>
               <img alt="printer logo" src="/assets/printer.png"></img>
             </Button>
+          </div>
+          <div id={recipe.id} className="favorite-btn">
+            <i onClick={
+                addToFavorite
+              }
+            >
+              <FontAwesomeIcon icon={faHeart} />
+            </i>
+            <span>liked!</span>
           </div>
         </div>
         <div id="recipePhoto">

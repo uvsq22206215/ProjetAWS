@@ -22,6 +22,16 @@ function RecipeCard(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState(null);
 
+  const addClassRedFill = (id) => {
+    const element = document.getElementById(id);
+    element.classList.add("redFill");
+  };
+
+  const removeClassRedFill = (id) => {
+    const element = document.getElementById(id);
+    element.classList.remove("redFill");
+  };
+
   const checkIfAssociationExists = async () => {
     await getDocs(
       query(
@@ -34,15 +44,18 @@ function RecipeCard(props) {
         if (snapshot.empty) {
           console.log(`No document found in collection`);
           setIsFavorite(false);
+          removeClassRedFill("btn-" + props.id);
         } else {
           console.log(`Document found in collection.`);
           snapshot.docs.map((favorite, id) => setFavoriteId(favorite.id));
           setIsFavorite(true);
+          addClassRedFill("btn-" + props.id);
         }
       })
       .catch((error) => {
         console.error(error);
         setIsFavorite(false);
+        removeClassRedFill("btn-" + props.id);
       });
   };
 
@@ -54,6 +67,7 @@ function RecipeCard(props) {
       addDoc(collection(database, "favorite"), favorite)
         .then(function (docRef) {
           console.log("Document written with ID: ", docRef.id);
+          addClassRedFill("btn-" + props.id);
         })
         .catch(function (error) {
           console.error("Error adding document: ", error);
@@ -66,6 +80,7 @@ function RecipeCard(props) {
   };
 
   useEffect(() => {
+    removeClassRedFill("btn-" + props.id);
     checkIfAssociationExists();
   }, []);
 
@@ -73,8 +88,8 @@ function RecipeCard(props) {
     <div className="recipe-card">
       <div className="card-image">
         {JSON.parse(sessionStorage.getItem("user-signin")) !== null ? (
-          <div className="favorite-btn">
-            <i className={isFavorite ? "redFill" : ""} onClick={addToFavorite}>
+          <div id={"btn-" + props.id} className="favorite-btn">
+            <i onClick={addToFavorite}>
               <FontAwesomeIcon icon={faHeart} />
             </i>
             <span>liked!</span>
