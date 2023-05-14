@@ -1,18 +1,23 @@
 import "../assets/css/CreateRecipePage.css";
-import { database } from "../utils/firebase";
+import { database, storage } from "../utils/firebase";
 import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { UserAuth } from "../context/Usercontext";
 import { useNavigate } from "react-router";
 
+import { getDownloadURL, uploadBytesResumable, ref } from "firebase/storage";
+import { Button, Stack } from "@mui/material";
+
 function CreateRecipePage() {
   const { usr } = UserAuth();
+  const [docRef, setDocRef] = useState(null);
   let history = useNavigate();
 
   const pushRecipe = (recipe) => {
-    addDoc(collection(database, "recipe"), recipe)
+    console.log(docRef);
+    setDoc(collection(database, "recipe", docRef), recipe)
       .then(function (docRef) {
         //console.log("Document written with ID: ", docRef.id);
         history("/recipe?id=" + docRef.id);
@@ -113,10 +118,22 @@ function CreateRecipePage() {
   const [cookTime, setCookTime] = useState();
   const [prepTime, setPrepTime] = useState();
   const [nbPersonnes, setNbPersonnes] = useState();
+  const [image, setImage] = useState();
 
   const [codeError, setCodeError] = useState("");
 
-  const handleCreation = () => {
+  const handleCreation = async () => {
+    const reference = await doc(collection(database, "recipe"));
+    setDocRef(reference.id);
+    const promises = [];
+    console.log(reference.id);
+    const imageRef = ref(storage, "images/" + reference.id);
+    promises.push(
+      uploadBytesResumable(imageRef, image).then((uploadResult) => {
+        return getDownloadURL(uploadResult.ref);
+      })
+    );
+    const photos = await Promise.all(promises);
     setCodeError("");
     let ingrFiltered = listIngredients.filter((e) => e.name !== "");
     let instFiltered = instructions.filter((e) => e !== "");
@@ -149,20 +166,28 @@ function CreateRecipePage() {
     listIngredients.forEach((ingr) => {
       ingr.quantity = parseInt(ingr.quantity) / nbPersonnes;
     });
-    pushRecipe({
+    const recipe = {
       author: usr.data().username,
       categorie: category,
       cookTime: parseInt(cookTime),
       cost: cost,
       difficulty: difficulty,
-      // TODO : image
+      image: photos,
       name: name,
       numberPersons: parseInt(nbPersonnes),
       prepTime: parseInt(prepTime),
       recipeIngredient: ingrFiltered,
       recipeInstructions: instFiltered,
       totalTime: parseInt(prepTime) + parseInt(cookTime),
-    });
+    };
+    setDoc(doc(collection(database, "recipe"), docRef), recipe)
+      .then(function (docRef) {
+        //console.log("Document written with ID: ", docRef.id);
+        history("/recipe?id=" + docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   };
 
   return (
@@ -314,6 +339,22 @@ function CreateRecipePage() {
               <option value="amuseGueule">Amuse-gueule</option>
             </select>
           </div>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <Button
+              variant="contained"
+              component="label"
+              sx={{ backgroundColor: "orange" }}
+            >
+              Uploader une image
+              <input
+                hidden
+                accept="image/*"
+                multiple
+                type="file"
+                onChange={(event) => setImage(event.currentTarget.files[0])}
+              />
+            </Button>
+          </Stack>
           {codeError !== "" && <div>{codeError}</div>}
           <button id="createRecipeButton" onClick={handleCreation}>
             Créer la recette
