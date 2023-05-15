@@ -60,8 +60,8 @@ function HomePage() {
                 <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider1.jpg")'}}>
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
-                    <h5 className="slider-title">First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h5 className="slider-title">Une petite faim?</h5>
+                    <p><a href="/search?category=apperitif">Decouvrez nos snacks et apperitifs</a></p>
                   </div>
                 </div>
               </div>
@@ -69,8 +69,8 @@ function HomePage() {
                 <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider2.jpg")'}}>
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
-                    <h5 className="slider-title">Second slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h5 className="slider-title">Nos Plats Gastronomiques!</h5>
+                    <p><a href="/search?category=plat">Voir les recettes</a></p>
                   </div>
                 </div>
               </div>
@@ -78,8 +78,8 @@ function HomePage() {
                 <div className="carousel-image" style={{backgroundImage: 'url("/assets/slider3.jpg")'}}>
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
-                    <h5 className="slider-title">Third slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h5 className="slider-title">Manque de temps pour cuisiner?</h5>
+                    <p><a href="/search?category=facile">Decouvrez nos recettes faciles</a></p>
                   </div>
                 </div>
               </div>

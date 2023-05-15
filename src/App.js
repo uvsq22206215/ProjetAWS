@@ -20,6 +20,8 @@ import RecipeGenerator from "./pages/RecipeGenerator";
 import ProtectedRoute from "./context/Protectedroutes";
 import Error404 from "./components/Error404";
 import ScrollToTop from "./utils/ScrollToTop";
+import Support from "./pages/SupportPage";
+import Conditions from "./pages/ConditionsPage";
 
 function App() {
   const Main = () => (
@@ -43,6 +45,8 @@ function App() {
             <Route path="/recipe" element={<RecipePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/supportpage" element={<Support />} />
+            <Route path="/conditions" element={<Conditions />} />
             <Route path="/author/:name" element={<AuthorPage />} />
             <Route path="/*" element={<Error404 />} />
             <Route

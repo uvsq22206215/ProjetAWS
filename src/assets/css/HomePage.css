@@ -203,6 +203,10 @@
   width: 250%;
 }
 
+.carousel-item a, .carousel-item a:hover {
+  color: white;
+}
+
 /* End button */
 
 @media (max-width: 600px) { 

@@ -149,6 +149,7 @@ function RecipeContent({ recipe }) {
               <img alt="printer logo" src="/assets/printer.png"></img>
             </Button>
           </div>
+          {JSON.parse(sessionStorage.getItem("user-signin")) !== null ? (
           <div id={recipe.id} className="favorite-btn">
             <i onClick={
                 addToFavorite
@@ -158,6 +159,9 @@ function RecipeContent({ recipe }) {
             </i>
             <span>liked!</span>
           </div>
+          ) : (
+            <div></div>
+          )}
         </div>
         <div id="recipePhoto">
           <img src={recipe.data().image} />
