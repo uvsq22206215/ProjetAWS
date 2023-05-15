@@ -39,7 +39,9 @@ function RecipeContent({ recipe }) {
 
   const removeClassRedFill = (id) => {
     const element = document.getElementById(id);
-    element.classList.remove("redFill");
+    if (element) {
+      element.classList.remove("redFill");
+    }
   }
   
 
