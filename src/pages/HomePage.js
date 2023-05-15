@@ -61,7 +61,7 @@ function HomePage() {
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
                     <h5 className="slider-title">Une petite faim?</h5>
-                    <p><a href="/search?category=apperitif">Decouvrez nos snacks et apperitifs</a></p>
+                    <p><a href="/search?category=Amuse-gueule">Decouvrez nos snacks et amuse-gueule</a></p>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@ function HomePage() {
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
                     <h5 className="slider-title">Nos Plats Gastronomiques!</h5>
-                    <p><a href="/search?category=plat">Voir les recettes</a></p>
+                    <p><a href="/search?category=Plat%20principal">Voir les recettes</a></p>
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@ function HomePage() {
                   <div className="overlay"></div>
                   <div className="carousel-caption d-none d-md-block">
                     <h5 className="slider-title">Manque de temps pour cuisiner?</h5>
-                    <p><a href="/search?category=facile">Decouvrez nos recettes faciles</a></p>
+                    <p><a href="/search">Decouvrez nos recettes faciles</a></p>
                   </div>
                 </div>
               </div>
@@ -126,27 +126,27 @@ function HomePage() {
               <CreatorCard
                 name="Oussama"
                 image="/assets/chef.jpg"
-                status="recipe creator"
+                status="Créateur de recettes"
               />
               <CreatorCard
                 name="Younes"
                 image="/assets/chef.jpg"
-                status="recipe creator"
+                status="Créateur de recettes"
               />
               <CreatorCard
                 name="Louis"
                 image="/assets/chef.jpg"
-                status="recipe creator"
+                status="Créateur de recettes"
               />
               <CreatorCard
                 name="Tasneem"
                 image="/assets/chef.jpg"
-                status="recipe creator"
+                status="Créatrice de recettes"
               />
               <CreatorCard
                 name="Marmiton"
                 image="/assets/chef.jpg"
-                status="recipe creator"
+                status="Créateur de recettes"
               />
             </Slider>
           </div>

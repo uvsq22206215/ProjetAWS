@@ -341,9 +341,10 @@ function CreateRecipePage() {
           </div>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Button
+              id="createRecipeButton"
               variant="contained"
               component="label"
-              sx={{ backgroundColor: "orange" }}
+              sx={{ backgroundColor: "orange"}}
             >
               Uploader une image
               <input
